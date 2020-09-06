@@ -1,22 +1,36 @@
 import React from "react";
 import styled from "styled-components";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import constants from "../../constants";
+import AuthButton from "../../components/AuthButton";
+import AuthInput from "../../components/AuthInput";
+import useInput from "../../hooks/useInput";
 
-const Container1 = styled.View`
+const OutContainer = styled.View`
   background : white
   flex: 1;
   paddingTop: ${Platform.OS === "ios" ? 0 : Expo.Constants.statusBarHeight};
 `;
 
-const Container2 = styled.View`
+const InContainer1 = styled.View`
+  margin-top: 3%;
+  flex: 3;
+  align-items: center;
+  justify-content: space-between;
+`;
+const InContainer2 = styled.View`
+  flex: 0.6;
+  align-items: center;
+`;
+const InContainer3 = styled.View`
+  flex: 2.5;
+  margin-left: 10%;
+  margin-right: 10%;
+  justify-content: space-between;
+`;
+const InContainer4 = styled.View`
+  flex: 1;
   align-items: center;
   justify-content: center;
-`;
-
-const Container3 = styled.View`
-  justify-content: center;
-  margin: 13%;
 `;
 
 const BackgroundImg = styled.Image`
@@ -27,10 +41,6 @@ const BackgroundImg = styled.Image`
 const Text = styled.Text`
   padding: 5px;
   color: ${(props) => props.theme.blueColor};
-`;
-
-const TextInput = styled.TextInput`
-  padding: 5px;
 `;
 
 const LogoImg1 = styled.Image`
@@ -44,16 +54,6 @@ const LogoImg2 = styled.Image`
 `;
 
 const Touchable = styled.TouchableOpacity``;
-const SignInBtn = styled.View`
-  background-color: ${(props) => props.theme.darkBlueColor};
-  padding: 10px;
-  border-radius: 10px;
-  margin-top: 10px;
-`;
-const SignInBtnText = styled.Text`
-  color: white;
-  text-align: center;
-`;
 
 const FindPasswordBtn = styled.View`
   padding: 10px;
@@ -64,42 +64,54 @@ const SignUpBtn = styled.View`
   align-items: center;
 `;
 
-export default ({ navigation }) => (
-  <Container1>
-    <BackgroundImg
-      resizeMode={"contain"}
-      source={require("../../assets/splash_background.png")}
-    />
-    <Container2>
-      <Text>대한민국 최고의 의사진들을 응원합니다</Text>
-      <LogoImg1
+export default ({ navigation }) => {
+  const emailInput = useInput("");
+  const pwInput = useInput("");
+  return (
+    <OutContainer>
+      <BackgroundImg
         resizeMode={"contain"}
-        source={require("../../assets/logo.png")}
+        source={require("../../assets/splash_background.png")}
       />
-      <LogoImg2
-        resizeMode={"contain"}
-        source={require("../../assets/logo2.png")}
-      />
-    </Container2>
-    <Container3>
-      <Text>먼저 로그인이 필요해요 :)</Text>
-      <TextInput placeholder={"이메일"} />
-      <TextInput placeholder={"비밀번호"} />
-      <Touchable>
-        <SignInBtn>
-          <SignInBtnText>로그인</SignInBtnText>
-        </SignInBtn>
-      </Touchable>
-      <Touchable>
-        <FindPasswordBtn>
-          <Text>비밀번호를 잊으셨나요?</Text>
-        </FindPasswordBtn>
-      </Touchable>
-    </Container3>
-    <Touchable>
-      <SignUpBtn>
-        <Text>처음이신가요? 계정을 생성하세요</Text>
-      </SignUpBtn>
-    </Touchable>
-  </Container1>
-);
+      <InContainer1>
+        <Text>대한민국 최고의 의사진들을 응원합니다</Text>
+        <LogoImg1
+          resizeMode={"contain"}
+          source={require("../../assets/logo.png")}
+        />
+        <LogoImg2
+          resizeMode={"contain"}
+          source={require("../../assets/logo2.png")}
+        />
+      </InContainer1>
+      <InContainer2></InContainer2>
+      <InContainer3>
+        <Text>먼저 로그인이 필요해요 :)</Text>
+        <AuthInput
+          {...emailInput}
+          placeholder="이메일"
+          keyboardType="email-address"
+        />
+        <AuthInput
+          {...pwInput}
+          placeholder="비밀번호"
+          keyboardType="default"
+          secureTextEntry={true}
+        />
+        <AuthButton onPress={() => null} text="로그인" />
+        <Touchable onPress={() => navigation.navigate("Findpw")}>
+          <FindPasswordBtn>
+            <Text>비밀번호를 잊으셨나요?</Text>
+          </FindPasswordBtn>
+        </Touchable>
+      </InContainer3>
+      <InContainer4>
+        <Touchable onPress={() => navigation.navigate("Signup")}>
+          <SignUpBtn>
+            <Text>처음이신가요? 계정을 생성하세요</Text>
+          </SignUpBtn>
+        </Touchable>
+      </InContainer4>
+    </OutContainer>
+  );
+};
