@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import constants from "../../constants";
 import AuthButton from "../../components/AuthButton";
-import AuthInput from "../../components/AuthInput";
-import useInput from "../../hooks/useInput";
+import AuthButtonText from "../../components/AuthButtonText";
+import { TouchableWithoutFeedback, Keyboard } from "react-native";
 
 const OutContainer = styled.View`
   background : white
@@ -18,18 +18,9 @@ const InContainer1 = styled.View`
   justify-content: space-between;
 `;
 const InContainer2 = styled.View`
-  flex: 0.6;
-  align-items: center;
-`;
-const InContainer3 = styled.View`
-  flex: 2.5;
+  flex: 4;
   margin-left: 10%;
   margin-right: 10%;
-  justify-content: space-between;
-`;
-const InContainer4 = styled.View`
-  flex: 1;
-  align-items: center;
   justify-content: center;
 `;
 
@@ -53,65 +44,36 @@ const LogoImg2 = styled.Image`
   height: ${193 * (constants.width / 3.2 / 551)};
 `;
 
-const Touchable = styled.TouchableOpacity``;
-
-const FindPasswordBtn = styled.View`
-  padding: 10px;
-  align-items: center;
-`;
-
-const SignUpBtn = styled.View`
-  align-items: center;
-`;
-
 export default ({ navigation }) => {
-  const emailInput = useInput("");
-  const pwInput = useInput("");
   return (
-    <OutContainer>
-      <BackgroundImg
-        resizeMode={"contain"}
-        source={require("../../assets/splash_background.png")}
-      />
-      <InContainer1>
-        <Text>대한민국 최고의 의사진들을 응원합니다</Text>
-        <LogoImg1
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <OutContainer>
+        <BackgroundImg
           resizeMode={"contain"}
-          source={require("../../assets/logo.png")}
+          source={require("../../assets/splash_background.png")}
         />
-        <LogoImg2
-          resizeMode={"contain"}
-          source={require("../../assets/logo2.png")}
-        />
-      </InContainer1>
-      <InContainer2></InContainer2>
-      <InContainer3>
-        <Text>먼저 로그인이 필요해요 :)</Text>
-        <AuthInput
-          {...emailInput}
-          placeholder="이메일"
-          keyboardType="email-address"
-        />
-        <AuthInput
-          {...pwInput}
-          placeholder="비밀번호"
-          keyboardType="default"
-          secureTextEntry={true}
-        />
-        <AuthButton onPress={() => null} text="로그인" />
-        <Touchable onPress={() => navigation.navigate("Findpw")}>
-          <FindPasswordBtn>
-            <Text>비밀번호를 잊으셨나요?</Text>
-          </FindPasswordBtn>
-        </Touchable>
-      </InContainer3>
-      <InContainer4>
-        <Touchable onPress={() => navigation.navigate("Signup")}>
-          <SignUpBtn>
-            <Text>처음이신가요? 계정을 생성하세요</Text>
-          </SignUpBtn>
-        </Touchable>
-      </InContainer4>
-    </OutContainer>
+        <InContainer1>
+          <Text>대한민국 최고의 의사진들을 응원합니다</Text>
+          <LogoImg1
+            resizeMode={"contain"}
+            source={require("../../assets/logo.png")}
+          />
+          <LogoImg2
+            resizeMode={"contain"}
+            source={require("../../assets/logo2.png")}
+          />
+        </InContainer1>
+        <InContainer2>
+          <AuthButton
+            onPress={() => navigation.navigate("Login")}
+            text="로그인 바로가기"
+          />
+          <AuthButtonText
+            onPress={() => navigation.navigate("Signup")}
+            text="처음이신가요? 계정을 생성하세요"
+          />
+        </InContainer2>
+      </OutContainer>
+    </TouchableWithoutFeedback>
   );
 };
