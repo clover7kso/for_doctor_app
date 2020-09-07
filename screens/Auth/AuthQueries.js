@@ -5,3 +5,9 @@ export const LOG_IN = gql`
     signIn(id: $id, password: $password)
   }
 `;
+
+export const MEDICAL_CATEGORY = gql`
+  query medicalCategory {
+    medicalCategory
+  }
+`;
