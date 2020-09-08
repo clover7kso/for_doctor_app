@@ -6,6 +6,12 @@ export const LOG_IN = gql`
   }
 `;
 
+export const CONFIRM_SECRET = gql`
+  mutation confirmSecret($id: String!, $secret: String!) {
+    confirmSecret(id: $id, secret: $secret)
+  }
+`;
+
 export const MEDICAL_CATEGORY = gql`
   query medicalCategory {
     medicalCategory
@@ -21,7 +27,7 @@ export const SIGN_UP = gql`
     $medical_cate: String!
     $medical_certi: String!
   ) {
-    signIn(
+    signUp(
       id: $id
       password: $password
       nickname: $nickname

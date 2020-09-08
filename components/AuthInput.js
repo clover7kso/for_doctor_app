@@ -10,7 +10,7 @@ const TextInput = styled.TextInput`
   padding-left: 10px;
   padding-top: 3px;
   padding-bottom: 3px;
-  background-color: ${(props) => props.theme.greyColor};
+  background-color: ${(props) => props.theme.weakGreyColor};
   border: 1px solid ${(props) => props.theme.darkGreyColor};
   border-radius: 4px;
 `;

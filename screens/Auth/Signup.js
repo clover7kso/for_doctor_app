@@ -3,17 +3,15 @@ import styled from "styled-components";
 import useInput from "../../hooks/useInput";
 import AuthInput from "../../components/AuthInput";
 import AuthButton from "../../components/AuthButton";
-import AuthButtonText from "../../components/AuthButtonText";
+import AuthButtonImage from "../../components/AuthButtonImage";
 import AuthPicker from "../../components/AuthPicker";
 import constants from "../../constants";
 import { TouchableWithoutFeedback, Keyboard, Alert } from "react-native";
-import { useQuery } from "react-apollo-hooks";
-import { MEDICAL_CATEGORY } from "./AuthQueries";
+import { useQuery, useMutation } from "react-apollo-hooks";
+import { MEDICAL_CATEGORY, SIGN_UP } from "./AuthQueries";
 import { Image, ScrollView, KeyboardAvoidingView } from "react-native";
 import moment from "moment";
 import axios from "axios";
-import { useMutation } from "react-apollo-hooks";
-import { SIGN_UP } from "./AuthQueries";
 
 const OutContainer = styled.View`
   background : white
@@ -38,7 +36,7 @@ export default ({ navigation }) => {
   const pwConfirmInput = useInput("");
   const nicknameInput = useInput("");
   const medicalIdInput = useInput("");
-  const medicalCateogryInput = useInput("");
+  const medicalCateogryInput = useInput("안과의사");
 
   const medicalUri = useInput("");
   const setMedicalUri = (uri) => {
@@ -77,7 +75,7 @@ export default ({ navigation }) => {
     try {
       const {
         data: { location },
-      } = await axios.post("http://192.168.43.253:4000/api/upload", formData, {
+      } = await axios.post("http://192.168.219.101:4000/api/upload", formData, {
         headers: {
           "content-type": "multipart/form-data",
         },
@@ -127,7 +125,6 @@ export default ({ navigation }) => {
         return Alert.alert("닉네임은 2 ~ 20 글자로 입력 해 주세요.");
       }
       if (medicalCateogryValue === "") {
-        console.log("이거" + medicalCateogryValue);
         return Alert.alert("분류가 정해지지 않았습니다");
       }
       if (medicalIdValue === "") {
@@ -142,9 +139,12 @@ export default ({ navigation }) => {
       handleSubmit();
 
       const {
-        data: { singUp },
+        data: { signUp },
       } = await uploadMutaion();
-      console.log(data);
+
+      if (signUp) {
+        navigation.navigate("Confirm", { emailId: emailValue });
+      }
     } catch (e) {
       Alert.alert(e.message.replace("GraphQL error: ", ""));
     } finally {
@@ -208,9 +208,8 @@ export default ({ navigation }) => {
                 source={{ uri: medicalUri.value }}
               />
             </KeyboardAvoidingView>
-          ) : null}
-          <InContainer1>
-            <AuthButton
+          ) : (
+            <AuthButtonImage
               onPress={() =>
                 navigation.navigate("TakePhoto", {
                   updateData: setMedicalUri,
@@ -218,6 +217,8 @@ export default ({ navigation }) => {
               }
               text="면허번호촬영"
             />
+          )}
+          <InContainer1>
             <AuthButton
               disabled={registerLoading}
               loading={registerLoading}
