@@ -5,9 +5,15 @@ import AuthInput from "../../components/AuthInput";
 import AuthButton from "../../components/AuthButton";
 import AuthButtonText from "../../components/AuthButtonText";
 import AuthPicker from "../../components/AuthPicker";
+import constants from "../../constants";
 import { TouchableWithoutFeedback, Keyboard, Alert } from "react-native";
 import { useQuery } from "react-apollo-hooks";
 import { MEDICAL_CATEGORY } from "./AuthQueries";
+import { Image, ScrollView, KeyboardAvoidingView } from "react-native";
+import moment from "moment";
+import axios from "axios";
+import { useMutation } from "react-apollo-hooks";
+import { SIGN_UP } from "./AuthQueries";
 
 const OutContainer = styled.View`
   background : white
@@ -23,60 +29,122 @@ const InContainer1 = styled.View`
 `;
 
 export default ({ navigation }) => {
+  const { loading, error, data } = useQuery(MEDICAL_CATEGORY, {
+    variables: {},
+  });
+
   const emailInput = useInput("");
   const pwInput = useInput("");
   const pwConfirmInput = useInput("");
   const nicknameInput = useInput("");
   const medicalIdInput = useInput("");
   const medicalCateogryInput = useInput("");
-  const { loading, error, data } = useQuery(MEDICAL_CATEGORY, {
-    variables: {},
-  });
+
+  const medicalUri = useInput("");
+  const setMedicalUri = (uri) => {
+    medicalUri.onChange(uri);
+  };
+  const [medicalUrl, setMedicalUrl] = useState("");
 
   const [registerLoading, setRegisterLoading] = useState(false);
 
-  const handleLogin = async () => {
-    const emailValue = emailInput.value;
-    const pwValue = pwInput.value;
-    const pwConfirmValue = pwConfirmInput.value;
-    const nicknameValue = nicknameInput.value;
-    const medicalIdValue = medicalIdInput.value;
-    const medicalCateogryValue = medicalCateogryInput.value;
-    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    const pwRegex = /^(?=.*[A-Za-z])(?=.*d)(?=.*[$@$!%*#?&])[A-Za-zd$@$!%*#?&]{8,}$/;
-    const nicknameRegex = /^[\w\Wㄱ-ㅎㅏ-ㅣ가-힣]{2,20}$/;
-    const medicalIdRegex = /^[0-9]{5}$/;
-    if (emailValue === "") {
-      return Alert.alert("이메일이 비어있습니다");
-    } else if (!emailValue.includes("@") || !emailValue.includes(".")) {
-      return Alert.alert("올바른 이메일형식을 입력해주세요");
-    } else if (!emailRegex.test(emailValue)) {
-      return Alert.alert("올바른 이메일형식을 입력해주세요");
+  const [uploadMutaion] = useMutation(SIGN_UP, {
+    variables: {
+      id: emailInput.value,
+      password: pwInput.value,
+      nickname: nicknameInput.value,
+      medical_id: medicalIdInput.value,
+      medical_cate: medicalCateogryInput.value,
+      medical_certi: medicalUrl,
+    },
+  });
+
+  const handleSubmit = async () => {
+    const formData = new FormData();
+    const name =
+      moment().format("YY:MM:DD-HH:mm:ss") +
+      "_" +
+      emailInput.value +
+      "_" +
+      nicknameInput.value +
+      ".jpg";
+    const [, type] = name.split(".");
+    formData.append("file", {
+      name,
+      type: "image/jpeg",
+      uri: medicalUri.value,
+    });
+    try {
+      const {
+        data: { location },
+      } = await axios.post("http://192.168.43.253:4000/api/upload", formData, {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      });
+      setMedicalUrl(location);
+    } catch (e) {
+      console.log(e);
+      Alert.alert("Cant upload", "Try later");
     }
-    if (pwValue === "") {
-      return Alert.alert("비밀번호가 비어있습니다");
-    } else if (pwValue !== pwConfirmValue) {
-      return Alert.alert("비밀번호가 일치하지 않습니다");
-    } else if (!pwRegex.test(pwValue)) {
-      return Alert.alert(
-        "최소 8자리에 숫자, 문자, 특수문자 각각 1개 이상 포함"
-      );
-    }
-    if (nicknameValue === "") {
-      return Alert.alert("닉네임이 비어있습니다");
-    } else if (!nicknameRegex.test(nicknameValue)) {
-      return Alert.alert("닉네임은 2 ~ 20 글자로 입력 해 주세요.");
-    }
-    if (medicalIdValue === "") {
-      return Alert.alert("면허번호가 비어있습니다");
-    } else if (!medicalIdRegex.test(medicalIdValue)) {
-      return Alert.alert("면허번호는 숫자 5글자입니다");
-    }
-    if (medicalCateogryValue === "") {
-      return Alert.alert("분류가 정해지지 않았습니다");
-    }
+  };
+
+  const handleRegister = async () => {
     try {
       setRegisterLoading(true);
+      const emailValue = emailInput.value;
+      const pwValue = pwInput.value;
+      const pwConfirmValue = pwConfirmInput.value;
+      const nicknameValue = nicknameInput.value;
+      const medicalIdValue = medicalIdInput.value;
+      const medicalCateogryValue = medicalCateogryInput.value;
+      const medicalUriValue = medicalUri.value;
+
+      const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      const pwRegex = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+      const nicknameRegex = /^[\w\Wㄱ-ㅎㅏ-ㅣ가-힣]{2,20}$/;
+      const medicalIdRegex = /^[0-9]{5}$/;
+
+      if (emailValue === "") {
+        return Alert.alert("이메일이 비어있습니다");
+      } else if (!emailValue.includes("@") || !emailValue.includes(".")) {
+        return Alert.alert("올바른 이메일형식을 입력해주세요");
+      } else if (!emailRegex.test(emailValue)) {
+        return Alert.alert("올바른 이메일형식을 입력해주세요");
+      }
+      if (pwValue === "") {
+        return Alert.alert("비밀번호가 비어있습니다");
+      } else if (pwValue !== pwConfirmValue) {
+        return Alert.alert("비밀번호가 일치하지 않습니다");
+      } else if (!pwRegex.test(pwValue)) {
+        return Alert.alert(
+          "특수문자 / 문자 / 숫자 포함 형태의 8~15자리 이내의 암호 정규식"
+        );
+      }
+      if (nicknameValue === "") {
+        return Alert.alert("닉네임이 비어있습니다");
+      } else if (!nicknameRegex.test(nicknameValue)) {
+        return Alert.alert("닉네임은 2 ~ 20 글자로 입력 해 주세요.");
+      }
+      if (medicalCateogryValue === "") {
+        console.log("이거" + medicalCateogryValue);
+        return Alert.alert("분류가 정해지지 않았습니다");
+      }
+      if (medicalIdValue === "") {
+        return Alert.alert("면허번호가 비어있습니다");
+      } else if (!medicalIdRegex.test(medicalIdValue)) {
+        return Alert.alert("면허번호는 숫자 5글자입니다");
+      }
+      if (medicalUriValue === "") {
+        return Alert.alert("면허번호 사진이 없습니다");
+      }
+
+      handleSubmit();
+
+      const {
+        data: { singUp },
+      } = await uploadMutaion();
+      console.log(data);
     } catch (e) {
       Alert.alert(e.message.replace("GraphQL error: ", ""));
     } finally {
@@ -85,53 +153,80 @@ export default ({ navigation }) => {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <OutContainer>
-        <InContainer1>
-          <AuthInput
-            {...emailInput}
-            placeholder="이메일"
-            keyboardType="email-address"
-          />
-          <AuthInput
-            {...pwInput}
-            placeholder="비밀번호"
-            keyboardType="default"
-            secureTextEntry={true}
-          />
-          <AuthInput
-            {...pwConfirmInput}
-            placeholder="비밀번호 확인"
-            keyboardType="default"
-            secureTextEntry={true}
-          />
-          <AuthInput
-            {...nicknameInput}
-            placeholder="닉네임"
-            keyboardType="default"
-          />
+    <ScrollView
+      contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <OutContainer>
+          <InContainer1>
+            <AuthInput
+              {...emailInput}
+              placeholder="이메일"
+              keyboardType="email-address"
+            />
+            <AuthInput
+              {...pwInput}
+              placeholder="비밀번호"
+              keyboardType="default"
+              secureTextEntry={true}
+            />
+            <AuthInput
+              {...pwConfirmInput}
+              placeholder="비밀번호 확인"
+              keyboardType="default"
+              secureTextEntry={true}
+            />
+            <AuthInput
+              {...nicknameInput}
+              placeholder="닉네임"
+              keyboardType="default"
+            />
 
-          <AuthPicker
-            {...medicalCateogryInput}
-            loading={loading}
-            error={error}
-            data={data.medicalCategory}
-          />
-          <AuthInput
-            {...medicalIdInput}
-            placeholder="면허번호"
-            keyboardType="default"
-            secureTextEntry={true}
-          />
+            <AuthPicker
+              {...medicalCateogryInput}
+              loading={loading}
+              error={error}
+              data={data.medicalCategory}
+            />
+            <AuthInput
+              {...medicalIdInput}
+              placeholder="면허번호"
+              keyboardType="default"
+              secureTextEntry={true}
+            />
+          </InContainer1>
 
-          <AuthButton
-            disabled={registerLoading}
-            loading={registerLoading}
-            onPress={handleLogin}
-            text="회원가입"
-          />
-        </InContainer1>
-      </OutContainer>
-    </TouchableWithoutFeedback>
+          {medicalUri.value !== "" ? (
+            <KeyboardAvoidingView>
+              <Image
+                style={{
+                  borderRadius: 15,
+                  width: constants.width,
+                  height: 300,
+                  resizeMode: "contain",
+                }}
+                source={{ uri: medicalUri.value }}
+              />
+            </KeyboardAvoidingView>
+          ) : null}
+          <InContainer1>
+            <AuthButton
+              onPress={() =>
+                navigation.navigate("TakePhoto", {
+                  updateData: setMedicalUri,
+                })
+              }
+              text="면허번호촬영"
+            />
+            <AuthButton
+              disabled={registerLoading}
+              loading={registerLoading}
+              onPress={handleRegister}
+              text="회원가입"
+            />
+          </InContainer1>
+        </OutContainer>
+      </TouchableWithoutFeedback>
+    </ScrollView>
   );
 };

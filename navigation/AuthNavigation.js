@@ -6,6 +6,7 @@ import Confirm from "../screens/Auth/Confirm";
 import Findpw from "../screens/Auth/Findpw";
 import AuthHome from "../screens/Auth/AuthHome";
 import Login from "../screens/Auth/Login";
+import TakePhoto from "../screens/Auth/TakePhoto";
 
 const Stack = createStackNavigator();
 
@@ -18,6 +19,7 @@ function AuthNavigation() {
         <Stack.Screen name="Findpw" component={Findpw} />
         <Stack.Screen name="Signup" component={Signup} />
         <Stack.Screen name="Confirm" component={Confirm} />
+        <Stack.Screen name="TakePhoto" component={TakePhoto} />
       </Stack.Navigator>
     </NavigationContainer>
   );
