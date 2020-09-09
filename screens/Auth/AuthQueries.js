@@ -6,9 +6,9 @@ export const LOG_IN = gql`
   }
 `;
 
-export const CONFIRM_SECRET = gql`
-  mutation confirmSecret($id: String!, $secret: String!) {
-    confirmSecret(id: $id, secret: $secret)
+export const SIGN_UP_CONFIRM = gql`
+  mutation signUpConfirm($id: String!, $secret: String!) {
+    signUpConfirm(id: $id, secret: $secret)
   }
 `;
 
@@ -35,5 +35,17 @@ export const SIGN_UP = gql`
       medical_cate: $medical_cate
       medical_certi: $medical_certi
     )
+  }
+`;
+
+export const FIND_PW = gql`
+  mutation findPw($id: String!, $medical_id: String!, $medical_cate: String!) {
+    findPw(id: $id, medical_id: $medical_id, medical_cate: $medical_cate)
+  }
+`;
+
+export const FIND_PW_CONFIRM = gql`
+  mutation findPwConfirm($id: String!, $secret: String!) {
+    findPwConfirm(id: $id, secret: $secret)
   }
 `;

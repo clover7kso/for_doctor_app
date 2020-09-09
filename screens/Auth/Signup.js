@@ -9,7 +9,12 @@ import constants from "../../constants";
 import { TouchableWithoutFeedback, Keyboard, Alert } from "react-native";
 import { useQuery, useMutation } from "react-apollo-hooks";
 import { MEDICAL_CATEGORY, SIGN_UP } from "./AuthQueries";
-import { Image, ScrollView, KeyboardAvoidingView } from "react-native";
+import {
+  Image,
+  ScrollView,
+  KeyboardAvoidingView,
+  BackHandler,
+} from "react-native";
 import moment from "moment";
 import axios from "axios";
 
@@ -75,12 +80,12 @@ export default ({ navigation }) => {
     try {
       const {
         data: { location },
-      } = await axios.post("http://192.168.219.101:4000/api/upload", formData, {
+      } = await axios.post("http://172.30.117.55:4000/api/upload", formData, {
         headers: {
           "content-type": "multipart/form-data",
         },
       });
-      setMedicalUrl(location);
+      return location;
     } catch (e) {
       console.log(e);
       Alert.alert("Cant upload", "Try later");
@@ -136,14 +141,15 @@ export default ({ navigation }) => {
         return Alert.alert("면허번호 사진이 없습니다");
       }
 
-      handleSubmit();
+      const url = handleSubmit();
+      setMedicalUrl(url);
 
       const {
         data: { signUp },
       } = await uploadMutaion();
 
       if (signUp) {
-        navigation.navigate("Confirm", { emailId: emailValue });
+        navigation.navigate("SignupConfirm", { emailId: emailValue });
       }
     } catch (e) {
       Alert.alert(e.message.replace("GraphQL error: ", ""));
@@ -151,6 +157,33 @@ export default ({ navigation }) => {
       setRegisterLoading(false);
     }
   };
+
+  React.useEffect(() => {
+    const backAction = () => {
+      Alert.alert(
+        "회원가입이 완료되지 않았습니다",
+        "화원가입이 완료되지 않은 상태에서 뒤로가면 내용은 저장되지 않습니다",
+        [
+          { text: "머무르기", style: "cancel", onPress: () => {} },
+          {
+            text: "뒤로가기",
+            style: "destructive",
+            // If the user confirmed, then we dispatch the action we blocked earlier
+            // This will continue the action that had triggered the removal of the screen
+            onPress: () => navigation.pop(1),
+          },
+        ]
+      );
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+
+    return () => backHandler.remove();
+  }, []);
 
   return (
     <ScrollView
