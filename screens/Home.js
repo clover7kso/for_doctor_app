@@ -1,25 +1,42 @@
 import React from "react";
 import styled from "styled-components";
-import { useLogOut } from "../AuthContext";
 import AuthButtonText from "../components/AuthButtonText";
 
-const View = styled.View`
+const OutContainer = styled.View`
   justify-content: center;
   align-items: center;
   flex: 1;
 `;
 
-const Text = styled.Text``;
+const Container = styled.View`
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+`;
 
-export default () => {
-  const logOut = useLogOut();
-  const handleLogout = async () => {
-    logOut();
-    return;
-  };
+export default ({ navigation }) => {
   return (
-    <View>
-      <AuthButtonText onPress={handleLogout} text="Home"></AuthButtonText>
-    </View>
+    <OutContainer>
+      <Container>
+        <AuthButtonText
+          onPress={() => navigation.navigate("Board")}
+          text="Board"
+        />
+        <AuthButtonText
+          onPress={() => navigation.navigate("BoardPost")}
+          text="BoardPost"
+        />
+      </Container>
+      <Container>
+        <AuthButtonText
+          onPress={() => navigation.navigate("Board")}
+          text="Board"
+        />
+        <AuthButtonText
+          onPress={() => navigation.navigate("BoardPost")}
+          text="BoardPost"
+        />
+      </Container>
+    </OutContainer>
   );
 };

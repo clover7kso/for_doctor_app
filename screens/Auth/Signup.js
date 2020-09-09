@@ -80,7 +80,7 @@ export default ({ navigation }) => {
     try {
       const {
         data: { location },
-      } = await axios.post("http://172.30.117.55:4000/api/upload", formData, {
+      } = await axios.post("http://192.168.219.101:4000/api/upload", formData, {
         headers: {
           "content-type": "multipart/form-data",
         },

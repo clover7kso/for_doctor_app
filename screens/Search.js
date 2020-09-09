@@ -9,7 +9,7 @@ const View = styled.View`
 
 const Text = styled.Text``;
 
-export default () => (
+export default ({navigation}) => (
   <View>
     <Text>Search</Text>
   </View>
