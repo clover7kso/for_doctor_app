@@ -17,7 +17,7 @@ const Container = styled.View`
 `;
 
 export default ({ navigation }) => {
-  const { loading, error, data } = useQuery(POST_TOP, {
+  const { loading, error, data= { postTop: {} }  } = useQuery(POST_TOP, {
     variables: {},
   });
 

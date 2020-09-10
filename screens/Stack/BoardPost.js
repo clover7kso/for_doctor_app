@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useQuery } from "react-apollo-hooks";
 import { POST_ONE } from "./BoardQueries";
 import { ActivityIndicator, ScrollView } from "react-native";
+import BackPressHeader from "../../components/BackPressHeader";
 
 const View = styled.View`
   background: white
@@ -36,6 +37,7 @@ export default ({ route, navigation }) => {
   const myDate = new Date(1000 * data.postOne.createdAt);
   return (
     <View>
+      <BackPressHeader text={data.postOne.category} navigation={navigation} />
       {loading ? (
         <ActivityIndicator color={"white"} />
       ) : (
@@ -44,12 +46,10 @@ export default ({ route, navigation }) => {
             <Title>{data.postOne.title}</Title>
             <Content> {data.postOne.content}</Content>
             <UserNickName>
-              {" "}
               {data.postOne.ananonymous ? "익명" : data.postOne.userNickname}
             </UserNickName>
             <NumViews> {data.postOne.views}</NumViews>
             <NumComments>
-              {" "}
               {data.postOne.comments === null
                 ? "0"
                 : data.postOne.comments.length}
