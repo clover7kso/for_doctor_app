@@ -4,7 +4,9 @@ import PropTypes from "prop-types";
 import { ActivityIndicator } from "react-native";
 import { Picker } from "@react-native-community/picker";
 
-const Container = styled.View``;
+const Container = styled.View`
+  align-items: center;
+`;
 
 const AuthPicker = ({ loading = true, error, data, value, onChange }) => (
   <Container>

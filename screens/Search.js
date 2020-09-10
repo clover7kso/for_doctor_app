@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const View = styled.View`
+background : white
   justify-content: center;
   align-items: center;
   flex: 1;
@@ -9,7 +10,7 @@ const View = styled.View`
 
 const Text = styled.Text``;
 
-export default ({navigation}) => (
+export default ({ navigation }) => (
   <View>
     <Text>Search</Text>
   </View>

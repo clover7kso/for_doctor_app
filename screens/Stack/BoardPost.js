@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const View = styled.View`
+background : white
   justify-content: center;
   align-items: center;
   flex: 1;
@@ -9,8 +10,12 @@ const View = styled.View`
 
 const Text = styled.Text``;
 
-export default ({ navigation }) => (
-  <View>
-    <Text>BoardPost</Text>
-  </View>
-);
+export default ({ route, navigation }) => {
+  const { postId } = route.params;
+
+  return (
+    <View>
+      <Text>BoardPost - {postId}</Text>
+    </View>
+  );
+};

@@ -2,10 +2,9 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import TabNavigation from "./TabNavigation";
-import Board from "../screens/Main/Board";
-import BoardPost from "../screens/Main/BoardPost";
-import BoardWrite from "../screens/Main/BoardWrite";
-
+import Board from "../screens/Stack/Board";
+import BoardPost from "../screens/Stack/BoardPost";
+import BoardWrite from "../screens/Stack/BoardWrite";
 
 const Stack = createStackNavigator();
 
