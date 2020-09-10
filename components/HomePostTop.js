@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { ActivityIndicator } from "react-native";
 import constants from "../constants";
 
 const Touchable = styled.TouchableOpacity``;
@@ -36,46 +35,41 @@ const TextViews = styled.Text`
   color: ${(props) => props.theme.darkGreyColor};
 `;
 
-const HomePostTop = ({ loading = true, error, data, navigation }) => (
+const HomePostTop = ({ error, data, navigation }) => (
   <Container>
-    {loading ? (
-      <ActivityIndicator color={"white"} />
-    ) : (
-      <Table>
-        <Container>
-          {data.map((item, key) => (
-            <Touchable
-              onPress={() =>
-                navigation.navigate("Board", { category: item.category })
-              }
-            >
-              <TextCategory>{item.category}</TextCategory>
-            </Touchable>
-          ))}
-        </Container>
-        <Container>
-          {data.map((item, key) => (
-            <Touchable
-              onPress={() =>
-                navigation.navigate("BoardPost", { postId: item.id })
-              }
-            >
-              <TextTitle>{item.title}</TextTitle>
-            </Touchable>
-          ))}
-        </Container>
-        <Container>
-          {data.map((item, key) => (
-            <TextViews>조회수 : {item.views}</TextViews>
-          ))}
-        </Container>
-      </Table>
-    )}
+    <Table>
+      <Container>
+        {data.map((item, key) => (
+          <Touchable
+            onPress={() =>
+              navigation.navigate("Board", { category: item.category })
+            }
+          >
+            <TextCategory>{item.category}</TextCategory>
+          </Touchable>
+        ))}
+      </Container>
+      <Container>
+        {data.map((item, key) => (
+          <Touchable
+            onPress={() =>
+              navigation.navigate("BoardPost", { postId: item.id })
+            }
+          >
+            <TextTitle>{item.title}</TextTitle>
+          </Touchable>
+        ))}
+      </Container>
+      <Container>
+        {data.map((item, key) => (
+          <TextViews>조회수 : {item.views}</TextViews>
+        ))}
+      </Container>
+    </Table>
   </Container>
 );
 
 HomePostTop.propTypes = {
-  loading: PropTypes.bool,
   error: PropTypes.string,
   data: PropTypes.array.isRequired,
   navigation: PropTypes.object.isRequired,

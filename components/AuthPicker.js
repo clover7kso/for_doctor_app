@@ -8,25 +8,20 @@ const Container = styled.View`
   align-items: center;
 `;
 
-const AuthPicker = ({ loading = true, error, data, value, onChange }) => (
+const AuthPicker = ({ error, data, value, onChange }) => (
   <Container>
-    {loading ? (
-      <ActivityIndicator color={"white"} />
-    ) : (
-      <Picker
-        selectedValue={value}
-        onValueChange={(itemValue, itemIndex) => onChange(itemValue)}
-      >
-        {data.map((item, key) => (
-          <Picker.Item label={item} value={item} key={key} />
-        ))}
-      </Picker>
-    )}
+    <Picker
+      selectedValue={value}
+      onValueChange={(itemValue, itemIndex) => onChange(itemValue)}
+    >
+      {data.map((item, key) => (
+        <Picker.Item label={item} value={item} key={key} />
+      ))}
+    </Picker>
   </Container>
 );
 
 AuthPicker.propTypes = {
-  loading: PropTypes.bool,
   error: PropTypes.string,
   data: PropTypes.array.isRequired,
   value: PropTypes.string.isRequired,

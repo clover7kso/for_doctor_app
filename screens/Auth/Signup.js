@@ -32,9 +32,12 @@ const InContainer1 = styled.View`
 `;
 
 export default ({ navigation }) => {
-  const { loading, error, data } = useQuery(MEDICAL_CATEGORY, {
-    variables: {},
-  });
+  const { loading, error, data = { medicalCategory: {} } } = useQuery(
+    MEDICAL_CATEGORY,
+    {
+      variables: {},
+    }
+  );
 
   const emailInput = useInput("");
   const pwInput = useInput("");
@@ -80,7 +83,7 @@ export default ({ navigation }) => {
     try {
       const {
         data: { location },
-      } = await axios.post("http://192.168.43.253:4000/api/upload", formData, {
+      } = await axios.post("http://192.168.219.101:4000/api/upload", formData, {
         headers: {
           "content-type": "multipart/form-data",
         },
@@ -214,13 +217,16 @@ export default ({ navigation }) => {
               placeholder="닉네임"
               keyboardType="default"
             />
-
-            <AuthPicker
-              {...medicalCateogryInput}
-              loading={loading}
-              error={error}
-              data={data.medicalCategory}
-            />
+            {loading ? (
+              <ActivityIndicator color={"white"} />
+            ) : (
+              <AuthPicker
+                {...medicalCateogryInput}
+                loading={loading}
+                error={error}
+                data={data.medicalCategory}
+              />
+            )}
             <AuthInput
               {...medicalIdInput}
               placeholder="면허번호"
