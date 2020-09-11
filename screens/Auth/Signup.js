@@ -6,6 +6,7 @@ import AuthButton from "../../components/AuthButton";
 import AuthButtonImage from "../../components/AuthButtonImage";
 import AuthPicker from "../../components/AuthPicker";
 import constants from "../../constants";
+import { ActivityIndicator } from "react-native";
 import { TouchableWithoutFeedback, Keyboard, Alert } from "react-native";
 import { useQuery, useMutation } from "react-apollo-hooks";
 import { MEDICAL_CATEGORY, SIGN_UP } from "./AuthQueries";
@@ -83,7 +84,7 @@ export default ({ navigation }) => {
     try {
       const {
         data: { location },
-      } = await axios.post("http://192.168.219.101:4000/api/upload", formData, {
+      } = await axios.post("http://192.168.35.71:4000/api/upload", formData, {
         headers: {
           "content-type": "multipart/form-data",
         },
