@@ -1,8 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import HomePostTop from "../components/HomePostTop";
+import AuthButtonText from "../components/AuthButtonText";
 import { useQuery } from "react-apollo-hooks";
-import { POST_TOP } from "./Stack/BoardQueries";
+import { POST_TOP } from "./Board/BoardQueries";
+import { useLogOut } from "../AuthContext";
 import { ActivityIndicator } from "react-native";
 const OutContainer = styled.View`
 background : white
@@ -17,9 +19,11 @@ const Container = styled.View`
 `;
 
 export default ({ navigation }) => {
-  const { loading, error, data= { postTop: {} }  } = useQuery(POST_TOP, {
+  const { loading, error, data = { postTop: {} } } = useQuery(POST_TOP, {
     variables: {},
   });
+
+  const logOut = useLogOut();
 
   return (
     <OutContainer>
@@ -27,11 +31,14 @@ export default ({ navigation }) => {
         {loading ? (
           <ActivityIndicator color={"white"} />
         ) : (
-          <HomePostTop
-            error={error}
-            data={data.postTop}
-            navigation={navigation}
-          />
+          <Container>
+            <HomePostTop
+              error={error}
+              data={data.postTop}
+              navigation={navigation}
+            />
+            <AuthButtonText text="로그아웃" onPress={logOut} />
+          </Container>
         )}
       </Container>
     </OutContainer>

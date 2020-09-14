@@ -41,11 +41,12 @@ export default ({ navigation }) => {
   );
 
   const emailInput = useInput("");
+  const phoneInput = useInput("");
   const pwInput = useInput("");
   const pwConfirmInput = useInput("");
-  const nicknameInput = useInput("");
+  const nameInput = useInput("");
   const medicalIdInput = useInput("");
-  const medicalCateogryInput = useInput("안과의사");
+  const medicalCategoryInput = useInput("안과의사");
 
   const medicalUri = useInput("");
   const setMedicalUri = (uri) => {
@@ -59,9 +60,10 @@ export default ({ navigation }) => {
     variables: {
       id: emailInput.value,
       password: pwInput.value,
-      nickname: nicknameInput.value,
+      phone: phoneInput.value,
+      name: nameInput.value,
       medical_id: medicalIdInput.value,
-      medical_cate: medicalCateogryInput.value,
+      medical_cate: medicalCategoryInput.value,
       medical_certi: medicalUrl,
     },
   });
@@ -73,7 +75,7 @@ export default ({ navigation }) => {
       "_" +
       emailInput.value +
       "_" +
-      nicknameInput.value +
+      nameInput.value +
       ".jpg";
     const [, type] = name.split(".");
     formData.append("file", {
@@ -84,7 +86,7 @@ export default ({ navigation }) => {
     try {
       const {
         data: { location },
-      } = await axios.post("http://192.168.35.71:4000/api/upload", formData, {
+      } = await axios.post("http://172.30.116.245:4000/api/upload", formData, {
         headers: {
           "content-type": "multipart/form-data",
         },
@@ -100,16 +102,18 @@ export default ({ navigation }) => {
     try {
       setRegisterLoading(true);
       const emailValue = emailInput.value;
+      const phoneValue = phoneInput.value;
       const pwValue = pwInput.value;
       const pwConfirmValue = pwConfirmInput.value;
-      const nicknameValue = nicknameInput.value;
+      const nameValue = nameInput.value;
       const medicalIdValue = medicalIdInput.value;
-      const medicalCateogryValue = medicalCateogryInput.value;
+      const medicalCateogryValue = medicalCategoryInput.value;
       const medicalUriValue = medicalUri.value;
 
       const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      const phoneRegex = /^\d{2,3}-\d{3,4}-\d{4}$/;
       const pwRegex = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
-      const nicknameRegex = /^[\w\Wㄱ-ㅎㅏ-ㅣ가-힣]{2,20}$/;
+      const nameRegex = /^[가-힣]{2,4}$/;
       const medicalIdRegex = /^[0-9]{5}$/;
 
       if (emailValue === "") {
@@ -118,6 +122,13 @@ export default ({ navigation }) => {
         return Alert.alert("올바른 이메일형식을 입력해주세요");
       } else if (!emailRegex.test(emailValue)) {
         return Alert.alert("올바른 이메일형식을 입력해주세요");
+      }
+      if (phoneValue === "") {
+        return Alert.alert("전화번호가 비어있습니다");
+      } else if (!phoneRegex.test(phoneValue)) {
+        return Alert.alert(
+          "잘못된 휴대폰 번호입니다. 숫자, - 를 포함한 숫자만 입력하세요"
+        );
       }
       if (pwValue === "") {
         return Alert.alert("비밀번호가 비어있습니다");
@@ -128,10 +139,10 @@ export default ({ navigation }) => {
           "특수문자 / 문자 / 숫자 포함 형태의 8~15자리 이내의 암호 정규식"
         );
       }
-      if (nicknameValue === "") {
-        return Alert.alert("닉네임이 비어있습니다");
-      } else if (!nicknameRegex.test(nicknameValue)) {
-        return Alert.alert("닉네임은 2 ~ 20 글자로 입력 해 주세요.");
+      if (nameValue === "") {
+        return Alert.alert("실명이 비어있습니다");
+      } else if (!nameRegex.test(nameValue)) {
+        return Alert.alert("실명은 2 ~ 4글자 한글로 입력 해 주세요.");
       }
       if (medicalCateogryValue === "") {
         return Alert.alert("분류가 정해지지 않았습니다");
@@ -189,7 +200,11 @@ export default ({ navigation }) => {
     return () => backHandler.remove();
   }, []);
 
-  return (
+  return loading ? (
+    <InContainer1>
+      <ActivityIndicator color={"black"} />
+    </InContainer1>
+  ) : (
     <ScrollView
       contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
     >
@@ -214,20 +229,23 @@ export default ({ navigation }) => {
               secureTextEntry={true}
             />
             <AuthInput
-              {...nicknameInput}
-              placeholder="닉네임"
+              {...phoneInput}
+              placeholder="전화번호 ( - 를 포함하여 입력 )"
+              keyboardType="number-pad"
+            />
+            <AuthInput
+              {...nameInput}
+              placeholder="실명"
               keyboardType="default"
             />
-            {loading ? (
-              <ActivityIndicator color={"white"} />
-            ) : (
-              <AuthPicker
-                {...medicalCateogryInput}
-                loading={loading}
-                error={error}
-                data={data.medicalCategory}
-              />
-            )}
+
+            <AuthPicker
+              {...medicalCategoryInput}
+              loading={loading}
+              error={error}
+              data={data.medicalCategory}
+            />
+
             <AuthInput
               {...medicalIdInput}
               placeholder="면허번호"

@@ -22,7 +22,8 @@ export const SIGN_UP = gql`
   mutation signUp(
     $id: String!
     $password: String!
-    $nickname: String!
+    $phone: String!
+    $name: String!
     $medical_id: String!
     $medical_cate: String!
     $medical_certi: String!
@@ -30,7 +31,8 @@ export const SIGN_UP = gql`
     signUp(
       id: $id
       password: $password
-      nickname: $nickname
+      phone: $phone
+      name: $name
       medical_id: $medical_id
       medical_cate: $medical_cate
       medical_certi: $medical_certi
