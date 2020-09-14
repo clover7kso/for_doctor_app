@@ -12,6 +12,6 @@ const Text = styled.Text``;
 
 export default ({ navigation }) => (
   <View>
-    <Text>Notifications</Text>
+    <Text>Message</Text>
   </View>
 );

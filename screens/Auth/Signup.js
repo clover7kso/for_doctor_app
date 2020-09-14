@@ -71,12 +71,7 @@ export default ({ navigation }) => {
   const handleSubmit = async () => {
     const formData = new FormData();
     const name =
-      moment().format("YY:MM:DD-HH:mm:ss") +
-      "_" +
-      emailInput.value +
-      "_" +
-      nameInput.value +
-      ".jpg";
+      moment().format("YY:MM:DD-HH:mm:ss") + "_" + emailInput.value + ".jpg";
     const [, type] = name.split(".");
     formData.append("file", {
       name,
@@ -86,15 +81,22 @@ export default ({ navigation }) => {
     try {
       const {
         data: { location },
-      } = await axios.post("http://172.30.116.245:4000/api/upload", formData, {
+      } = await axios.post("http://192.168.219.101:4000/api/upload", formData, {
         headers: {
           "content-type": "multipart/form-data",
         },
       });
-      return location;
+      setMedicalUrl(location);
+
+      const {
+        data: { signUp },
+      } = await uploadMutaion();
+
+      if (signUp) {
+        navigation.navigate("SignupConfirm", { emailId: emailInput.value });
+      }
     } catch (e) {
-      console.log(e);
-      Alert.alert("Cant upload", "Try later");
+      Alert.alert(e.message.replace("GraphQL error: ", ""));
     }
   };
 
@@ -156,16 +158,7 @@ export default ({ navigation }) => {
         return Alert.alert("면허번호 사진이 없습니다");
       }
 
-      const url = handleSubmit();
-      setMedicalUrl(url);
-
-      const {
-        data: { signUp },
-      } = await uploadMutaion();
-
-      if (signUp) {
-        navigation.navigate("SignupConfirm", { emailId: emailValue });
-      }
+      handleSubmit();
     } catch (e) {
       Alert.alert(e.message.replace("GraphQL error: ", ""));
     } finally {

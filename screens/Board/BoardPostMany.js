@@ -10,12 +10,8 @@ background : white
 
 const Text = styled.Text``;
 
-export default ({ route, navigation }) => {
-  const { category } = route.params;
-
-  return (
-    <View>
-      <Text>Board - {category}</Text>
-    </View>
-  );
-};
+export default ({ navigation }) => (
+  <View>
+    <Text>BoardPostMany</Text>
+  </View>
+);

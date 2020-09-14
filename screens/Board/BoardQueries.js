@@ -16,7 +16,7 @@ export const POST_ONE = gql`
     postOne(id: $id) {
       updatedAt
       createdAt
-      userNickname
+      userName
 
       category
       title
@@ -24,7 +24,7 @@ export const POST_ONE = gql`
       views
       comments {
         postId
-        userNickname
+        userName
         createdAt
         updatedAt
         text

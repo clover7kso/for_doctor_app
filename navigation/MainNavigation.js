@@ -1,11 +1,12 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import Board from "../screens/Board/Board";
-import BoardPost from "../screens/Board/BoardPost";
+import BoardPostTop from "../screens/Board/BoardPostTop";
+import BoardPostMany from "../screens/Board/BoardPostMany";
+import BoardPostOne from "../screens/Board/BoardPostOne";
 import BoardWrite from "../screens/Board/BoardWrite";
 import Home from "../screens/Home";
-import Notifications from "../screens/Notifications";
+import Message from "../screens/Message";
 import Profile from "../screens/Profile";
 
 const Stack = createStackNavigator();
@@ -16,9 +17,10 @@ function MainNavigation() {
       <Stack.Navigator headerMode="none">
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Profile" component={Profile} />
-        <Stack.Screen name="Notifications" component={Notifications} />
-        <Stack.Screen name="Board" component={Board} />
-        <Stack.Screen name="BoardPost" component={BoardPost} />
+        <Stack.Screen name="Message" component={Message} />
+        <Stack.Screen name="BoardPostTop" component={BoardPostTop} />
+        <Stack.Screen name="BoardPostMany" component={BoardPostMany} />
+        <Stack.Screen name="BoardPostOne" component={BoardPostOne} />
         <Stack.Screen name="BoardWrite" component={BoardWrite} />
       </Stack.Navigator>
     </NavigationContainer>
