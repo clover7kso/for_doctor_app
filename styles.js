@@ -7,4 +7,6 @@ export default {
   redColor: "#ED4956",
   blueColor: "#0099FF",
   darkBlueColor: "#0066CC",
+  blackBlueColor: "#002060",
+  greyBlueColor: "#7189BA",
 };

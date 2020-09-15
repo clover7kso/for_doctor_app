@@ -12,36 +12,77 @@ const Container = styled.View`
   width: ${constants.width};
   align-items: center;
   justify-content: space-between;
+
+	shadow-color: #000000;
+  shadow-opacity: 0.3;
+  shadow-offset: { width: 2, height: 2 };
+  elevation: 10;
+
+  padding-bottom: 5;
+  padding-top: ${Platform.OS === "ios" ? 0 : Expo.Constants.statusBarHeight};
 `;
 
 const Text = styled.Text`
-  padding:20px
-  font-size: 19px;
-  color: black;
+  font-size: 25px;
+  color: ${(props) => props.theme.darkBlueColor};
   text-align: center;
 `;
 const Icon = styled.View`
-  padding: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
 `;
 
-const BackPressHeader = ({ text, navigation }) => (
-  <Container>
-    <Touchable onPress={() => navigation.pop(1)}>
-      <Icon>
-        <Ionicons
-          name={Platform.OS === "ios" ? "ios-arrow-back" : "md-arrow-back"}
-          size={32}
-          color={"grey"}
-        />
-      </Icon>
-    </Touchable>
-    <Text>{text}</Text>
-  </Container>
-);
+const BackPressHeader = ({ navigation, text }) => {
+  const goBackToTopSafe = () => {
+    // Traverse parent stack until we can go back
+    let parent = navigation;
+    while (
+      parent.dangerouslyGetState()?.index === 0 &&
+      parent.dangerouslyGetParent()
+    ) {
+      parent = parent.dangerouslyGetParent();
+    }
+    parent?.popToTop();
+  };
+  const goBackSafe = () => {
+    // Traverse parent stack until we can go back
+    let parent = navigation;
+    while (
+      parent.dangerouslyGetState()?.index === 0 &&
+      parent.dangerouslyGetParent()
+    ) {
+      parent = parent.dangerouslyGetParent();
+    }
+    parent?.goBack();
+  };
+  return (
+    <Container>
+      <Touchable onPress={goBackSafe}>
+        <Icon>
+          <Ionicons
+            name={Platform.OS === "ios" ? "ios-arrow-back" : "md-arrow-back"}
+            size={30}
+            color={"grey"}
+          />
+        </Icon>
+      </Touchable>
+      <Text>{text}</Text>
+      <Touchable onPress={goBackToTopSafe}>
+        <Icon>
+          <Ionicons
+            name={Platform.OS === "ios" ? "ios-home" : "md-home"}
+            size={30}
+            color={"grey"}
+          />
+        </Icon>
+      </Touchable>
+    </Container>
+  );
+};
 
 BackPressHeader.propTypes = {
-  text: PropTypes.string.isRequired,
   navigation: PropTypes.object.isRequired,
+  text: PropTypes.string.isRequired,
 };
 
 export default BackPressHeader;

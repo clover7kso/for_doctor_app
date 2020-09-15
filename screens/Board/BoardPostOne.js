@@ -37,7 +37,7 @@ export default ({ route, navigation }) => {
   const myDate = new Date(1000 * data.postOne.createdAt);
   return (
     <View>
-      <BackPressHeader text={data.postOne.category} navigation={navigation} />
+      <BackPressHeader navigation={navigation} text={"게시판-게시글"} />
       {loading ? (
         <ActivityIndicator color={"white"} />
       ) : (
