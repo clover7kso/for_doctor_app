@@ -13,6 +13,10 @@ const styles = StyleSheet.create({
     alignSelf: "baseline",
     backgroundColor: "#0066CC",
     paddingBottom: 10,
+    shadowColor: "#000000",
+    shadowOpacity: 0.3,
+    shadowOffset: { width: 2, height: 2 },
+    elevation: 10,
   },
   scroll: {
     paddingLeft: 10,

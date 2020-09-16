@@ -42,12 +42,13 @@ const Text = styled.Text`
 `;
 
 export default ({ navigation }) => {
-  const { loading, error, data = { productCategory: {} } } = useQuery(
+  const { loading, error, data = { productCategory: {} }, refetch } = useQuery(
     PRODUCT_CATEGORY,
     {
       variables: {},
     }
   );
+  refetch();
 
   return (
     <OutContainer>

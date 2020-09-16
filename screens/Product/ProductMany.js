@@ -25,14 +25,19 @@ const Text = styled.Text``;
 export default ({ navigation, route }) => {
   const { category } = route.params;
 
-  const { loading, error, data = { productSubCategory: {} } } = useQuery(
-    PRODUCT_SUB_CATEGORY,
-    {
-      variables: { category: category },
-    }
-  );
+  const {
+    loading,
+    error,
+    data = { productSubCategory: {} },
+    refetch,
+  } = useQuery(PRODUCT_SUB_CATEGORY, {
+    variables: { category: category },
+  });
+  refetch();
 
-  const selectText = useInput("");
+  console.log(data);
+
+  const selectText = useInput(data.productSubCategory[0]);
 
   return (
     <OutContainer>
