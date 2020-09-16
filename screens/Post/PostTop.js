@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-import BoardPostTop from "../../components/BoardPostTop";
+import PostTop from "../../components/PostTop";
 import { useQuery } from "react-apollo-hooks";
-import { POST_TOP } from "./BoardQueries";
+import { POST_TOP } from "./PostQueries";
 
 const OutContainer = styled.View`
 background : white
@@ -29,7 +29,7 @@ export default ({ route, navigation }) => {
           <ActivityIndicator color={"white"} />
         ) : (
           <Container>
-            <BoardPostTop
+            <PostTop
               error={error}
               data={data.postTop}
               navigation={navigation}

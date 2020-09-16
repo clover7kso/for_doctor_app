@@ -12,6 +12,6 @@ const Text = styled.Text``;
 
 export default ({ navigation }) => (
   <View>
-    <Text>BoardWrite</Text>
+    <Text>Write</Text>
   </View>
 );

@@ -35,14 +35,14 @@ const TextViews = styled.Text`
   color: ${(props) => props.theme.darkGreyColor};
 `;
 
-const HomePostTop = ({ error, data, navigation }) => (
+const PostTop = ({ error, data, navigation }) => (
   <Container>
     <Table>
       <Container>
         {data.map((item, key) => (
           <Touchable
             onPress={() =>
-              navigation.navigate("Board", { category: item.category })
+              navigation.navigate("PostMany", { category: item.category })
             }
           >
             <TextCategory>{item.category}</TextCategory>
@@ -52,9 +52,7 @@ const HomePostTop = ({ error, data, navigation }) => (
       <Container>
         {data.map((item, key) => (
           <Touchable
-            onPress={() =>
-              navigation.navigate("BoardPost", { postId: item.id })
-            }
+            onPress={() => navigation.navigate("PostOne", { postId: item.id })}
           >
             <TextTitle>{item.title}</TextTitle>
           </Touchable>
@@ -69,10 +67,10 @@ const HomePostTop = ({ error, data, navigation }) => (
   </Container>
 );
 
-HomePostTop.propTypes = {
+PostTop.propTypes = {
   error: PropTypes.string,
   data: PropTypes.array.isRequired,
   navigation: PropTypes.object.isRequired,
 };
 
-export default HomePostTop;
+export default PostTop;

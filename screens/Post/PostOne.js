@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useQuery } from "react-apollo-hooks";
-import { POST_ONE } from "./BoardQueries";
+import { POST_ONE } from "./PostQueries";
 import { ActivityIndicator, ScrollView } from "react-native";
 import BackPressHeader from "../../components/BackPressHeader";
 
