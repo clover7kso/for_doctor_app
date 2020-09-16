@@ -8,6 +8,7 @@ import BoardPostOne from "../screens/Board/BoardPostOne";
 import BoardWrite from "../screens/Board/BoardWrite";
 
 import ProductCategory from "../screens/Product/ProductCategory";
+import ProductMany from "../screens/Product/ProductMany";
 
 import Home from "../screens/Home";
 import Message from "../screens/Message";
@@ -27,6 +28,7 @@ function MainNavigation() {
         <Stack.Screen name="BoardPostOne" component={BoardPostOne} />
         <Stack.Screen name="BoardWrite" component={BoardWrite} />
         <Stack.Screen name="ProductCategory" component={ProductCategory} />
+        <Stack.Screen name="ProductMany" component={ProductMany} />
       </Stack.Navigator>
     </NavigationContainer>
   );

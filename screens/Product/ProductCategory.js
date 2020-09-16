@@ -14,16 +14,18 @@ const OutContainer = styled.View`
 `;
 
 const Container = styled.View`
+  padding-top:10px
   flex-wrap : wrap
+  flex-direction : row
   justify-content: center;
   align-items: center;
 `;
 
 const Touchable = styled.TouchableOpacity`
-  margin-top:10px
+  margin:5px;
   border-radius: 15px;
-  width: ${constants.width / 2.17};
-  width: ${constants.width / 4};
+  width: ${constants.width / 2.15};
+  height: ${constants.width / 5};
   background: ${(props) => props.theme.blueColor};
   justify-content: center;
   alignItems: center;
@@ -34,7 +36,10 @@ const Touchable = styled.TouchableOpacity`
   elevation: 15;
 `;
 
-const Text = styled.Text``;
+const Text = styled.Text`
+  color: white;
+  font-size: 20px;
+`;
 
 export default ({ navigation }) => {
   const { loading, error, data = { productCategory: {} } } = useQuery(
@@ -43,9 +48,6 @@ export default ({ navigation }) => {
       variables: {},
     }
   );
-  console.log(loading);
-  console.log(error);
-  console.log(data);
 
   return (
     <OutContainer>
@@ -54,9 +56,17 @@ export default ({ navigation }) => {
         <ActivityIndicator color={"white"} />
       ) : (
         <Container>
-          <Touchable>
-            <Text>ProductCategory</Text>
-          </Touchable>
+          {data.productCategory.map((item, key) => (
+            <Touchable
+              onPress={() =>
+                navigation.navigate("ProductMany", {
+                  category: item,
+                })
+              }
+            >
+              <Text>{item}</Text>
+            </Touchable>
+          ))}
         </Container>
       )}
     </OutContainer>

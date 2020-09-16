@@ -10,12 +10,10 @@ import constants from "../constants";
 
 const OutContainer = styled.View`
   background : white
-  justify-content: center;
   align-items: center;
   flex: 1;
-  padding-top: ${Platform.OS === "ios" ? 0 : Expo.Constants.statusBarHeight};
   padding-bottom: ${
-    Platform.OS === "ios" ? 0 : Expo.Constants.statusBarHeight * 1.3
+    Platform.OS === "ios" ? 0 : Expo.Constants.statusBarHeight * 2.2
   };
 `;
 
