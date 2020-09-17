@@ -17,8 +17,8 @@ const OutContainer = styled.View`
 `;
 
 const Container = styled.View`
-  justify-content: center;
   align-items: center;
+  flex: 1;
 `;
 
 const Text = styled.Text``;
@@ -35,9 +35,10 @@ export default ({ navigation, route }) => {
     variables: { mainCategory: category, subCategory: selectText.value },
   });
   resProductMany.refetch();
-  const [lastItem, setLastItem] = useState(
-    resProductMany.data.productMany.slice(-1)[0].id
-  );
+
+  const [lastItem, setLastItem] = !resProductMany.loading
+    ? useState(resProductMany.data.productMany.slice(-1)[0].id)
+    : useState("");
 
   const onLoadMore = () => {
     resProductMany.fetchMore({
@@ -48,7 +49,25 @@ export default ({ navigation, route }) => {
       },
       updateQuery: (prev, { fetchMoreResult }) => {
         if (!fetchMoreResult) return prev;
-        setLastItem(fetchMoreResult.productMany.slice(-1)[0].id);
+        console.log(lastItem);
+        if (fetchMoreResult.productMany.length > 0) {
+          setLastItem(fetchMoreResult.productMany.slice(-1)[0].id);
+          console.log(fetchMoreResult.productMany.slice(-1)[0].id);
+        }
+
+        console.log("-----------prev-------------------");
+        console.log(prev.productMany);
+        console.log("-----------only new productMany-------------------");
+        console.log(fetchMoreResult.productMany);
+        console.log("-----------new-------------------");
+        console.log(
+          Object.assign({}, prev, {
+            productMany: [...prev.productMany, ...fetchMoreResult.productMany],
+          })
+        );
+
+        console.log("-------------original-----------------");
+        console.log(resProductMany.data.productMany);
         return Object.assign({}, prev, {
           productMany: [...prev.productMany, ...fetchMoreResult.productMany],
         });
@@ -61,6 +80,7 @@ export default ({ navigation, route }) => {
     try {
       setRefreshing(true);
       await resProductMany.refetch();
+      setLastItem(resProductMany.data.productMany.slice(-1)[0].id);
     } catch (e) {
       console.log(e);
     } finally {
@@ -87,6 +107,7 @@ export default ({ navigation, route }) => {
             <ActivityIndicator color={"black"} />
           ) : (
             <FlatList
+              showsVerticalScrollIndicator={false}
               data={resProductMany.data.productMany}
               renderItem={Product}
               keyExtractor={(item, index) => item.id}
