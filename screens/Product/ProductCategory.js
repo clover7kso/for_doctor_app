@@ -10,7 +10,6 @@ const OutContainer = styled.View`
   background : white
   align-items: center;
   flex: 1;
-  
 `;
 
 const Container = styled.View`
