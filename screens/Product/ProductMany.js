@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useQuery } from "react-apollo-hooks";
 import { PRODUCT_SUB_CATEGORY, PRODUCT_MANY } from "./ProductQueries";
-import { ActivityIndicator, FlatList, RefreshControl } from "react-native";
+import { ActivityIndicator, FlatList } from "react-native";
 import BackPressHeader from "../../components/BackPressHeader";
 import ProductSearchBox from "../../components/ProductSearchBox";
 import ProductSubCategory from "../../components/ProductSubCategory";
@@ -29,50 +29,47 @@ export default ({ navigation, route }) => {
     variables: { category: category },
   });
   resSubCate.refetch();
-  const selectText = useInput(resSubCate.data.productSubCategory[0]);
+  const [selectText, setSelectText] =
+    resSubCate.data.productSubCategory.length > 0
+      ? useState(resSubCate.data.productSubCategory[0])
+      : useState(null);
 
   const resProductMany = useQuery(PRODUCT_MANY, {
-    variables: { mainCategory: category, subCategory: selectText.value },
+    variables: { mainCategory: category, subCategory: selectText },
   });
-  resProductMany.refetch();
-
-  const [lastItem, setLastItem] = !resProductMany.loading
-    ? useState(resProductMany.data.productMany.slice(-1)[0].id)
-    : useState("");
 
   const onLoadMore = () => {
-    resProductMany.fetchMore({
-      variables: {
-        mainCategory: category,
-        subCategory: selectText.value,
-        after: lastItem,
-      },
-      updateQuery: (prev, { fetchMoreResult }) => {
-        if (!fetchMoreResult) return prev;
-        console.log(lastItem);
-        if (fetchMoreResult.productMany.length > 0) {
-          setLastItem(fetchMoreResult.productMany.slice(-1)[0].id);
-          console.log(fetchMoreResult.productMany.slice(-1)[0].id);
-        }
+    if (!loadMore & (resProductMany.data.productMany.cursor !== "End")) {
+      setLoadMore(true);
+      resProductMany.fetchMore({
+        variables: {
+          mainCategory: category,
+          subCategory: selectText,
+          after: resProductMany.data.productMany.cursor,
+        },
+        updateQuery: (prev, { fetchMoreResult }) => {
+          if (!fetchMoreResult) return prev;
+          setLoadMore(false);
+          return {
+            productMany: {
+              __typename: prev.productMany.__typename,
+              cursor: fetchMoreResult.productMany.cursor,
+              products: [
+                ...prev.productMany.products,
+                ...fetchMoreResult.productMany.products,
+              ],
+            },
+          };
+        },
+      });
+    }
+  };
 
-        console.log("-----------prev-------------------");
-        console.log(prev.productMany);
-        console.log("-----------only new productMany-------------------");
-        console.log(fetchMoreResult.productMany);
-        console.log("-----------new-------------------");
-        console.log(
-          Object.assign({}, prev, {
-            productMany: [...prev.productMany, ...fetchMoreResult.productMany],
-          })
-        );
-
-        console.log("-------------original-----------------");
-        console.log(resProductMany.data.productMany);
-        return Object.assign({}, prev, {
-          productMany: [...prev.productMany, ...fetchMoreResult.productMany],
-        });
-      },
-    });
+  const [loadMore, setLoadMore] = useState(false);
+  const renderFooter = () => {
+    //it will show indicator at the bottom of the list when data is loading otherwise it returns null
+    if (!loadMore) return null;
+    return <ActivityIndicator style={{ color: "#000" }} />;
   };
 
   const [refreshing, setRefreshing] = useState(false);
@@ -80,7 +77,6 @@ export default ({ navigation, route }) => {
     try {
       setRefreshing(true);
       await resProductMany.refetch();
-      setLastItem(resProductMany.data.productMany.slice(-1)[0].id);
     } catch (e) {
       console.log(e);
     } finally {
@@ -92,13 +88,12 @@ export default ({ navigation, route }) => {
     <OutContainer>
       <BackPressHeader navigation={navigation} text={category} />
       <ProductSearchBox />
-      {resSubCate.loading ? (
-        <ActivityIndicator color={"white"} />
-      ) : (
+      {resSubCate.loading ? null : (
         <Container>
           {resSubCate.data.productSubCategory.length === 0 ? null : (
             <ProductSubCategory
-              {...selectText}
+              value={selectText}
+              onChange={setSelectText}
               tabArray={resSubCate.data.productSubCategory}
             />
           )}
@@ -108,9 +103,10 @@ export default ({ navigation, route }) => {
           ) : (
             <FlatList
               showsVerticalScrollIndicator={false}
-              data={resProductMany.data.productMany}
+              data={resProductMany.data.productMany.products}
               renderItem={Product}
               keyExtractor={(item, index) => item.id}
+              ListFooterComponent={renderFooter}
               refreshing={refreshing}
               onRefresh={refresh}
               onEndReached={onLoadMore}

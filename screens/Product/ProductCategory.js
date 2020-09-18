@@ -40,18 +40,20 @@ const Text = styled.Text`
   font-size: 20px;
 `;
 
-export default ({ navigation }) => {
+export default ({ navigation, route }) => {
+  const { type } = route.params;
+
   const { loading, error, data = { productCategory: {} }, refetch } = useQuery(
     PRODUCT_CATEGORY,
     {
-      variables: {},
+      variables: { type: type },
     }
   );
   refetch();
 
   return (
     <OutContainer>
-      <BackPressHeader navigation={navigation} text={"의료기기"} />
+      <BackPressHeader navigation={navigation} text={type} />
       {loading ? (
         <ActivityIndicator color={"white"} />
       ) : (

@@ -1,8 +1,8 @@
 import { gql } from "apollo-boost";
 
 export const PRODUCT_CATEGORY = gql`
-  query productCategory {
-    productCategory
+  query productCategory($type: String!) {
+    productCategory(type: $type)
   }
 `;
 
@@ -15,7 +15,7 @@ export const PRODUCT_SUB_CATEGORY = gql`
 export const PRODUCT_MANY = gql`
   query productMany(
     $mainCategory: String!
-    $subCategory: String!
+    $subCategory: String
     $after: String
   ) {
     productMany(
@@ -23,12 +23,15 @@ export const PRODUCT_MANY = gql`
       subCategory: $subCategory
       after: $after
     ) {
-      id
-      title
-      content
-      company
-      sampleImages {
-        url
+      cursor
+      products {
+        id
+        title
+        content
+        company
+        sampleImages {
+          url
+        }
       }
     }
   }

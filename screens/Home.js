@@ -152,7 +152,9 @@ export default ({ navigation }) => {
             <Table>
               <Left_Column>
                 <Touchable_1
-                  onPress={() => navigation.navigate("ProductCategory")}
+                  onPress={() =>
+                    navigation.navigate("ProductCategory", { type: "의료기기" })
+                  }
                 >
                   <Icon
                     resizeMode={"contain"}
@@ -179,7 +181,11 @@ export default ({ navigation }) => {
                   <Text_1>커뮤니티</Text_1>
                   <Text_2>오직 의사만을 위한</Text_2>
                 </Touchable_3>
-                <Touchable_4>
+                <Touchable_4
+                  onPress={() =>
+                    navigation.navigate("ProductCategory", { type: "마케팅" })
+                  }
+                >
                   <Icon
                     resizeMode={"contain"}
                     source={require("../assets/btn_marketing.png")}
