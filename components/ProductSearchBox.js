@@ -43,24 +43,33 @@ const TextInput = styled.TextInput`
 
 const Touchable = styled.TouchableOpacity``;
 
-const ProductSearchBox = ({ value, onChange, onPress }) => (
-  <Container>
-    <InnerContainer>
-      <Touchable onPress={onPress}>
-        <Ionicons
-          name={Platform.OS === "ios" ? "ios-search" : "md-search"}
-          size={30}
-          color="#0066CC"
+const ProductSearchBox = ({ onChange, value }) => {
+  var inputValue = value;
+  const change = (text) => {
+    inputValue = text;
+  };
+  const onPress = () => {
+    onChange(inputValue);
+  };
+  return (
+    <Container>
+      <InnerContainer>
+        <Touchable onPress={onPress}>
+          <Ionicons
+            name={Platform.OS === "ios" ? "ios-search" : "md-search"}
+            size={30}
+            color="#0066CC"
+          />
+        </Touchable>
+        <TextInput
+          onChangeText={change}
+          placeholder="업체명, 제품명을 검색하세요"
+          value={(text) => inputValue}
         />
-      </Touchable>
-      <TextInput
-        onChangeText={onChange}
-        placeholder="업체명, 제품명을 검색하세요"
-        value={value}
-      />
-    </InnerContainer>
-  </Container>
-);
+      </InnerContainer>
+    </Container>
+  );
+};
 
 ProductSearchBox.propTypes = {
   value: PropTypes.string.isRequired,

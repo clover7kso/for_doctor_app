@@ -34,8 +34,13 @@ export default ({ navigation, route }) => {
       ? useState(resSubCate.data.productSubCategory[0])
       : useState(null);
 
+  const [searchWord, setSearchWord] = useState("");
   const resProductMany = useQuery(PRODUCT_MANY, {
-    variables: { mainCategory: category, subCategory: selectText },
+    variables: {
+      mainCategory: category,
+      subCategory: selectText,
+      searchWord: searchWord,
+    },
   });
 
   const onLoadMore = () => {
@@ -46,6 +51,7 @@ export default ({ navigation, route }) => {
           mainCategory: category,
           subCategory: selectText,
           after: resProductMany.data.productMany.cursor,
+          searchWord: searchWord,
         },
         updateQuery: (prev, { fetchMoreResult }) => {
           if (!fetchMoreResult) return prev;
@@ -87,7 +93,7 @@ export default ({ navigation, route }) => {
   return (
     <OutContainer>
       <BackPressHeader navigation={navigation} text={category} />
-      <ProductSearchBox />
+      <ProductSearchBox value={searchWord} onChange={setSearchWord} />
       {resSubCate.loading ? null : (
         <Container>
           {resSubCate.data.productSubCategory.length === 0 ? null : (
