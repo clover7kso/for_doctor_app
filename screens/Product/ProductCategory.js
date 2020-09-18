@@ -43,22 +43,19 @@ const Text = styled.Text`
 export default ({ navigation, route }) => {
   const { type } = route.params;
 
-  const { loading, error, data = { productCategory: {} }, refetch } = useQuery(
-    PRODUCT_CATEGORY,
-    {
-      variables: { type: type },
-    }
-  );
-  refetch();
+  const categories = useQuery(PRODUCT_CATEGORY, {
+    variables: { type: type },
+  });
+  categories.refetch();
 
   return (
     <OutContainer>
       <BackPressHeader navigation={navigation} text={type} />
-      {loading ? (
+      {categories.loading ? (
         <ActivityIndicator color={"white"} />
       ) : (
         <Container>
-          {data.productCategory.map((item, key) => (
+          {categories.data.productCategory.map((item, key) => (
             <Touchable
               onPress={() =>
                 navigation.navigate("ProductMany", {

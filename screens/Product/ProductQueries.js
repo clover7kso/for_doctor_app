@@ -1,5 +1,16 @@
 import { gql } from "apollo-boost";
 
+export const PRODUCT_AD_MANY = gql`
+  query productAdMany($type: String!) {
+    productAdMany(type: $type) {
+      id
+      sampleImages {
+        url
+      }
+    }
+  }
+`;
+
 export const PRODUCT_CATEGORY = gql`
   query productCategory($type: String!) {
     productCategory(type: $type)
