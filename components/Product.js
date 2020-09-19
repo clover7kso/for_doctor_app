@@ -47,12 +47,15 @@ const Divider = styled.View`
   height: 1;
 `;
 
-const Product = ({ item }) => {
+const Product = ({ item, navigation }) => {
   return (
     <Container>
       <Touchable
         onPress={() =>
-          item.navigation.navigate("ProductDetail", { id: item.id })
+          navigation.navigate("ProductOne", {
+            id: item.id,
+            subCategory: item.subCategory,
+          })
         }
       >
         <InContainer1>

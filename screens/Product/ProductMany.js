@@ -7,7 +7,6 @@ import BackPressHeader from "../../components/BackPressHeader";
 import ProductSearchBox from "../../components/ProductSearchBox";
 import ProductSubCategory from "../../components/ProductSubCategory";
 import Product from "../../components/Product";
-import useInput from "../../hooks/useInput";
 
 const OutContainer = styled.View`
   background : white
@@ -29,10 +28,9 @@ export default ({ navigation, route }) => {
     variables: { category: category },
   });
   resSubCate.refetch();
-  const [selectText, setSelectText] =
-    resSubCate.data.productSubCategory.length > 0
-      ? useState(resSubCate.data.productSubCategory[0])
-      : useState(null);
+  const [selectText, setSelectText] = !resSubCate.loading
+    ? useState(resSubCate.data.productSubCategory[0])
+    : useState(null);
 
   const [searchWord, setSearchWord] = useState("");
   const resProductMany = useQuery(PRODUCT_MANY, {
@@ -110,7 +108,7 @@ export default ({ navigation, route }) => {
             <FlatList
               showsVerticalScrollIndicator={false}
               data={resProductMany.data.productMany.products}
-              renderItem={Product}
+              renderItem={({ item }) => Product({ item, navigation })}
               keyExtractor={(item, index) => item.id}
               ListFooterComponent={renderFooter}
               refreshing={refreshing}

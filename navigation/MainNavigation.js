@@ -9,6 +9,7 @@ import PostWrite from "../screens/Post/PostWrite";
 
 import ProductCategory from "../screens/Product/ProductCategory";
 import ProductMany from "../screens/Product/ProductMany";
+import ProductOne from "../screens/Product/ProductOne";
 
 import Home from "../screens/Home";
 import Message from "../screens/Message";
@@ -29,6 +30,7 @@ function MainNavigation() {
         <Stack.Screen name="PostWrite" component={PostWrite} />
         <Stack.Screen name="ProductCategory" component={ProductCategory} />
         <Stack.Screen name="ProductMany" component={ProductMany} />
+        <Stack.Screen name="ProductOne" component={ProductOne} />
       </Stack.Navigator>
     </NavigationContainer>
   );

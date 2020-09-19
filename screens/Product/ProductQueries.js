@@ -31,10 +31,37 @@ export const PRODUCT_MANY = gql`
         title
         content
         company
+        subCategory
         sampleImages {
           url
         }
       }
+    }
+  }
+`;
+
+export const PRODUCT_ONE = gql`
+  query productOne($id: String!) {
+    productOne(id: $id) {
+      id
+      updatedAt
+      createdAt
+      expireAt
+
+      mainCategory
+      subCategory
+      sampleImages {
+        url
+      }
+      detailImages {
+        url
+      }
+      title
+      content
+      views
+      calls
+      company
+      phone
     }
   }
 `;
