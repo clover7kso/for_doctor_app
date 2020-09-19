@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useQuery } from "react-apollo-hooks";
-import { PRODUCT_SUB_CATEGORY, PRODUCT_MANY } from "./ProductQueries";
+import { useQuery, useMutation } from "react-apollo-hooks";
+import {
+  PRODUCT_SUB_CATEGORY,
+  PRODUCT_MANY,
+  PRODUCT_ADD_VIEW,
+} from "./ProductQueries";
 import { ActivityIndicator, FlatList } from "react-native";
 import BackPressHeader from "../../components/BackPressHeader";
 import ProductSearchBox from "../../components/ProductSearchBox";
@@ -69,6 +73,11 @@ export default ({ navigation, route }) => {
     }
   };
 
+  const [productAddView] = useMutation(PRODUCT_ADD_VIEW);
+  const handleProductAddView = (id) => {
+    productAddView({ variables: { productId: id } });
+  };
+
   const [loadMore, setLoadMore] = useState(false);
   const renderFooter = () => {
     //it will show indicator at the bottom of the list when data is loading otherwise it returns null
@@ -108,7 +117,9 @@ export default ({ navigation, route }) => {
             <FlatList
               showsVerticalScrollIndicator={false}
               data={resProductMany.data.productMany.products}
-              renderItem={({ item }) => Product({ item, navigation })}
+              renderItem={({ item }) =>
+                Product({ item, navigation, handleProductAddView })
+              }
               keyExtractor={(item, index) => item.id}
               ListFooterComponent={renderFooter}
               refreshing={refreshing}

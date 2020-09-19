@@ -49,8 +49,9 @@ const Text = styled.Text`
   text-align: center;
 `;
 
-const ProductFooter = ({ isLiked, onLike, phoneNum }) => {
+const ProductFooter = ({ isLiked, onLike, onCall, phoneNum }) => {
   const dialCall = (number) => {
+    onCall();
     let phoneNumber = "";
     if (Platform.OS === "android") {
       phoneNumber = `tel:${number}`;

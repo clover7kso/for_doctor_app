@@ -64,3 +64,14 @@ export const TOGGLE_LIKE = gql`
     toggleLike(productId: $productId)
   }
 `;
+export const PRODUCT_ADD_VIEW = gql`
+  mutation productAddView($productId: String!) {
+    productAddView(productId: $productId)
+  }
+`;
+
+export const PRODUCT_ADD_CALL = gql`
+  mutation productAddCall($productId: String!) {
+    productAddCall(productId: $productId)
+  }
+`;

@@ -19,7 +19,7 @@ const ImageSample = styled.Image`
   margin-right: 10px;
 `;
 
-const ProductSimpleImages = ({ imageArray }) => {
+const ProductSampleImages = ({ imageArray }) => {
   return (
     <Container>
       <ScrollView
@@ -35,8 +35,8 @@ const ProductSimpleImages = ({ imageArray }) => {
   );
 };
 
-ProductSimpleImages.propTypes = {
+ProductSampleImages.propTypes = {
   imageArray: PropTypes.array.isRequired,
 };
 
-export default ProductSimpleImages;
+export default ProductSampleImages;

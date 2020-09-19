@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import constants from "../constants";
-
 const Container = styled.View`
   margin-top: 10px;
 `;
@@ -47,16 +46,17 @@ const Divider = styled.View`
   height: 1;
 `;
 
-const Product = ({ item, navigation }) => {
+const Product = ({ item, navigation, handleProductAddView }) => {
   return (
     <Container>
       <Touchable
-        onPress={() =>
+        onPress={() => {
+          handleProductAddView(item.id);
           navigation.navigate("ProductOne", {
             id: item.id,
             subCategory: item.subCategory,
-          })
-        }
+          });
+        }}
       >
         <InContainer1>
           <ImageSample source={{ uri: item.sampleImages[0].url }} />

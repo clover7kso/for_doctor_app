@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ScrollView } from "react-native";
 import styled from "styled-components";
 import { useQuery, useMutation } from "react-apollo-hooks";
-import { PRODUCT_ONE, TOGGLE_LIKE } from "./ProductQueries";
+import { PRODUCT_ONE, TOGGLE_LIKE, PRODUCT_ADD_CALL } from "./ProductQueries";
 import { ActivityIndicator } from "react-native";
 import BackPressHeader from "../../components/BackPressHeader";
 import ProductSampleImages from "../../components/ProductSampleImages";
@@ -57,6 +57,11 @@ export default ({ navigation, route }) => {
       productId: id,
     },
   });
+  const [productAddCall] = useMutation(PRODUCT_ADD_CALL, {
+    variables: {
+      productId: id,
+    },
+  });
 
   const handleToggleLike = async () => {
     setIsLiked((p) => !p);
@@ -91,6 +96,7 @@ export default ({ navigation, route }) => {
           <ProductFooter
             isLiked={isLiked}
             onLike={handleToggleLike}
+            onCall={productAddCall}
             phoneNum={resProductOne.data.productOne.phone}
           />
         </Container>
