@@ -48,7 +48,9 @@ export default ({ navigation, route }) => {
     },
   });
   resProductOne.refetch();
-  const [isLiked, setIsLiked] = useState(resProductOne.data.productOne.isLiked);
+  const [isLiked, setIsLiked] = !resProductOne.loading
+    ? useState(resProductOne.data.productOne.isLiked)
+    : useState(false);
 
   const [toggleLikeMutation] = useMutation(TOGGLE_LIKE, {
     variables: {
