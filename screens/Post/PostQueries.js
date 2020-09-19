@@ -7,6 +7,8 @@ export const POST_TOP = gql`
       category
       title
       views
+      commentCount
+      timeFromToday
     }
   }
 `;
@@ -14,11 +16,9 @@ export const POST_TOP = gql`
 export const POST_ONE = gql`
   query($id: String!) {
     postOne(id: $id) {
-      updatedAt
-      createdAt
       userName
+      timeFromToday
 
-      category
       title
       content
       views
@@ -29,7 +29,6 @@ export const POST_ONE = gql`
         updatedAt
         text
       }
-      anonymous
     }
   }
 `;

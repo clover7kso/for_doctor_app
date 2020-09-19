@@ -173,7 +173,11 @@ export default ({ navigation }) => {
                 </Touchable_2>
               </Left_Column>
               <Right_Column>
-                <Touchable_3>
+                <Touchable_3
+                  onPress={() =>
+                    navigation.navigate("PostTop", { type: "커뮤니티" })
+                  }
+                >
                   <Icon
                     resizeMode={"contain"}
                     source={require("../assets/btn_board.png")}

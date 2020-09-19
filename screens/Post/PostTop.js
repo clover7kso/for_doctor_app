@@ -1,37 +1,42 @@
 import React from "react";
 import styled from "styled-components";
+import { ActivityIndicator } from "react-native";
 
-import PostTop from "../../components/PostTop";
+import BackPressHeader from "../../components/BackPressHeader";
+
+import PostTopView from "../../components/PostTopView";
 import { useQuery } from "react-apollo-hooks";
 import { POST_TOP } from "./PostQueries";
 
 const OutContainer = styled.View`
-background : white
-  justify-content: center;
+  background: white;
   align-items: center;
   flex: 1;
 `;
 
 const Container = styled.View`
-  justify-content: center;
   align-items: center;
 `;
 
 export default ({ route, navigation }) => {
-  const { loading, error, data = { postTop: {} } } = useQuery(POST_TOP, {
+  const { type } = route.params;
+
+  const resPostTop = useQuery(POST_TOP, {
     variables: {},
   });
+  resPostTop.refetch();
 
   return (
     <OutContainer>
+      <BackPressHeader navigation={navigation} text={type} />
       <Container>
-        {loading ? (
+        {resPostTop.loading ? (
           <ActivityIndicator color={"white"} />
         ) : (
           <Container>
-            <PostTop
-              error={error}
-              data={data.postTop}
+            <PostTopView
+              error={resPostTop.error}
+              data={resPostTop.data.postTop}
               navigation={navigation}
             />
           </Container>

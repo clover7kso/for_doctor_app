@@ -7,10 +7,8 @@ import BackPressHeader from "../../components/BackPressHeader";
 
 const View = styled.View`
   background: white
-  justify-content: center
   align-items: center
   flex: 1
-  paddingTop: ${Platform.OS === "ios" ? 0 : Expo.Constants.statusBarHeight}
 `;
 
 const ViewInScroll = styled.View`
@@ -27,34 +25,35 @@ const Content = styled.Text``;
 const UserNickName = styled.Text``;
 const NumViews = styled.Text``;
 const NumComments = styled.Text``;
-const CreateDate = styled.Text``;
+const TimeFromToday = styled.Text``;
 
 export default ({ route, navigation }) => {
   const { postId } = route.params;
-  const { loading, error, data = { postOne: {} } } = useQuery(POST_ONE, {
+  const resPostOne = useQuery(POST_ONE, {
     variables: { id: postId },
   });
-  const myDate = new Date(1000 * data.postOne.createdAt);
+
   return (
     <View>
       <BackPressHeader navigation={navigation} text={"게시판-게시글"} />
-      {loading ? (
+      {resPostOne.loading ? (
         <ActivityIndicator color={"white"} />
       ) : (
         <ScrollView>
           <ViewInScroll>
-            <Title>{data.postOne.title}</Title>
-            <Content> {data.postOne.content}</Content>
-            <UserNickName>
-              {data.postOne.ananonymous ? "익명" : data.postOne.userNickname}
-            </UserNickName>
-            <NumViews> {data.postOne.views}</NumViews>
+            <Title>{resPostOne.data.postOne.title}</Title>
+            <Content> {resPostOne.data.postOne.content}</Content>
+            <UserNickName>{resPostOne.data.postOne.userName}</UserNickName>
+            <NumViews> {resPostOne.data.postOne.views}</NumViews>
             <NumComments>
-              {data.postOne.comments === null
+              {resPostOne.data.postOne.comments === null
                 ? "0"
-                : data.postOne.comments.length}
+                : resPostOne.data.postOne.comments.length}
             </NumComments>
-            <CreateDate> {myDate.toString()}</CreateDate>
+            <TimeFromToday>
+              {" "}
+              {resPostOne.data.postOne.timeFromToday}
+            </TimeFromToday>
           </ViewInScroll>
         </ScrollView>
       )}
