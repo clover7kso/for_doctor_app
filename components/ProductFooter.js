@@ -49,7 +49,7 @@ const Text = styled.Text`
   text-align: center;
 `;
 
-const ProductFooter = ({ onLike, phoneNum }) => {
+const ProductFooter = ({ isLiked, onLike, phoneNum }) => {
   const dialCall = (number) => {
     let phoneNumber = "";
     if (Platform.OS === "android") {
@@ -62,11 +62,17 @@ const ProductFooter = ({ onLike, phoneNum }) => {
 
   return (
     <Container>
-      <TouchableIcon onPress={onLike}>
+      <TouchableIcon onPress={() => onLike()}>
         <IconLike>
           <Ionicons
             name={
-              Platform.OS === "ios" ? "ios-square-outline" : "md-square-outline"
+              isLiked
+                ? Platform.OS === "ios"
+                  ? "ios-square"
+                  : "md-square"
+                : Platform.OS === "ios"
+                ? "ios-square-outline"
+                : "md-square-outline"
             }
             size={50}
             color={"grey"}

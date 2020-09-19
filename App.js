@@ -39,6 +39,7 @@ export default function App() {
         },
         ...apolloClientOptions,
       });
+      //client.resetStore();
       const isLoggedIn = await AsyncStorage.getItem("isLoggedIn");
       if (!isLoggedIn || isLoggedIn === "false") {
         setIsLoggedIn(false);

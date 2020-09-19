@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { ScrollView } from "react-native";
 import styled from "styled-components";
-import { useQuery } from "react-apollo-hooks";
-import { PRODUCT_ONE } from "./ProductQueries";
+import { useQuery, useMutation } from "react-apollo-hooks";
+import { PRODUCT_ONE, TOGGLE_LIKE } from "./ProductQueries";
 import { ActivityIndicator } from "react-native";
 import BackPressHeader from "../../components/BackPressHeader";
 import ProductSampleImages from "../../components/ProductSampleImages";
@@ -48,11 +48,21 @@ export default ({ navigation, route }) => {
     },
   });
   resProductOne.refetch();
+  const [isLiked, setIsLiked] = useState(resProductOne.data.productOne.isLiked);
 
-  console.log("------------------------");
-  console.log(resProductOne.loading);
-  console.log(resProductOne.data);
-  console.log("------------------------");
+  const [toggleLikeMutation] = useMutation(TOGGLE_LIKE, {
+    variables: {
+      productId: id,
+    },
+  });
+
+  const handleToggleLike = async () => {
+    setIsLiked((p) => !p);
+    try {
+      await toggleLikeMutation();
+    } catch (e) {}
+  };
+
   return (
     <OutContainer>
       <BackPressHeader navigation={navigation} text={subCategory} />
@@ -76,7 +86,11 @@ export default ({ navigation, route }) => {
               imageArray={resProductOne.data.productOne.detailImages}
             />
           </ScrollView>
-          <ProductFooter phoneNum={resProductOne.data.productOne.phone} />
+          <ProductFooter
+            isLiked={isLiked}
+            onLike={handleToggleLike}
+            phoneNum={resProductOne.data.productOne.phone}
+          />
         </Container>
       )}
     </OutContainer>

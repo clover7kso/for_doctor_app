@@ -43,13 +43,7 @@ export const PRODUCT_MANY = gql`
 export const PRODUCT_ONE = gql`
   query productOne($id: String!) {
     productOne(id: $id) {
-      id
-      updatedAt
-      createdAt
-      expireAt
-
-      mainCategory
-      subCategory
+      isLiked
       sampleImages {
         url
       }
@@ -59,9 +53,14 @@ export const PRODUCT_ONE = gql`
       title
       content
       views
-      calls
       company
       phone
     }
+  }
+`;
+
+export const TOGGLE_LIKE = gql`
+  mutation toggleLike($productId: String!) {
+    toggleLike(productId: $productId)
   }
 `;
