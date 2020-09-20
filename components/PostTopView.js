@@ -9,10 +9,18 @@ const Container = styled.View`
   height: ${constants.height / 1.2};
 `;
 const PostItem = styled.View`
-  margin-top: 10;
+  margin-bottom: 8;
+  margin-top: 8;
 `;
 const CategoryContainer = styled.View`
-  margin-top: 20;
+  margin-top: 25;
+`;
+const ItemContainer = styled.View``;
+
+const Divider = styled.View`
+  background: #f0f0f0;
+  border-radius: 30;
+  height: 1;
 `;
 
 const Row = styled.View`
@@ -24,6 +32,7 @@ const Row = styled.View`
 
 const TextCategory = styled.Text`
   font-size:20px
+  margin-bottom:10px
   color: ${(props) => props.theme.blackColor};
 `;
 
@@ -84,21 +93,27 @@ const PostTopView = ({ error, data, navigation }) => {
               </Touchable>
             </Row>
             {topByCategories[itemCategory].map((item, key) => (
-              <Touchable
-                onPress={() =>
-                  navigation.navigate("PostOne", { postId: item[0] })
-                }
-              >
-                <PostItem>
-                  <TextTitle>{item[1]}</TextTitle>
-                  <Row>
-                    <TextViews>
-                      조회수 : {item[2]} | 댓글수 : {item[3]}
-                    </TextViews>
-                    <TextViews>{item[4]}</TextViews>
-                  </Row>
-                </PostItem>
-              </Touchable>
+              <ItemContainer>
+                <Touchable
+                  onPress={() =>
+                    navigation.navigate("PostOne", { postId: item[0] })
+                  }
+                >
+                  <PostItem>
+                    <TextTitle>{item[1]}</TextTitle>
+                    <Row>
+                      <TextViews>
+                        조회수 : {item[2]} | 댓글수 : {item[3]}
+                      </TextViews>
+                      <TextViews>{item[4]}</TextViews>
+                    </Row>
+                  </PostItem>
+                </Touchable>
+                {topByCategories[itemCategory].length - 1 !==
+                topByCategories[itemCategory].indexOf(item) ? (
+                  <Divider />
+                ) : null}
+              </ItemContainer>
             ))}
           </CategoryContainer>
         ))}
