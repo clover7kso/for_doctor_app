@@ -35,7 +35,7 @@ export default ({ route, navigation }) => {
 
   return (
     <View>
-      <BackPressHeader navigation={navigation} text={"게시판-게시글"} />
+      <BackPressHeader navigation={navigation} text={"게시글"} />
       {resPostOne.loading ? (
         <ActivityIndicator color={"white"} />
       ) : (

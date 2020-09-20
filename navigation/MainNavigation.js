@@ -1,11 +1,12 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import { CardStyleInterpolators } from "@react-navigation/stack";
 
 import PostTop from "../screens/Post/PostTop";
 import PostMany from "../screens/Post/PostMany";
 import PostOne from "../screens/Post/PostOne";
-import PostWrite from "../screens/Post/PostWrite";
+import PostUpload from "../screens/Post/PostUpload";
 
 import ProductCategory from "../screens/Product/ProductCategory";
 import ProductMany from "../screens/Product/ProductMany";
@@ -27,7 +28,7 @@ function MainNavigation() {
         <Stack.Screen name="PostTop" component={PostTop} />
         <Stack.Screen name="PostMany" component={PostMany} />
         <Stack.Screen name="PostOne" component={PostOne} />
-        <Stack.Screen name="PostWrite" component={PostWrite} />
+        <Stack.Screen name="PostUpload" component={PostUpload} />
         <Stack.Screen name="ProductCategory" component={ProductCategory} />
         <Stack.Screen name="ProductMany" component={ProductMany} />
         <Stack.Screen name="ProductOne" component={ProductOne} />

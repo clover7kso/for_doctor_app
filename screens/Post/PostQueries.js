@@ -55,3 +55,9 @@ export const POST_ADD_VIEW = gql`
     postAddView(postId: $postId)
   }
 `;
+
+export const POST_UPLOAD = gql`
+  mutation postUpload($category: String!, $title: String!, $content: String!) {
+    postUpload(category: $category, title: $title, content: $content)
+  }
+`;

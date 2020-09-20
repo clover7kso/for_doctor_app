@@ -8,7 +8,7 @@ import Post from "../../components/Post";
 import { ActivityIndicator, FlatList } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-const TouchableOpacity = styled.TouchableOpacity`
+const Touchable = styled.TouchableOpacity`
   padding-left:35;
   padding-right:35;
   padding-top:10;
@@ -131,14 +131,18 @@ export default ({ navigation, route }) => {
             onEndReachedThreshold={1}
           />
         )}
-        <TouchableOpacity>
+        <Touchable
+          onPress={() =>
+            navigation.navigate("PostUpload", { category: category })
+          }
+        >
           <Text>글쓰기</Text>
           <Ionicons
             name={Platform.OS === "ios" ? "ios-add" : "md-add"}
             size={20}
             color={"white"}
           />
-        </TouchableOpacity>
+        </Touchable>
       </Container>
     </OutContainer>
   );
