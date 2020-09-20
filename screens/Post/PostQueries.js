@@ -32,3 +32,26 @@ export const POST_ONE = gql`
     }
   }
 `;
+
+export const POST_MANY = gql`
+  query postMany($category: String!, $after: String, $searchWord: String) {
+    postMany(category: $category, after: $after, searchWord: $searchWord) {
+      cursor
+      posts {
+        id
+        title
+        content
+        views
+        timeFromToday
+        commentCount
+        userName
+      }
+    }
+  }
+`;
+
+export const POST_ADD_VIEW = gql`
+  mutation postAddView($postId: String!) {
+    postAddView(postId: $postId)
+  }
+`;

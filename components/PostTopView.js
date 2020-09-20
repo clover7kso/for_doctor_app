@@ -8,12 +8,14 @@ const Touchable = styled.TouchableOpacity``;
 const Container = styled.View`
   height: ${constants.height / 1.2};
 `;
+
+const CategoryContainer = styled.View`
+  margin-top: 25;
+`;
+
 const PostItem = styled.View`
   margin-bottom: 8;
   margin-top: 8;
-`;
-const CategoryContainer = styled.View`
-  margin-top: 25;
 `;
 const ItemContainer = styled.View``;
 
@@ -43,7 +45,7 @@ const TextMany = styled.Text`
 
 const TextTitle = styled.Text`
   font-size:16px
-  color: ${(props) => props.theme.darkGreyColor};
+  color: ${(props) => props.theme.blackColor};
 `;
 
 const TextViews = styled.Text`
@@ -100,7 +102,9 @@ const PostTopView = ({ error, data, navigation }) => {
                   }
                 >
                   <PostItem>
-                    <TextTitle>{item[1]}</TextTitle>
+                    <TextTitle numberOfLines={1} ellipsizeMode="tail">
+                      {item[1]}
+                    </TextTitle>
                     <Row>
                       <TextViews>
                         조회수 : {item[2]} | 댓글수 : {item[3]}
