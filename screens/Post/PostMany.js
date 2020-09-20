@@ -6,12 +6,39 @@ import BackPressHeader from "../../components/BackPressHeader";
 import ProductSearchBox from "../../components/ProductSearchBox";
 import Post from "../../components/Post";
 import { ActivityIndicator, FlatList } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+
+const TouchableOpacity = styled.TouchableOpacity`
+  padding-left:35;
+  padding-right:35;
+  padding-top:10;
+  padding-bottom:10;
+  flex-direction:row;
+  border-width: 1;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 10;
+  border-color: transparent
+  background: #0066cc;
+  border-radius: 100;
+  
+  shadow-color: #000000;
+  shadow-opacity: 0.3;
+  shadow-offset: { width: 2, height: 2 };
+  elevation: 10;
+`;
 
 const OutContainer = styled.View`
   background : white
   align-items: center;
   flex: 1;
-  
+`;
+
+const Text = styled.Text`
+  align-items: center;
+  color: white;
+  margin-right: 10px;
 `;
 
 const Container = styled.View`
@@ -90,6 +117,7 @@ export default ({ navigation, route }) => {
           <ActivityIndicator color={"black"} />
         ) : (
           <FlatList
+            contentContainerStyle={{ paddingBottom: 60 }}
             showsVerticalScrollIndicator={false}
             data={resPostMany.data.postMany.posts}
             renderItem={({ item }) =>
@@ -103,6 +131,14 @@ export default ({ navigation, route }) => {
             onEndReachedThreshold={1}
           />
         )}
+        <TouchableOpacity>
+          <Text>글쓰기</Text>
+          <Ionicons
+            name={Platform.OS === "ios" ? "ios-add" : "md-add"}
+            size={20}
+            color={"white"}
+          />
+        </TouchableOpacity>
       </Container>
     </OutContainer>
   );

@@ -5,9 +5,7 @@ import PropTypes from "prop-types";
 import constants from "../constants";
 const Touchable = styled.TouchableOpacity``;
 
-const Container = styled.View`
-  height: ${constants.height / 1.2};
-`;
+const Container = styled.View``;
 
 const CategoryContainer = styled.View`
   margin-top: 25;
@@ -75,7 +73,10 @@ const PostTopView = ({ error, data, navigation }) => {
 
   return (
     <Container>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        contentContainerStyle={{ paddingBottom: 100 }}
+        showsVerticalScrollIndicator={false}
+      >
         {categories.map((itemCategory, key) => (
           <CategoryContainer>
             <Row>

@@ -38,11 +38,12 @@ const TextTitle = styled.Text`
 `;
 
 const TextContent = styled.Text`
-  font-size:16px
-  color: ${(props) => props.theme.blackColor};
+  font-size:14px
+  color: ${(props) => props.theme.darkGreyColor};
 `;
 
 const TextInfo = styled.Text`
+  margin-top:5px
   font-size:9px
   color: ${(props) => props.theme.darkGreyColor};
 `;
