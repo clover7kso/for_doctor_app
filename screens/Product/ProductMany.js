@@ -43,6 +43,7 @@ export default ({ navigation, route }) => {
       subCategory: selectText,
       searchWord: searchWord,
     },
+    fetchPolicy: "network-only",
   });
 
   const onLoadMore = () => {

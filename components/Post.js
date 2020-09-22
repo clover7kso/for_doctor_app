@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import constants from "../constants";
 const Container = styled.View`
   margin-top: 10px;
+  width: ${constants.width};
 `;
 
 const Touchable = styled.TouchableOpacity`

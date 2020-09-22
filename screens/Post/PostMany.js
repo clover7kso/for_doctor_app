@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useQuery, useMutation } from "react-apollo-hooks";
 import { POST_MANY, POST_ADD_VIEW } from "./PostQueries";
@@ -7,6 +7,7 @@ import ProductSearchBox from "../../components/ProductSearchBox";
 import Post from "../../components/Post";
 import { ActivityIndicator, FlatList } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useIsFocused } from "@react-navigation/native";
 
 const Touchable = styled.TouchableOpacity`
   padding-left:35;
@@ -60,7 +61,11 @@ export default ({ navigation, route }) => {
       category: category,
       searchWord: searchWord,
     },
+    fetchPolicy: "network-only",
   });
+  const handleOnBack = () => {
+    resPostMany.refetch();
+  };
 
   const onLoadMore = () => {
     if (!loadMore & (resPostMany.data.postMany.cursor !== "End")) {
@@ -121,7 +126,11 @@ export default ({ navigation, route }) => {
             showsVerticalScrollIndicator={false}
             data={resPostMany.data.postMany.posts}
             renderItem={({ item }) =>
-              Post({ item, navigation, handlePostAddView })
+              Post({
+                item,
+                navigation,
+                handlePostAddView,
+              })
             }
             keyExtractor={(item, index) => item.id}
             ListFooterComponent={renderFooter}
@@ -133,7 +142,10 @@ export default ({ navigation, route }) => {
         )}
         <Touchable
           onPress={() =>
-            navigation.navigate("PostUpload", { category: category })
+            navigation.navigate("PostUpload", {
+              category: category,
+              refresh: handleOnBack,
+            })
           }
         >
           <Text>글쓰기</Text>

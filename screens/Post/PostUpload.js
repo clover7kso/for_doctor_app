@@ -57,7 +57,10 @@ export default ({ navigation, route }) => {
         content: contentInput.value,
       },
     });
-    if (result) navigation.pop(1);
+    if (result) {
+      route.params.refresh();
+      navigation.goBack();
+    }
   };
 
   return (
