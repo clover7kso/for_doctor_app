@@ -60,3 +60,9 @@ export const POST_UPLOAD = gql`
     postUpload(category: $category, title: $title, content: $content)
   }
 `;
+
+export const COMMENT_UPLOAD = gql`
+  mutation commentUpload($postId: String!, $text: String!) {
+    commentUpload(postId: $postId, text: $text)
+  }
+`;

@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import { useQuery } from "react-apollo-hooks";
+import { useQuery, useMutation } from "react-apollo-hooks";
 import { POST_ONE } from "./PostQueries";
 import { ActivityIndicator, ScrollView, FlatList } from "react-native";
 import BackPressHeader from "../../components/BackPressHeader";
-
+import PostCommentBox from "../../components/PostCommentBox";
+import { COMMENT_UPLOAD } from "./PostQueries";
 const OutContainer = styled.View`
   background: white
   flex: 1
@@ -106,7 +107,20 @@ export default ({ route, navigation }) => {
   const resPostOne = useQuery(POST_ONE, {
     variables: { id: postId },
   });
+
   resPostOne.refetch();
+  const [commentUpload] = useMutation(COMMENT_UPLOAD);
+  const handleCommentUpload = (text, setInputValue) => {
+    const result = commentUpload({
+      variables: {
+        postId: postId,
+        text: text,
+      },
+    });
+    if (result) {
+      resPostOne.refetch(), setInputValue("");
+    }
+  };
 
   const commentItem = (item) => {
     return (
@@ -181,6 +195,9 @@ export default ({ route, navigation }) => {
             }}
           />
         </ScrollView>
+      )}
+      {resPostOne.loading ? null : (
+        <PostCommentBox onPress={handleCommentUpload} />
       )}
     </OutContainer>
   );
