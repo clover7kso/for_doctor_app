@@ -7,7 +7,6 @@ import ProductSearchBox from "../../components/ProductSearchBox";
 import Post from "../../components/Post";
 import { ActivityIndicator, FlatList } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { useIsFocused } from "@react-navigation/native";
 
 const Touchable = styled.TouchableOpacity`
   padding-left:35;
