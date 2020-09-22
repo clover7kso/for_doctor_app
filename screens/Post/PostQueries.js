@@ -16,17 +16,16 @@ export const POST_TOP = gql`
 export const POST_ONE = gql`
   query($id: String!) {
     postOne(id: $id) {
-      userName
       timeFromToday
-
+      userName
+      userAvatar
       title
       content
       views
       comments {
-        postId
         userName
-        createdAt
-        updatedAt
+        userAvatar
+        timeFromToday
         text
       }
     }
