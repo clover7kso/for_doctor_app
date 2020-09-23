@@ -138,7 +138,7 @@ export default ({ navigation }) => {
 
   return (
     <OutContainer>
-      <HomeHeader />
+      <HomeHeader navigation={navigation} />
       <Container>
         {loading ? (
           <ActivityIndicator color={"white"} />

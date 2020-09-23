@@ -12,9 +12,17 @@ import ProductCategory from "../screens/Product/ProductCategory";
 import ProductMany from "../screens/Product/ProductMany";
 import ProductOne from "../screens/Product/ProductOne";
 
+import Profile from "../screens/Profile/Profile";
+import ProfileEdit from "../screens/Profile/ProfileEdit";
+import ProfileMyComment from "../screens/Profile/ProfileMyComment";
+import ProfileMyLaw from "../screens/Profile/ProfileMyLaw";
+import ProfileMyMarketing from "../screens/Profile/ProfileMyMarketing";
+import ProfileMyPost from "../screens/Profile/ProfileMyPost";
+import ProfileMyProduct from "../screens/Profile/ProfileMyProduct";
+import ProfileCenter from "../screens/Profile/ProfileCenter";
+
 import Home from "../screens/Home";
 import Message from "../screens/Message";
-import Profile from "../screens/Profile";
 
 const Stack = createStackNavigator();
 
@@ -23,12 +31,26 @@ function MainNavigation() {
     <NavigationContainer>
       <Stack.Navigator headerMode="none">
         <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Profile" component={Profile} />
+
         <Stack.Screen name="Message" component={Message} />
+
+        <Stack.Screen name="Profile" component={Profile} />
+        <Stack.Screen name="ProfileEdit" component={ProfileEdit} />
+        <Stack.Screen name="ProfileMyComment" component={ProfileMyComment} />
+        <Stack.Screen name="ProfileMyLaw" component={ProfileMyLaw} />
+        <Stack.Screen
+          name="ProfileMyMarketing"
+          component={ProfileMyMarketing}
+        />
+        <Stack.Screen name="ProfileMyPost" component={ProfileMyPost} />
+        <Stack.Screen name="ProfileMyProduct" component={ProfileMyProduct} />
+        <Stack.Screen name="ProfileCenter" component={ProfileCenter} />
+
         <Stack.Screen name="PostTop" component={PostTop} />
         <Stack.Screen name="PostMany" component={PostMany} />
         <Stack.Screen name="PostOne" component={PostOne} />
         <Stack.Screen name="PostUpload" component={PostUpload} />
+
         <Stack.Screen name="ProductCategory" component={ProductCategory} />
         <Stack.Screen name="ProductMany" component={ProductMany} />
         <Stack.Screen name="ProductOne" component={ProductOne} />

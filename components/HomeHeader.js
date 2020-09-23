@@ -34,7 +34,7 @@ const Icon = styled.View`
 
 const BackPressHeader = ({ navigation }) => (
   <Container>
-    <Touchable>
+    <Touchable onPress={() => navigation.navigate("Message")}>
       <Icon>
         <Ionicons
           name={Platform.OS === "ios" ? "ios-mail" : "md-mail"}
@@ -44,7 +44,7 @@ const BackPressHeader = ({ navigation }) => (
       </Icon>
     </Touchable>
     <Text>FOR DOCTOR</Text>
-    <Touchable>
+    <Touchable onPress={() => navigation.navigate("Profile")}>
       <Icon>
         <Ionicons
           name={Platform.OS === "ios" ? "ios-person" : "md-person"}
