@@ -13,7 +13,7 @@ import ProductMany from "../screens/Product/ProductMany";
 import ProductOne from "../screens/Product/ProductOne";
 
 import Profile from "../screens/Profile/Profile";
-import ProfileEdit from "../screens/Profile/ProfileEdit";
+import ProfileAvatarEdit from "../screens/Profile/ProfileAvatarEdit";
 import ProfileMyComment from "../screens/Profile/ProfileMyComment";
 import ProfileMyLaw from "../screens/Profile/ProfileMyLaw";
 import ProfileMyMarketing from "../screens/Profile/ProfileMyMarketing";
@@ -35,7 +35,7 @@ function MainNavigation() {
         <Stack.Screen name="Message" component={Message} />
 
         <Stack.Screen name="Profile" component={Profile} />
-        <Stack.Screen name="ProfileEdit" component={ProfileEdit} />
+        <Stack.Screen name="ProfileAvatarEdit" component={ProfileAvatarEdit} />
         <Stack.Screen name="ProfileMyComment" component={ProfileMyComment} />
         <Stack.Screen name="ProfileMyLaw" component={ProfileMyLaw} />
         <Stack.Screen

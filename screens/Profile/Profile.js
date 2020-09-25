@@ -34,6 +34,7 @@ const UserName = styled.Text`
 `;
 const UserId = styled.Text`
   margin-left: 22px;
+  margin-top: 8px;
   color: #cfcfcf;
 `;
 const UserProfile = styled.Text`
@@ -80,19 +81,20 @@ export default ({ navigation }) => {
         <ScrollView>
           <Column>
             <Row>
-              <UserAvater
-                source={
-                  resUserOne.data.userOne.userAvatar
-                    ? { uri: resUserOne.data.userOne.userAvatar }
-                    : require("../../assets/avatar.png")
-                }
-              />
+              <Touchable
+                onPress={() => navigation.navigate("ProfileAvatarEdit")}
+              >
+                <UserAvater
+                  source={
+                    resUserOne.data.userOne.userAvatar
+                      ? { uri: resUserOne.data.userOne.userAvatar }
+                      : require("../../assets/avatar.png")
+                  }
+                />
+              </Touchable>
               <Column>
-                <UserName>{resUserOne.data.userOne.name}</UserName>
+                <UserName>{resUserOne.data.userOne.name} 원장님</UserName>
                 <UserId>{resUserOne.data.userOne.id}</UserId>
-                <Touchable onPress={() => navigation.navigate("ProfileEdit")}>
-                  <UserProfile>프로필수정</UserProfile>
-                </Touchable>
               </Column>
             </Row>
             <Touchable onPress={() => navigation.navigate("ProfileMyProduct")}>

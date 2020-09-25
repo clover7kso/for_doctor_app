@@ -14,7 +14,7 @@ export default ({ navigation }) => {
     <OutContainer>
       <BackPressHeader navigation={navigation} text={"프로필수정"} />
 
-      <Text>ProfileEdit</Text>
+      <Text>ProfileAvatarEdit</Text>
     </OutContainer>
   );
 };
