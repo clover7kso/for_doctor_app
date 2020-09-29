@@ -66,3 +66,9 @@ export const MY_POST = gql`
     }
   }
 `;
+
+export const AVATAR_EDIT = gql`
+  mutation avatarEdit($avatar: String) {
+    avatarEdit(avatar: $avatar)
+  }
+`;
