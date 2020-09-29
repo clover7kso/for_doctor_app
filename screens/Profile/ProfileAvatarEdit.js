@@ -30,7 +30,8 @@ const ImageSelect = styled.Text`
   font-size: 20px;
 `;
 
-export default ({ navigation }) => {
+export default ({ navigation, route }) => {
+  const { avatar, refresh } = route.params;
   const [image, setImage] = useState(null);
 
   useEffect(() => {
@@ -53,8 +54,6 @@ export default ({ navigation }) => {
       aspect: [4, 3],
       quality: 1,
     });
-
-    console.log(result);
 
     if (!result.cancelled) {
       setImage(result.uri);
@@ -90,6 +89,7 @@ export default ({ navigation }) => {
 
       if (avatarEdit) {
         navigation.goBack();
+        refresh();
       }
     } catch (e) {
       Alert.alert(e.message.replace("GraphQL error: ", ""));
@@ -100,7 +100,13 @@ export default ({ navigation }) => {
       <BackPressHeader navigation={navigation} text={"프로필사진변경"} />
 
       <ImageSelected
-        source={image ? { uri: image } : require("../../assets/avatar.png")}
+        source={
+          image
+            ? { uri: image }
+            : avatar
+            ? { uri: avatar }
+            : require("../../assets/avatar.png")
+        }
       />
       <TouchableOpacity onPress={pickImage}>
         <ImageSelect>사진변경</ImageSelect>

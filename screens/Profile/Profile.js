@@ -65,6 +65,9 @@ export default ({ navigation }) => {
     variables: {},
   });
   resUserOne.refetch();
+  const handleOnBack = () => {
+    resUserOne.refetch();
+  };
 
   const logOut = useLogOut();
   const handleLogOut = () => {
@@ -82,12 +85,17 @@ export default ({ navigation }) => {
           <Column>
             <Row>
               <Touchable
-                onPress={() => navigation.navigate("ProfileAvatarEdit")}
+                onPress={() =>
+                  navigation.navigate("ProfileAvatarEdit", {
+                    avatar: resUserOne.data.userOne.avatar,
+                    refresh: handleOnBack,
+                  })
+                }
               >
                 <UserAvater
                   source={
-                    resUserOne.data.userOne.userAvatar
-                      ? { uri: resUserOne.data.userOne.userAvatar }
+                    resUserOne.data.userOne.avatar
+                      ? { uri: resUserOne.data.userOne.avatar }
                       : require("../../assets/avatar.png")
                   }
                 />
