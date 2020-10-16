@@ -149,7 +149,7 @@ export default ({ route, navigation }) => {
     <OutContainer>
       <BackPressHeader navigation={navigation} text={"게시글"} />
       {resPostOne.loading ? (
-        <ActivityIndicator color={"white"} />
+        <ActivityIndicator color={"black"} />
       ) : (
         <ScrollView>
           <ViewInScroll>
