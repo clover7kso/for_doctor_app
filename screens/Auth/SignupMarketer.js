@@ -3,14 +3,22 @@ import styled from "styled-components";
 import useInput from "../../hooks/useInput";
 import AuthInput from "../../components/AuthInput";
 import AuthButton from "../../components/AuthButton";
+import AuthButtonImage from "../../components/AuthButtonImage";
+import AuthPicker from "../../components/AuthPicker";
+import constants from "../../constants";
 import { ActivityIndicator } from "react-native";
 import { TouchableWithoutFeedback, Keyboard, Alert } from "react-native";
 import { useQuery, useMutation } from "react-apollo-hooks";
-import { MEDICAL_CATEGORY, CHECK_ID_PHONE } from "./AuthQueries";
+import { MEDICAL_CATEGORY, SIGN_UP } from "./AuthQueries";
 import {
+  Image,
   ScrollView,
+  KeyboardAvoidingView,
   BackHandler,
 } from "react-native";
+import moment from "moment";
+import axios from "axios";
+import * as config from '../../config';
 
 const OutContainer = styled.View`
   background : white
@@ -26,35 +34,67 @@ const InContainer1 = styled.View`
 `;
 
 export default ({ navigation }) => {
+  const { loading, error, data = { medicalCategory: {} } } = useQuery(
+    MEDICAL_CATEGORY,
+    {
+      variables: {},
+    }
+  );
+
   const emailInput = useInput("");
   const phoneInput = useInput("");
   const pwInput = useInput("");
   const pwConfirmInput = useInput("");
   const nameInput = useInput("");
+  const medicalIdInput = useInput("");
+  const medicalCategoryInput = useInput("안과의사");
+
+  const medicalUri = useInput("");
+  const setMedicalUri = (uri) => {
+    medicalUri.onChange(uri);
+  };
+  const [medicalUrl, setMedicalUrl] = useState("");
 
   const [registerLoading, setRegisterLoading] = useState(false);
 
-  
-  const [uploadMutaion] = useMutation(CHECK_ID_PHONE, {
+  const [uploadMutaion] = useMutation(SIGN_UP, {
     variables: {
       id: emailInput.value,
+      password: pwInput.value,
       phone: phoneInput.value,
+      name: nameInput.value,
+      medical_id: medicalIdInput.value,
+      medical_cate: medicalCategoryInput.value,
+      medical_certi: medicalUrl,
     },
   });
 
   const handleSubmit = async () => {
+    const formData = new FormData();
+    const name =
+      moment().format("YY:MM:DD-HH:mm:ss") + "_" + emailInput.value + ".jpg";
+    const [, type] = name.split(".");
+    formData.append("file", {
+      name,
+      type: "image/jpeg",
+      uri: medicalUri.value,
+    });
     try {
       const {
-        data: { checkIdPhone },
+        data: { location },
+      } = await axios.post(config.SERVER_URL+"/api/upload", formData, {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      });
+      setMedicalUrl(location);
+
+      const {
+        data: { signUp },
       } = await uploadMutaion();
 
-      if (checkIdPhone) {
-        navigation.navigate("SignupDoctor", {
-          id: emailInput.value,
-          password: pwInput.value,
-          phone: phoneInput.value,
-          name: nameInput.value
-        });
+      if (signUp) {
+        navigation.navigate("SignupConfirm", { emailId: emailInput.value });
       }
     } catch (e) {
       Alert.alert(e.message.replace("GraphQL error: ", ""));
@@ -69,13 +109,15 @@ export default ({ navigation }) => {
       const pwValue = pwInput.value;
       const pwConfirmValue = pwConfirmInput.value;
       const nameValue = nameInput.value;
-      
+      const medicalIdValue = medicalIdInput.value;
+      const medicalCateogryValue = medicalCategoryInput.value;
+      const medicalUriValue = medicalUri.value;
 
       const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       const phoneRegex = /^\d{2,3}-\d{3,4}-\d{4}$/;
       const pwRegex = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
       const nameRegex = /^[가-힣]{2,4}$/;
-      
+      const medicalIdRegex = /^[0-9]{5}$/;
 
       if (emailValue === "") {
         return Alert.alert("이메일이 비어있습니다");
@@ -104,6 +146,17 @@ export default ({ navigation }) => {
         return Alert.alert("실명이 비어있습니다");
       } else if (!nameRegex.test(nameValue)) {
         return Alert.alert("실명은 2 ~ 4글자 한글로 입력 해 주세요.");
+      }
+      if (medicalCateogryValue === "") {
+        return Alert.alert("분류가 정해지지 않았습니다");
+      }
+      if (medicalIdValue === "") {
+        return Alert.alert("면허번호가 비어있습니다");
+      } else if (!medicalIdRegex.test(medicalIdValue)) {
+        return Alert.alert("면허번호는 숫자 5글자입니다");
+      }
+      if (medicalUriValue === "") {
+        return Alert.alert("면허번호 사진이 없습니다");
       }
 
       handleSubmit();
@@ -141,7 +194,11 @@ export default ({ navigation }) => {
     return () => backHandler.remove();
   }, []);
 
-  return (
+  return loading ? (
+    <InContainer1>
+      <ActivityIndicator color={"black"} />
+    </InContainer1>
+  ) : (
     <ScrollView
       contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
     >
@@ -176,16 +233,53 @@ export default ({ navigation }) => {
               keyboardType="default"
             />
 
+            <AuthPicker
+              {...medicalCategoryInput}
+              loading={loading}
+              error={error}
+              data={data.medicalCategory}
+            />
+
+            <AuthInput
+              {...medicalIdInput}
+              placeholder="면허번호"
+              keyboardType="default"
+              secureTextEntry={true}
+            />
+          </InContainer1>
+
+          {medicalUri.value !== "" ? (
+            <KeyboardAvoidingView>
+              <Image
+                style={{
+                  borderRadius: 15,
+                  width: constants.width,
+                  height: 300,
+                  resizeMode: "contain",
+                }}
+                source={{ uri: medicalUri.value }}
+              />
+            </KeyboardAvoidingView>
+          ) : (
+            <AuthButtonImage
+              onPress={() =>
+                navigation.navigate("TakePhoto", {
+                  updateData: setMedicalUri,
+                })
+              }
+              text="면허번호촬영"
+            />
+          )}
+          <InContainer1>
             <AuthButton
               disabled={registerLoading}
               loading={registerLoading}
               onPress={handleRegister}
-              text="의사 회원가입"
+              text="회원가입"
             />
           </InContainer1>
-
         </OutContainer>
       </TouchableWithoutFeedback>
     </ScrollView>
-  )
+  );
 };

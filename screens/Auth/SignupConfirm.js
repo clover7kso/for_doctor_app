@@ -51,7 +51,7 @@ export default ({ route, navigation }) => {
       } = await secretMutaion();
 
       if (signUpConfirm) {
-        navigation.pop(2);
+        navigation.pop(3);
         Alert.alert("가입인증까지 1~2일가량 소요됩니다");
       }
     } catch (e) {
@@ -73,7 +73,7 @@ export default ({ route, navigation }) => {
             style: "destructive",
             // If the user confirmed, then we dispatch the action we blocked earlier
             // This will continue the action that had triggered the removal of the screen
-            onPress: () => navigation.pop(2),
+            onPress: () => navigation.pop(3),
           },
         ]
       );

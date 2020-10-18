@@ -2,6 +2,8 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Signup from "../screens/Auth/Signup";
+import SignupDoctor from "../screens/Auth/SignupDoctor";
+import SignupMarketer from "../screens/Auth/SignupMarketer";
 import SignupConfirm from "../screens/Auth/SignupConfirm";
 import Findpw from "../screens/Auth/Findpw";
 import FindpwConfirm from "../screens/Auth/FindpwConfirm";
@@ -20,6 +22,8 @@ function AuthNavigation() {
         <Stack.Screen name="Findpw" component={Findpw} />
         <Stack.Screen name="FindpwConfirm" component={FindpwConfirm} />
         <Stack.Screen name="Signup" component={Signup} />
+        <Stack.Screen name="SignupDoctor" component={SignupDoctor} />
+        <Stack.Screen name="SignupMarketer" component={SignupMarketer} />
         <Stack.Screen name="SignupConfirm" component={SignupConfirm} />
         <Stack.Screen name="TakePhoto" component={TakePhoto} />
       </Stack.Navigator>
