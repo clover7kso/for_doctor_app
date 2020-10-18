@@ -1,5 +1,6 @@
+import * as config from './config';
 const options = {
-  uri: "http://172.30.1.36:4000",
+  uri: config.SERVER_URL,
 };
 
 export default options;

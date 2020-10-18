@@ -7,6 +7,7 @@ import { AVATAR_EDIT } from "./ProfileQueries";
 import { useMutation } from "react-apollo-hooks";
 import moment from "moment";
 import axios from "axios";
+import * as config from '../../config';
 
 const OutContainer = styled.View`
   background: white;
@@ -73,7 +74,7 @@ export default ({ navigation, route }) => {
     try {
       const {
         data: { location },
-      } = await axios.post("http://172.30.1.36:4000/api/upload", formData, {
+      } = await axios.post(config.SERVER_URL+"/api/upload", formData, {
         headers: {
           "content-type": "multipart/form-data",
         },
