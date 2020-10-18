@@ -9,7 +9,7 @@ import constants from "../../constants";
 import { ActivityIndicator } from "react-native";
 import { TouchableWithoutFeedback, Keyboard, Alert } from "react-native";
 import { useQuery, useMutation } from "react-apollo-hooks";
-import { MEDICAL_CATEGORY, SIGN_UP } from "./AuthQueries";
+import { MARKETER_CATEGORY, SIGN_UP_MARKETER } from "./AuthQueries";
 import {
   Image,
   ScrollView,
@@ -32,52 +32,69 @@ const InContainer1 = styled.View`
   margin-right: 10%;
   justify-content: center;
 `;
+function checkBizId(value) {
+    var valueMap = value.replace(/-/gi, '').split('').map(function(item) {
+        return parseInt(item, 10);
+    });
 
-export default ({ navigation }) => {
-  const { loading, error, data = { medicalCategory: {} } } = useQuery(
-    MEDICAL_CATEGORY,
+    if (valueMap.length === 10) {
+        var multiply = new Array(1, 3, 7, 1, 3, 7, 1, 3, 5);
+        var checkSum = 0;
+
+        for (var i = 0; i < multiply.length; ++i) {
+            checkSum += multiply[i] * valueMap[i];
+        }
+
+        checkSum += parseInt((multiply[8] * valueMap[8]) / 10, 10);
+        return Math.floor(valueMap[9]) === (10 - (checkSum % 10));
+    }
+
+    return false;
+}
+export default ({ navigation,route }) => {
+  const { id,password,phone,name,} = route.params;
+
+  const { loading, error, data = { marketerCategory: {} } } = useQuery(
+    MARKETER_CATEGORY,
     {
       variables: {},
     }
   );
 
-  const emailInput = useInput("");
-  const phoneInput = useInput("");
-  const pwInput = useInput("");
-  const pwConfirmInput = useInput("");
-  const nameInput = useInput("");
-  const medicalIdInput = useInput("");
-  const medicalCategoryInput = useInput("안과의사");
+  const companyNameInput = useInput("");
+  const companyIdInput = useInput("");
+  const companyCategoryInput = useInput("의료기기판매");
 
-  const medicalUri = useInput("");
-  const setMedicalUri = (uri) => {
-    medicalUri.onChange(uri);
+  const companyUri = useInput("");
+  const setCompanyUri = (uri) => {
+    companyUri.onChange(uri);
   };
-  const [medicalUrl, setMedicalUrl] = useState("");
+  const [companyUrl, setCompanyUrl] = useState("");
 
   const [registerLoading, setRegisterLoading] = useState(false);
 
-  const [uploadMutaion] = useMutation(SIGN_UP, {
+  const [uploadMutaion] = useMutation(SIGN_UP_MARKETER, {
     variables: {
-      id: emailInput.value,
-      password: pwInput.value,
-      phone: phoneInput.value,
-      name: nameInput.value,
-      medical_id: medicalIdInput.value,
-      medical_cate: medicalCategoryInput.value,
-      medical_certi: medicalUrl,
+      id: id,
+      password: password,
+      phone: phone,
+      name: name,
+      company_cate: companyCategoryInput.value,
+      company_name: companyNameInput.value,
+      company_id: companyIdInput.value,
+      company_certi: companyUrl,
     },
   });
 
   const handleSubmit = async () => {
     const formData = new FormData();
     const name =
-      moment().format("YY:MM:DD-HH:mm:ss") + "_" + emailInput.value + ".jpg";
+      moment().format("YY:MM:DD-HH:mm:ss") + "_" + id + ".jpg";
     const [, type] = name.split(".");
     formData.append("file", {
       name,
       type: "image/jpeg",
-      uri: medicalUri.value,
+      uri: companyUri.value,
     });
     try {
       const {
@@ -87,14 +104,14 @@ export default ({ navigation }) => {
           "content-type": "multipart/form-data",
         },
       });
-      setMedicalUrl(location);
+      setCompanyUrl(location);
 
       const {
-        data: { signUp },
+        data: { signUpMarketer },
       } = await uploadMutaion();
 
-      if (signUp) {
-        navigation.navigate("SignupConfirm", { emailId: emailInput.value });
+      if (signUpMarketer) {
+        navigation.navigate("SignupConfirm", { emailId: id });
       }
     } catch (e) {
       Alert.alert(e.message.replace("GraphQL error: ", ""));
@@ -104,59 +121,22 @@ export default ({ navigation }) => {
   const handleRegister = async () => {
     try {
       setRegisterLoading(true);
-      const emailValue = emailInput.value;
-      const phoneValue = phoneInput.value;
-      const pwValue = pwInput.value;
-      const pwConfirmValue = pwConfirmInput.value;
-      const nameValue = nameInput.value;
-      const medicalIdValue = medicalIdInput.value;
-      const medicalCateogryValue = medicalCategoryInput.value;
-      const medicalUriValue = medicalUri.value;
 
-      const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      const phoneRegex = /^\d{2,3}-\d{3,4}-\d{4}$/;
-      const pwRegex = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
-      const nameRegex = /^[가-힣]{2,4}$/;
-      const medicalIdRegex = /^[0-9]{5}$/;
+      const companyIdValue = companyIdInput.value;
+      const companyCateogryValue = companyCategoryInput.value;
+      const companyUriValue = companyUri.value;
 
-      if (emailValue === "") {
-        return Alert.alert("이메일이 비어있습니다");
-      } else if (!emailValue.includes("@") || !emailValue.includes(".")) {
-        return Alert.alert("올바른 이메일형식을 입력해주세요");
-      } else if (!emailRegex.test(emailValue)) {
-        return Alert.alert("올바른 이메일형식을 입력해주세요");
-      }
-      if (phoneValue === "") {
-        return Alert.alert("전화번호가 비어있습니다");
-      } else if (!phoneRegex.test(phoneValue)) {
-        return Alert.alert(
-          "잘못된 휴대폰 번호입니다. 숫자, - 를 포함한 숫자만 입력하세요"
-        );
-      }
-      if (pwValue === "") {
-        return Alert.alert("비밀번호가 비어있습니다");
-      } else if (pwValue !== pwConfirmValue) {
-        return Alert.alert("비밀번호가 일치하지 않습니다");
-      } else if (!pwRegex.test(pwValue)) {
-        return Alert.alert(
-          "특수문자 / 문자 / 숫자 포함 형태의 8~15자리 이내의 암호 정규식"
-        );
-      }
-      if (nameValue === "") {
-        return Alert.alert("실명이 비어있습니다");
-      } else if (!nameRegex.test(nameValue)) {
-        return Alert.alert("실명은 2 ~ 4글자 한글로 입력 해 주세요.");
-      }
-      if (medicalCateogryValue === "") {
+      if (companyCateogryValue === "") {
         return Alert.alert("분류가 정해지지 않았습니다");
       }
-      if (medicalIdValue === "") {
-        return Alert.alert("면허번호가 비어있습니다");
-      } else if (!medicalIdRegex.test(medicalIdValue)) {
-        return Alert.alert("면허번호는 숫자 5글자입니다");
+
+      if (companyIdValue==="") {
+        return Alert.alert("사업자번호가 비어있습니다");
+      } else if (checkBizId(companyIdValue)) {
+        return Alert.alert("유효한 사업자 번호가 아닙니다");
       }
-      if (medicalUriValue === "") {
-        return Alert.alert("면허번호 사진이 없습니다");
+      if (companyUriValue === "") {
+        return Alert.alert("사업자번호 사진이 없습니다");
       }
 
       handleSubmit();
@@ -205,50 +185,27 @@ export default ({ navigation }) => {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <OutContainer>
           <InContainer1>
-            <AuthInput
-              {...emailInput}
-              placeholder="이메일"
-              keyboardType="email-address"
-            />
-            <AuthInput
-              {...pwInput}
-              placeholder="비밀번호"
-              keyboardType="default"
-              secureTextEntry={true}
-            />
-            <AuthInput
-              {...pwConfirmInput}
-              placeholder="비밀번호 확인"
-              keyboardType="default"
-              secureTextEntry={true}
-            />
-            <AuthInput
-              {...phoneInput}
-              placeholder="전화번호 ( - 를 포함하여 입력 )"
-              keyboardType="number-pad"
-            />
-            <AuthInput
-              {...nameInput}
-              placeholder="실명"
-              keyboardType="default"
-            />
-
             <AuthPicker
-              {...medicalCategoryInput}
+              {...companyCategoryInput}
               loading={loading}
               error={error}
-              data={data.medicalCategory}
+              data={data.marketerCategory}
             />
 
             <AuthInput
-              {...medicalIdInput}
-              placeholder="면허번호"
+              {...companyNameInput}
+              placeholder="회사명"
               keyboardType="default"
-              secureTextEntry={true}
+            />
+
+            <AuthInput
+              {...companyIdInput}
+              placeholder="면허번호"
+              keyboardType="number-pad"
             />
           </InContainer1>
 
-          {medicalUri.value !== "" ? (
+          {companyUri.value !== "" ? (
             <KeyboardAvoidingView>
               <Image
                 style={{
@@ -257,17 +214,17 @@ export default ({ navigation }) => {
                   height: 300,
                   resizeMode: "contain",
                 }}
-                source={{ uri: medicalUri.value }}
+                source={{ uri: companyUri.value }}
               />
             </KeyboardAvoidingView>
           ) : (
             <AuthButtonImage
               onPress={() =>
                 navigation.navigate("TakePhoto", {
-                  updateData: setMedicalUri,
+                  updateData: setCompanyUri,
                 })
               }
-              text="면허번호촬영"
+              text="사업자촬영"
             />
           )}
           <InContainer1>
@@ -275,7 +232,7 @@ export default ({ navigation }) => {
               disabled={registerLoading}
               loading={registerLoading}
               onPress={handleRegister}
-              text="회원가입"
+              text="업체 회원가입"
             />
           </InContainer1>
         </OutContainer>

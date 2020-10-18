@@ -90,7 +90,7 @@ export default ({ navigation }) => {
           <AuthButtonText
             onPress={() => navigation.navigate("Findpw")}
             text={"비밀번호를 잊으셨나요?"}
-          ></AuthButtonText>
+          />
         </InContainer1>
       </OutContainer>
     </TouchableWithoutFeedback>

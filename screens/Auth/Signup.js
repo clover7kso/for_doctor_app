@@ -3,10 +3,10 @@ import styled from "styled-components";
 import useInput from "../../hooks/useInput";
 import AuthInput from "../../components/AuthInput";
 import AuthButton from "../../components/AuthButton";
-import { ActivityIndicator } from "react-native";
+import AuthButtonText from "../../components/AuthButtonText"
 import { TouchableWithoutFeedback, Keyboard, Alert } from "react-native";
-import { useQuery, useMutation } from "react-apollo-hooks";
-import { MEDICAL_CATEGORY, CHECK_ID_PHONE } from "./AuthQueries";
+import {  useMutation } from "react-apollo-hooks";
+import { CHECK_ID_PHONE } from "./AuthQueries";
 import {
   ScrollView,
   BackHandler,
@@ -42,14 +42,14 @@ export default ({ navigation }) => {
     },
   });
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (navigateTo) => {
     try {
       const {
         data: { checkIdPhone },
       } = await uploadMutaion();
 
       if (checkIdPhone) {
-        navigation.navigate("SignupDoctor", {
+        navigation.navigate(navigateTo, {
           id: emailInput.value,
           password: pwInput.value,
           phone: phoneInput.value,
@@ -61,7 +61,7 @@ export default ({ navigation }) => {
     }
   };
 
-  const handleRegister = async () => {
+  const handleRegister = async (navigateTo) => {
     try {
       setRegisterLoading(true);
       const emailValue = emailInput.value;
@@ -106,7 +106,7 @@ export default ({ navigation }) => {
         return Alert.alert("실명은 2 ~ 4글자 한글로 입력 해 주세요.");
       }
 
-      handleSubmit();
+      handleSubmit(navigateTo);
     } catch (e) {
       Alert.alert(e.message.replace("GraphQL error: ", ""));
     } finally {
@@ -179,9 +179,14 @@ export default ({ navigation }) => {
             <AuthButton
               disabled={registerLoading}
               loading={registerLoading}
-              onPress={handleRegister}
+              onPress={()=>handleRegister("SignupDoctor")}
               text="의사 회원가입"
             />
+            
+          <AuthButtonText
+            onPress={()=>handleRegister("SignupMarketer")}
+            text={"의사가 아니신가요?"}
+          />
           </InContainer1>
 
         </OutContainer>
