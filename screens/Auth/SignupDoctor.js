@@ -71,9 +71,7 @@ export default ({ navigation, route }) => {
 
   const handleSubmit = async () => {
     const formData = new FormData();
-    const name =
-      moment().format("YY:MM:DD-HH:mm:ss") + "_" + id + ".jpg";
-    const [, type] = name.split(".");
+    const name = "DoctorCerti-"+ id + moment().format("_YYYY:MM:DD_HH:mm:ss") + ".jpg";
     formData.append("file", {
       name,
       type: "image/jpeg",

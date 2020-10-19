@@ -64,8 +64,7 @@ export default ({ navigation, route }) => {
   const [avatarEditMutation] = useMutation(AVATAR_EDIT);
   const handleSubmit = async () => {
     const formData = new FormData();
-    const name = moment().format("YY:MM:DD-HH:mm:ss") + ".jpg";
-    const [, type] = name.split(".");
+    const name = "UserAvatar-"+ id + moment().format("_YYYY:MM:DD_HH:mm:ss") + ".jpg";
     formData.append("file", {
       name,
       type: "image/jpeg",
