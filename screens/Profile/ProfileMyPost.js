@@ -4,7 +4,7 @@ import { useQuery } from "react-apollo-hooks";
 import { MY_POST } from "./ProfileQueries";
 import BackPressHeader from "../../components/BackPressHeader";
 import MyPost from "../../components/profileMy/MyPost";
-import { ActivityIndicator, FlatList } from "react-native";
+import { ActivityIndicator, FlatList,Alert } from "react-native";
 
 const OutContainer = styled.View`
   background : white
@@ -22,6 +22,11 @@ export default ({ navigation }) => {
     variables: {},
     fetchPolicy: "network-only",
   });
+  if(resMyPost.error)
+  {
+    Alert.alert(resMyPost.error.message.replace("GraphQL error: ", ""));
+    navigation.pop(1)
+  }
 
   const [refreshing, setRefreshing] = useState(false);
   const refresh = async () => {

@@ -4,7 +4,7 @@ import { useQuery } from "react-apollo-hooks";
 import { MY_COMMENT } from "./ProfileQueries";
 import BackPressHeader from "../../components/BackPressHeader";
 import MyComment from "../../components/profileMy/MyComment";
-import { ActivityIndicator, FlatList } from "react-native";
+import { ActivityIndicator, FlatList,Alert } from "react-native";
 
 const OutContainer = styled.View`
   background : white
@@ -22,6 +22,12 @@ export default ({ navigation }) => {
     variables: {},
     fetchPolicy: "network-only",
   });
+  if(resMyComment.error)
+  {
+    Alert.alert(resMyComment.error.message.replace("GraphQL error: ", ""));
+    navigation.pop(1)
+  }
+
 
   const [refreshing, setRefreshing] = useState(false);
   const refresh = async () => {

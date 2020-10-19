@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useQuery } from "react-apollo-hooks";
 import { MY_PRODUCT } from "./ProfileQueries";
-import { ActivityIndicator, FlatList } from "react-native";
+import { ActivityIndicator, FlatList,Alert } from "react-native";
 import BackPressHeader from "../../components/BackPressHeader";
 import MyProduct from "../../components/profileMy/MyProduct";
 
@@ -23,6 +23,11 @@ export default ({ navigation, route }) => {
     variables: {},
   });
   resMyProduct.refetch();
+  if(resMyProduct.error)
+  {
+    Alert.alert(resMyProduct.error.message.replace("GraphQL error: ", ""));
+    navigation.pop(1)
+  }
 
   const [refreshing, setRefreshing] = useState(false);
   const refresh = async () => {

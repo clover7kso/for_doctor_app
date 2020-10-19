@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useQuery } from "react-apollo-hooks";
 import { PRODUCT_CATEGORY } from "./ProductQueries";
-import { ActivityIndicator } from "react-native";
+import { ActivityIndicator,Alert } from "react-native";
 import BackPressHeader from "../../components/BackPressHeader";
 import constants from "../../constants";
 
@@ -47,6 +47,11 @@ export default ({ navigation, route }) => {
     variables: { type: type },
   });
   categories.refetch();
+  if(categories.error)
+  {
+    Alert.alert(categories.error.message.replace("GraphQL error: ", ""));
+    navigation.pop(1)
+  }
 
   return (
     <OutContainer>

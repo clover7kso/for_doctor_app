@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { ActivityIndicator } from "react-native";
+import { ActivityIndicator,Alert } from "react-native";
 
 import BackPressHeader from "../../components/BackPressHeader";
 
@@ -20,12 +20,18 @@ const Container = styled.View`
 
 export default ({ route, navigation }) => {
   const { type } = route.params;
-
+  
   const resPostTop = useQuery(POST_TOP, {
     variables: {},
   });
   resPostTop.refetch();
-
+  
+  if(resPostTop.error)
+  {
+    Alert.alert(resPostTop.error.message.replace("GraphQL error: ", ""));
+    navigation.pop(1)
+  }
+ 
   return (
     <OutContainer>
       <BackPressHeader navigation={navigation} text={type} />
