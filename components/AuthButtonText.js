@@ -11,7 +11,7 @@ const Container = styled.View`
 
 const Text = styled.Text`
   padding: 5px;
-  color: ${(props) => props.theme.blueColor};
+  color: white;
 `;
 
 const AuthButton = ({ text, onPress }) => (

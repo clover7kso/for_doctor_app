@@ -6,15 +6,16 @@ import { ActivityIndicator } from "react-native";
 const Touchable = styled.TouchableOpacity``;
 
 const Container = styled.View`
-  background-color: ${(props) => props.theme.darkBlueColor};
+  background-color: white;
   padding: 15px;
-  border-radius: 10px;
+  border-radius: 50px;
   margin-top: 10px;
 `;
 
 const Text = styled.Text`
-  color: white;
+  color: #34766e;
   text-align: center;
+  font-size:20px
 `;
 
 const AuthButton = ({ text, onPress, loading = false }) => (
