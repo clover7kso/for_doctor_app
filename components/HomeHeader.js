@@ -1,59 +1,44 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { Ionicons } from "@expo/vector-icons";
 import constants from "../constants";
+import { ImageBackground  } from "react-native";
 
-const Touchable = styled.TouchableOpacity``;
-
-const Container = styled.View`
-  flex-direction: row;
-  background-color: white;
-  width: ${constants.width};
+const Touchable = styled.TouchableOpacity`  
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
-
-	shadow-color: #000000;
-  shadow-opacity: 0.3;
-  shadow-offset: { width: 2, height: 2 };
-  elevation: 10;
-
-  padding-bottom: 5;
-  padding-top: ${Platform.OS === "ios" ? 0 : Expo.Constants.statusBarHeight};
+  margin:10px;
+  width: ${constants.width / 14};
+  height: ${constants.width / 14};
 `;
 
-const Text = styled.Text`
-  font-size: 25px;
-  color: ${(props) => props.theme.darkBlueColor};
-  text-align: center;
+const TopBackground = styled.View`
+  width: ${constants.width};
+  height: ${Platform.OS === "ios" ? 0 : Expo.Constants.statusBarHeight};
+  background:#4ca493
 `;
-const Icon = styled.View`
-  padding-left: 15px;
-  padding-right: 15px;
+const Container = styled.View`
+  align-items: flex-end;
+  width: ${constants.width};
+  background:#4ca493
+`;
+
+const MessageImg = styled.Image`  
+  width: ${constants.width / 14};
+  height: ${constants.width / 14};
 `;
 
 const BackPressHeader = ({ navigation }) => (
-  <Container>
-    <Touchable onPress={() => navigation.navigate("Message")}>
-      <Icon>
-        <Ionicons
-          name={Platform.OS === "ios" ? "ios-mail" : "md-mail"}
-          size={30}
-          color={"grey"}
-        />
-      </Icon>
-    </Touchable>
-    <Text>FOR DOCTOR</Text>
-    <Touchable onPress={() => navigation.navigate("Profile")}>
-      <Icon>
-        <Ionicons
-          name={Platform.OS === "ios" ? "ios-person" : "md-person"}
-          size={30}
-          color={"grey"}
-        />
-      </Icon>
-    </Touchable>
-  </Container>
+ 
+    <Container>
+      <TopBackground/>
+        <Touchable onPress={() => navigation.navigate("Message")}>
+            <MessageImg
+              resizeMode={"contain"}
+              source={require("../assets/main_message.png")}
+            />
+        </Touchable>
+    </Container>
 );
 
 BackPressHeader.propTypes = {
