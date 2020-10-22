@@ -3,14 +3,11 @@ import styled from "styled-components";
 import { ActivityIndicator,ImageBackground } from "react-native";
 import HomeAd from "../components/HomeAd";
 import HomeHeader from "../components/HomeHeader";
+import HomeButton from "../components/HomeButton";
 import { useQuery } from "react-apollo-hooks";
 import { HOME_AD_MANY } from "./ScreenQueries";
 import constants from "../constants";
 
-const LogoImg = styled.Image`
-  width: ${constants.width / 2.6};
-  height: ${793 * (constants.width / 2.6 / 1948)};
-`;
 
 
 const OutContainer = styled.View`
@@ -27,35 +24,30 @@ const Container = styled.View`
 `;
 
 const Table = styled.View`
-  justify-content: center;
-  align-items: center;
+  flex-direction:row
   flex: 1;
 `;
 const Column_1 = styled.View`
-  justify-content: center;
-  align-items: center;
-  flex: 1;
+  align-items: flex-end;
+  width: ${constants.width / 2.5 / 2};
+`;
+const Divider = styled.View`
+  margin-right:-${constants.width / 39}
+  margin-bottom:10px
+  margin-top:10px
+  background-color: #CBCBCB;
+  border-radius: 50px;
+  flex:1
+  padding: 0.7px;
 `;
 
 const Column_2 = styled.View`
-  justify-content: center;
-  align-items: center;
-  flex: 3;
+  padding-top:30px
+  padding-bottom:30px
+  justify-content: space-around;
+  flex: 1;
 `;
 
-const Touchable = styled.TouchableOpacity`
-  margin-top:10px
-  border-radius: 15px;
-  width: ${constants.width / 2.17};
-  alignItems: center;
-`;
-
-const Text = styled.Text`
-  text-align: center;
-  padding-top: 5px;
-  color: #34766e;
-  font-size: 20px;
-`;
 
 const TopContainer = styled.View`
   width: ${constants.width};
@@ -63,7 +55,12 @@ const TopContainer = styled.View`
   padding-left: 10px;
   padding-bottom: 10px;
 `;
-const ProfileContainer = styled.View`
+
+const LogoImg = styled.Image`
+  width: ${constants.width / 2.5};
+  height: ${793 * (constants.width / 2.5 / 1948)};
+`;
+const ProfileContainer = styled.TouchableOpacity`
   flex:1
 `;
 const ProfileLineContainer = styled.View`
@@ -117,7 +114,10 @@ export default ({ navigation }) => {
                 resizeMode={"contain"}
                 source={require("../assets/top_bar_logo.png")}
                 />
-                <ProfileContainer>
+                <ProfileContainer
+                onPress={() =>
+                  navigation.navigate("Profile")
+                }>
                   <ProfileRowContainer>
                     <ProfileText_1>강성운원장님</ProfileText_1>
                     <ProfileText_2>안녕하세요!</ProfileText_2>
@@ -128,30 +128,33 @@ export default ({ navigation }) => {
                 </ProfileContainer>
               </TopContainer>
               <Table>
-                  <Touchable
+                <Column_1><Divider/></Column_1>
+                <Column_2>
+                  <HomeButton
                     onPress={() =>
                       navigation.navigate("ProductCategory", { type: "의료기기" })
                     }
-                  >
-                    <Text>의료기기</Text>
-                  </Touchable>
-                  <Touchable>
-                    <Text>법률제휴</Text>
-                  </Touchable>
-                  <Touchable
+                    text = "의료기기"
+                  />
+                  <HomeButton
+                    onPress={() =>
+                      {}
+                    }
+                    text = "법률제휴"
+                  />
+                  <HomeButton
                     onPress={() =>
                       navigation.navigate("PostTop", { type: "커뮤니티" })
                     }
-                  >
-                    <Text>커뮤니티</Text>
-                  </Touchable>
-                  <Touchable
+                    text = "커뮤니티"
+                  />
+                  <HomeButton
                     onPress={() =>
                       navigation.navigate("ProductCategory", { type: "마케팅" })
                     }
-                  >
-                    <Text>마케팅</Text>
-                  </Touchable>
+                    text = "마케팅"
+                  />
+                </Column_2>
               </Table>
               <HomeAd data={data.homeAdMany} />
             </Container>

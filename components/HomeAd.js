@@ -48,10 +48,9 @@ export default class HomeAd extends React.Component {
         >
           <Image
             style={{
-              borderRadius: 15,
               resizeMode: "contain",
-              width: constants.width / 1.05,
-              height: constants.width / 2.1,
+              width: constants.width / 1,
+              height: constants.width / 2,
             }}
             source={{ uri: this.state.imageArray[this.state.counter] }}
           />
