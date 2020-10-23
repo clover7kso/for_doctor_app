@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Ionicons } from "@expo/vector-icons";
 import { AppLoading } from "expo";
 import { Asset } from "expo-asset";
 import * as Font from "expo-font";
@@ -14,6 +13,7 @@ import styles from "./styles";
 import NavController from "./components/NavController";
 import { AuthProvider } from "./AuthContext";
 
+
 export default function App() {
   const [loaded, setLoaded] = useState(false);
   const [client, setClient] = useState(null);
@@ -21,9 +21,10 @@ export default function App() {
   const preLoad = async () => {
     try {
       await Font.loadAsync({
-        ...Ionicons.font,
+        'NotoSansCJKkr-Regular': require('./assets/fonts/NotoSansCJKkr-Regular.ttf'),
+        'NotoSansCJKkr-Thin': require('./assets/fonts/NotoSansCJKkr-Thin.ttf'),
       });
-      await Asset.loadAsync([require("./assets/logo.png")]);
+      await Asset.loadAsync([require("./assets/images/logo.png")]);
       const cache = new InMemoryCache();
       await persistCache({
         cache,

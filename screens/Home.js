@@ -100,7 +100,7 @@ export default ({ navigation }) => {
     <ImageBackground
       style={{ width: "100%", height: "100%" }}
       resizeMode="cover"
-      source={require("../assets/main_background.png")}
+      source={require("../assets/images/main_background.png")}
     >
       <OutContainer>
         <HomeHeader navigation={navigation} />
@@ -112,7 +112,7 @@ export default ({ navigation }) => {
               <TopContainer>
                 <LogoImg
                 resizeMode={"contain"}
-                source={require("../assets/top_bar_logo.png")}
+                source={require("../assets/images/top_bar_logo.png")}
                 />
                 <ProfileContainer
                 onPress={() =>
@@ -138,15 +138,15 @@ export default ({ navigation }) => {
                   />
                   <HomeButton
                     onPress={() =>
-                      {}
-                    }
-                    text = "법률제휴"
-                  />
-                  <HomeButton
-                    onPress={() =>
                       navigation.navigate("PostTop", { type: "커뮤니티" })
                     }
                     text = "커뮤니티"
+                  />
+                  <HomeButton
+                    onPress={() =>
+                      {}
+                    }
+                    text = "법률제휴"
                   />
                   <HomeButton
                     onPress={() =>

@@ -12,12 +12,13 @@ const Container = styled.View`
 `;
 
 const Text = styled.Text`
+    font-family:NotoSansCJKkr-Thin;
     margin-left:20px;
-    margin-right:10px;
-    padding-top: 10px;
+    margin-right:20px;
+    padding-top: 12px;
     padding-bottom: 10px;
     color: #34766e;
-    font-size: 20px;
+    font-size: 22px;
 `;
 const Circle = styled.View`
     zIndex: 1
@@ -35,12 +36,13 @@ const PressedContainer = styled.View`
     margin-left: 10px;
 `;
 const PressedText = styled.Text`
+    font-family:NotoSansCJKkr-Regular;
     margin-left:20px;
-    margin-right:10px;
-    padding-top: 10px;
+    margin-right:20px;
+    padding-top: 12px;
     padding-bottom: 10px;
     color: white;
-    font-size: 20px;
+    font-size: 22px;
 `;
 const PressedCircle = styled.View`
     zIndex: 1

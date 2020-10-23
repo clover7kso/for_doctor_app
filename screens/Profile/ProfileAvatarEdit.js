@@ -105,7 +105,7 @@ export default ({ navigation, route }) => {
             ? { uri: image }
             : avatar
             ? { uri: avatar }
-            : require("../../assets/avatar.png")
+            : require("../../assets/images/avatar.png")
         }
       />
       <TouchableOpacity onPress={pickImage}>

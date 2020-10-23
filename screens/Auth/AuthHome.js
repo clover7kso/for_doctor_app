@@ -40,13 +40,13 @@ export default ({ navigation }) => {
       <ImageBackground
             style={{ width: "100%", height: "100%" }}
             resizeMode="cover"
-            source={require("../../assets/splash_background.png")}
+            source={require("../../assets/images/splash_background.png")}
       >
         <OutContainer>
           <InContainer1>
             <LogoImg
               resizeMode={"contain"}
-              source={require("../../assets/logo.png")}
+              source={require("../../assets/images/logo.png")}
             />
             <Text>의사 선생님들을 위한 대한민국 No.1 플랫폼</Text>
           </InContainer1>

@@ -130,7 +130,7 @@ export default ({ route, navigation }) => {
             source={
               item.userAvatar
                 ? { uri: item.userAvatar }
-                : require("../../assets/avatar.png")
+                : require("../../assets/images/avatar.png")
             }
           />
           <CommentColumn>
@@ -158,7 +158,7 @@ export default ({ route, navigation }) => {
                 source={
                   resPostOne.data.postOne.userAvatar
                     ? { uri: resPostOne.data.postOne.userAvatar }
-                    : require("../../assets/avatar.png")
+                    : require("../../assets/images/avatar.png")
                 }
               />
               <Column>

@@ -96,7 +96,7 @@ export default ({ navigation }) => {
                   source={
                     resUserOne.data.userOne.avatar
                       ? { uri: resUserOne.data.userOne.avatar }
-                      : require("../../assets/avatar.png")
+                      : require("../../assets/images/avatar.png")
                   }
                 />
               </Touchable>

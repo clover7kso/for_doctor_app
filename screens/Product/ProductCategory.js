@@ -2,8 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { useQuery } from "react-apollo-hooks";
 import { PRODUCT_CATEGORY } from "./ProductQueries";
-import { ActivityIndicator,Alert } from "react-native";
+import { ActivityIndicator,Alert,ImageBackground } from "react-native";
 import BackPressHeader from "../../components/BackPressHeader";
+import ProductButton from "../../components/ProductButton";
 import constants from "../../constants";
 
 const OutContainer = styled.View`
@@ -14,30 +15,11 @@ const OutContainer = styled.View`
 
 const Container = styled.View`
   padding-top:10px
-  flex-wrap : wrap
-  flex-direction : row
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 `;
 
-const Touchable = styled.TouchableOpacity`
-  margin:5px;
-  border-radius: 15px;
-  width: ${constants.width / 2.15};
-  height: ${constants.width / 5};
-  background: ${(props) => props.theme.blueColor};
-  justify-content: center;
-  alignItems: center;
-
-  shadow-color: #000000;
-  shadow-opacity: 0.3;
-  shadow-offset: { width: 2, height: 2 };
-  elevation: 15;
-`;
-
-const Text = styled.Text`
-  color: white;
-  font-size: 20px;
+const Divider = styled.View`
 `;
 
 export default ({ navigation, route }) => {
@@ -56,23 +38,31 @@ export default ({ navigation, route }) => {
   return (
     <OutContainer>
       <BackPressHeader navigation={navigation} text={type} />
+      <ImageBackground
+            style={{ width: "100%", height: "100%" }}
+            resizeMode="cover"
+            source={require("../../assets/images/sub_background_all.png")}
+      >
       {categories.loading ? (
         <ActivityIndicator color={"white"} />
       ) : (
         <Container>
           {categories.data.productCategory.map((item, key) => (
-            <Touchable
+            <>
+            <ProductButton
               onPress={() =>
                 navigation.navigate("ProductMany", {
                   category: item,
                 })
               }
-            >
-              <Text>{item}</Text>
-            </Touchable>
+              text = {item}
+            />
+            <Divider style={{height:constants.height/categories.data.productCategory.length/4}}/>
+            </>
           ))}
         </Container>
       )}
+      </ImageBackground>
     </OutContainer>
   );
 };

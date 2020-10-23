@@ -52,7 +52,7 @@ const BackPressHeader = ({ navigation }) => (
         <Touchable onPress={() => navigation.navigate("Message")}>
               <MessageImg
                 resizeMode={"contain"}
-                source={require("../assets/main_message.png")}
+                source={require("../assets/images/main_message.png")}
               />
           </Touchable>
       </Column_2>
