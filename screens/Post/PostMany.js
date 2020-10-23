@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useQuery, useMutation } from "react-apollo-hooks";
 import { POST_MANY, POST_ADD_VIEW } from "./PostQueries";
-import BackPressHeader from "../../components/BackPressHeader";
-import ProductSearchBox from "../../components/ProductSearchBox";
+import BackPressHeader2 from "../../components/BackPressHeader2";
+import PostSearchBox from "../../components/PostSearchBox";
 import Post from "../../components/Post";
 import { ActivityIndicator, FlatList } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
@@ -20,7 +20,7 @@ const Touchable = styled.TouchableOpacity`
   position: absolute;
   bottom: 10;
   border-color: transparent
-  background: #0066cc;
+  background: #4A7768;
   border-radius: 100;
   
   shadow-color: #000000;
@@ -47,7 +47,7 @@ const Container = styled.View`
 `;
 
 export default ({ navigation, route }) => {
-  const { category } = route.params;
+  const { title, category } = route.params;
 
   const [postAddView] = useMutation(POST_ADD_VIEW);
   const handlePostAddView = (id) => {
@@ -114,8 +114,8 @@ export default ({ navigation, route }) => {
 
   return (
     <OutContainer>
-      <BackPressHeader navigation={navigation} text={category} />
-      <ProductSearchBox value={searchWord} onChange={setSearchWord} />
+      <BackPressHeader2 navigation={navigation} mainText={title} subText={category.replace("게시판","").substring(0,4)} />
+      <PostSearchBox value={searchWord} onChange={setSearchWord} />
       <Container>
         {resPostMany.loading ? (
           <ActivityIndicator color={"black"} />

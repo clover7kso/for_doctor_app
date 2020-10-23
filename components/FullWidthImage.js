@@ -43,8 +43,6 @@ export default class FullWidthImage extends Component {
         <Image
           source={this.props.source}
           style={{
-            borderRadius: 15,
-            marginTop: 20,
             width: this.state.width,
             height: this.state.height,
           }}

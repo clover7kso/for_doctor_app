@@ -8,13 +8,13 @@ const Container = styled.View`
   margin-top: 10px;
   align-items: center;
   justify-content: center;
-  height: ${(constants.width / 3) * (11 / 7)};
+  height: ${(constants.width / 2.1)};
 `;
 
 const ImageSample = styled.Image`
-  border-radius: 15;
-  resize-mode: contain;
-  width: ${constants.width / 1.5};
+  border-radius: 10;
+  resize-mode: cover;
+  width: ${constants.width / 1.4};
   margin-left: 10px;
   margin-right: 10px;
 `;

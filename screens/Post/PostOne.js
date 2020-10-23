@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useQuery, useMutation } from "react-apollo-hooks";
 import { POST_ONE } from "./PostQueries";
 import { ActivityIndicator, ScrollView, FlatList } from "react-native";
-import BackPressHeader from "../../components/BackPressHeader";
+import BackPressHeader3 from "../../components/BackPressHeader3";
 import PostCommentBox from "../../components/PostCommentBox";
 import { COMMENT_UPLOAD } from "./PostQueries";
 const OutContainer = styled.View`
@@ -147,7 +147,7 @@ export default ({ route, navigation }) => {
 
   return (
     <OutContainer>
-      <BackPressHeader navigation={navigation} text={"게시글"} />
+      <BackPressHeader3 navigation={navigation} />
       {resPostOne.loading ? (
         <ActivityIndicator color={"black"} />
       ) : (

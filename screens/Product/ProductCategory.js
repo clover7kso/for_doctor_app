@@ -58,7 +58,8 @@ export default ({ navigation, route }) => {
             <ProductButton
               onPress={() =>
                 navigation.navigate("ProductMany", {
-                  category: item,
+                  title: type,
+                  category: item
                 })
               }
               text = {item}

@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useQuery, useMutation } from "react-apollo-hooks";
 import { PRODUCT_ONE, TOGGLE_LIKE, PRODUCT_ADD_CALL } from "./ProductQueries";
 import { ActivityIndicator } from "react-native";
-import BackPressHeader from "../../components/BackPressHeader";
+import BackPressHeader3 from "../../components/BackPressHeader3";
 import ProductSampleImages from "../../components/ProductSampleImages";
 import ProductDetailImages from "../../components/ProductDetailImages";
 import ProductFooter from "../../components/ProductFooter";
@@ -24,6 +24,8 @@ const Container = styled.View`
 const InfoContainer = styled.View`
   padding-left: 20;
   padding-right: 20;
+  margin-bottom: 40;
+  margin-top: 20;
 `;
 
 const Title = styled.Text`
@@ -72,13 +74,13 @@ export default ({ navigation, route }) => {
 
   return (
     <OutContainer>
-      <BackPressHeader navigation={navigation} text={subCategory} />
+      <BackPressHeader3 navigation={navigation} />
       {resProductOne.loading ? (
         <ActivityIndicator color={"black"} />
       ) : (
         <Container>
           <ScrollView
-            contentContainerStyle={{ paddingBottom: 10 }}
+            contentContainerStyle={{ paddingBottom: 20 }}
             showsVerticalScrollIndicator={false}
           >
             <ProductSampleImages

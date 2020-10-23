@@ -39,7 +39,7 @@ const TextInput = styled.TextInput`
 
 const Touchable = styled.TouchableOpacity``;
 
-const ProductSearchBox = ({ onChange, value }) => {
+const PostSearchBox = ({ onChange, value }) => {
   var inputValue = value;
   const change = (text) => {
     inputValue = text;
@@ -59,7 +59,7 @@ const ProductSearchBox = ({ onChange, value }) => {
         </Touchable>
         <TextInput
           onChangeText={change}
-          placeholder="업체명, 제품명을 검색하세요"
+          placeholder="제목 및 내용을 입력하세요"
           value={(text) => inputValue}
         />
       </InnerContainer>
@@ -67,10 +67,10 @@ const ProductSearchBox = ({ onChange, value }) => {
   );
 };
 
-ProductSearchBox.propTypes = {
+PostSearchBox.propTypes = {
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   onPress: PropTypes.func.isRequired,
 };
 
-export default ProductSearchBox;
+export default PostSearchBox;

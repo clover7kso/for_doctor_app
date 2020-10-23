@@ -9,14 +9,11 @@ import {
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop:10,
     flexDirection: "row",
     alignSelf: "baseline",
-    backgroundColor: "#0066CC",
-    paddingBottom: 10,
-    shadowColor: "#000000",
-    shadowOpacity: 0.3,
-    shadowOffset: { width: 2, height: 2 },
-    elevation: 10,
+    backgroundColor: "#4CA493",
+    paddingBottom: 10
   },
   scroll: {
     paddingLeft: 10,

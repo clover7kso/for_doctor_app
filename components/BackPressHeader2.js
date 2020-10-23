@@ -4,11 +4,6 @@ import PropTypes from "prop-types";
 import { Ionicons } from "@expo/vector-icons";
 import constants from "../constants";
 
-const LogoImg = styled.Image`
-  width: ${constants.width / 3.7};
-  height: ${230 * (constants.width / 3.7 / 877)};
-`;
-
 const Touchable = styled.TouchableOpacity`  
   justify-content: center;
   align-items: center;
@@ -30,7 +25,7 @@ const SubTitleBack = styled.Image`
 `;
 const SubTitleText = styled.Text`
   font-size: ${constants.width / 23};
-  color: black;
+  color: #4CA493;
   text-align: center;
   width: ${constants.width / 2.5};
 `;
@@ -47,6 +42,7 @@ const HomeImg = styled.Image`
 `;
 
 const Container = styled.View`
+  background : #4CA493
   align-items: center;
 `;
 
@@ -60,12 +56,12 @@ const TopBarContainer = styled.View`
 `;
 
 const MainText = styled.Text`
-  font-size: 20px;
+  font-size: 25px;
   color: black;
   text-align: center;
 `;
 
-const BackPressHeader = ({ navigation, subText }) => {
+const BackPressHeader = ({ navigation, mainText, subText }) => {
   const goBackToTopSafe = () => {
     // Traverse parent stack until we can go back
     let parent = navigation;
@@ -97,12 +93,7 @@ const BackPressHeader = ({ navigation, subText }) => {
             source={require("../assets/images/navi_back.png")}
           />
         </Touchable>
-        
-        <LogoImg
-          resizeMode={"contain"}
-          source={require("../assets/images/logo_color.png")}
-        />
-        
+        <MainText>{mainText}</MainText>
         <Touchable onPress={goBackToTopSafe}>
           <HomeImg
             resizeMode={"contain"}
@@ -123,6 +114,7 @@ const BackPressHeader = ({ navigation, subText }) => {
 
 BackPressHeader.propTypes = {
   navigation: PropTypes.object.isRequired,
+  mainText: PropTypes.string.isRequired,
   subText: PropTypes.string.isRequired,
 };
 

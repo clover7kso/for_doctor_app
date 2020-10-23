@@ -11,7 +11,7 @@ const TouchableCall = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   flex: 1;
-  background-color: ${(props) => props.theme.darkBlueColor};
+  background-color: #4A7768;
   padding: 15px;
   border-radius: 10px;
   margin-left: 20px;

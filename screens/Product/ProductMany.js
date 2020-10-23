@@ -7,7 +7,7 @@ import {
   PRODUCT_ADD_VIEW,
 } from "./ProductQueries";
 import { ActivityIndicator, FlatList } from "react-native";
-import BackPressHeader from "../../components/BackPressHeader";
+import BackPressHeader2 from "../../components/BackPressHeader2";
 import ProductSearchBox from "../../components/ProductSearchBox";
 import ProductSubCategory from "../../components/ProductSubCategory";
 import Product from "../../components/Product";
@@ -24,10 +24,8 @@ const Container = styled.View`
   flex: 1;
 `;
 
-const Text = styled.Text``;
-
 export default ({ navigation, route }) => {
-  const { category } = route.params;
+  const { title,category } = route.params;
   const resSubCate = useQuery(PRODUCT_SUB_CATEGORY, {
     variables: { category: category },
   });
@@ -100,7 +98,7 @@ export default ({ navigation, route }) => {
 
   return (
     <OutContainer>
-      <BackPressHeader navigation={navigation} text={category} />
+      <BackPressHeader2 navigation={navigation} mainText={title} subText={category} />
       <ProductSearchBox value={searchWord} onChange={setSearchWord} />
       {resSubCate.loading ? null : (
         <Container>

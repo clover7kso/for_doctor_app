@@ -17,15 +17,15 @@ const InContainer1 = styled.View`
 `;
 const ImageSample = styled.Image`
   border-radius: 15;
-  resize-mode: contain;
-  width: ${constants.width / 2.4};
-  height: ${(constants.width / 3) * (20 / 19)};
+  resize-mode: cover;
+  width: ${constants.width / 2 - 10};
+  height: ${constants.width / 3 - 10};
 `;
 const InContainer2 = styled.View`
   justify-content: space-around;
   padding-left:10
-  width: ${constants.width / 2};
-  height: ${(constants.width / 3) * (20 / 19)};
+  width: ${constants.width / 2 - 10};
+  height: ${constants.width / 3};
 `;
 const InContainer3 = styled.View`
   align-items: flex-end;

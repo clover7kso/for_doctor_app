@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { Ionicons } from "@expo/vector-icons";
 import constants from "../constants";
 
 const LogoImg = styled.Image`
@@ -15,24 +14,6 @@ const Touchable = styled.TouchableOpacity`
   margin:10px;
   width: ${constants.width / 14};
   height: ${constants.width / 14};
-`;
-
-const SubTitleContainer= styled.View`
-  justify-content: center;
-  align-items: center;
-  width: ${constants.width / 2.5};
-  height: ${793 * (constants.width / 2.5 / 1948)}
-`;
-const SubTitleBack = styled.Image`
-  position: absolute;
-  width: ${constants.width / 2.5};
-  height: ${793 * (constants.width / 2.5 / 1948)}
-`;
-const SubTitleText = styled.Text`
-  font-size: ${constants.width / 23};
-  color: black;
-  text-align: center;
-  width: ${constants.width / 2.5};
 `;
 
 
@@ -65,7 +46,7 @@ const MainText = styled.Text`
   text-align: center;
 `;
 
-const BackPressHeader = ({ navigation, subText }) => {
+const BackPressHeader = ({ navigation }) => {
   const goBackToTopSafe = () => {
     // Traverse parent stack until we can go back
     let parent = navigation;
@@ -110,20 +91,13 @@ const BackPressHeader = ({ navigation, subText }) => {
           />
         </Touchable>
       </TopBarContainer>
-      <SubTitleContainer>
-        <SubTitleBack
-          resizeMode={"contain"}
-          source={require("../assets/images/top_bar_text.png")}
-        />
-        <SubTitleText>{subText}</SubTitleText>
-      </SubTitleContainer>
+      
     </Container>
   );
 };
 
 BackPressHeader.propTypes = {
   navigation: PropTypes.object.isRequired,
-  subText: PropTypes.string.isRequired,
 };
 
 export default BackPressHeader;

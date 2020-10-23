@@ -91,7 +91,7 @@ const PostTopView = ({ error, data, navigation }) => {
             <Row>
               <Touchable
                 onPress={() =>
-                  navigation.navigate("PostMany", { category: itemCategory })
+                  navigation.navigate("PostMany", { title: "커뮤니티", category: itemCategory })
                 }
               >
                 <PressedContainer>
