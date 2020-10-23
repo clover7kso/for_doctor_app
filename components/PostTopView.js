@@ -3,60 +3,71 @@ import { ScrollView } from "react-native";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import constants from "../constants";
-const Touchable = styled.TouchableOpacity``;
 
-const Container = styled.View``;
+const TouchableTitle = styled.TouchableOpacity`
+  flex-direction: row;
+`;
+
+const Touchable = styled.TouchableOpacity`
+`;
+
+const Container = styled.View`
+  position: relative;
+  top:${-793 * (constants.width / 2.5 / 1948)}
+`;
 
 const CategoryContainer = styled.View`
+  padding-left: 20;
+  padding-right: 20;
   margin-top: 25;
 `;
 
 const PostItem = styled.View`
-  margin-bottom: 8px;
-  margin-top: 8px;
+  margin-bottom: 12px;
+  margin-top: 12px;
 `;
 const ItemContainer = styled.View`
   padding-left: 12px
-  padding-right: 15px
+  padding-right: 17px
 `;
 
 const Divider = styled.View`
-  background: #f0f0f0;
+  background: #595959;
   border-radius: 30;
-  height: 1;
+  height: 0.2;
 `;
 
 const Row = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items:baseline
+  flex:1
 `;
 
 
 const TextTitle = styled.Text`
-  font-size:16px
+  font-size:17px
   color: ${(props) => props.theme.blackColor};
 `;
 
 const TextViews = styled.Text`
   font-size:9px
-  color: #000000;
+  color: #595959;
 `;
 
 const PressedContainer = styled.View`
-    background:white;
-    padding-top:10px;
-    padding-bottom:10px
-    align-items:center
-    border-radius:300px
-    border: 1px solid white;
-    width: ${constants.width / 1.2};
+  flex:1
+  background:white;
+  padding-top:10px;
+  padding-bottom:10px
+  align-items:center
+  border-radius:300px
 `;
 const PressedText = styled.Text`
-    font-family:NotoSansCJKkr-Regular;
-    align-items:center;
-    color: #4A7768;
-    font-size: 20px;
+  font-family:NotoSansCJKkr-Regular;
+  align-items:center;
+  color: #4A7768;
+  font-size: 22px;
 `;
 
 
@@ -83,13 +94,13 @@ const PostTopView = ({ error, data, navigation }) => {
   return (
     <Container>
       <ScrollView
-        contentContainerStyle={{ paddingBottom: 100 }}
+        contentContainerStyle={{ paddingBottom: 120, paddingTop: 793 * (constants.width / 2.5 / 1948) }}
         showsVerticalScrollIndicator={false}
       >
         {categories.map((itemCategory, key) => (
           <CategoryContainer>
             <Row>
-              <Touchable
+              <TouchableTitle
                 onPress={() =>
                   navigation.navigate("PostMany", { title: "커뮤니티", category: itemCategory })
                 }
@@ -97,7 +108,7 @@ const PostTopView = ({ error, data, navigation }) => {
                 <PressedContainer>
                     <PressedText>{itemCategory}</PressedText>
                 </PressedContainer>
-              </Touchable>
+              </TouchableTitle>
             </Row>
             {topByCategories[itemCategory].map((item, key) => (
               <ItemContainer>

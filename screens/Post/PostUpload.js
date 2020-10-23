@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import BackPressHeader from "../../components/BackPressHeader";
+import BackPressHeader3 from "../../components/BackPressHeader3";
 import AuthButtonText from "../../components/AuthButtonText";
 import useInput from "../../hooks/useInput";
 import { useMutation } from "react-apollo-hooks";
@@ -66,7 +66,7 @@ export default ({ navigation, route }) => {
   return (
     <OutContainer>
       <InputScrollView style={{ flex: 1 }}>
-        <BackPressHeader navigation={navigation} text={"글쓰기"} />
+        <BackPressHeader3 navigation={navigation} />
 
         <InContainer>
           <TextTitleInput

@@ -18,6 +18,7 @@ const Touchable = styled.TouchableOpacity`
 `;
 
 const SubTitleContainer= styled.View`
+  z-index: 1
   justify-content: center;
   align-items: center;
   width: ${constants.width / 2.5};
