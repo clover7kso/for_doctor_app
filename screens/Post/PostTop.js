@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { ActivityIndicator,Alert } from "react-native";
+import { ActivityIndicator,Alert,ImageBackground } from "react-native";
 
 import BackPressHeader from "../../components/BackPressHeader";
 
@@ -34,7 +34,12 @@ export default ({ route, navigation }) => {
  
   return (
     <OutContainer>
-      <BackPressHeader navigation={navigation} text={type} />
+      <ImageBackground
+        style={{ width: "100%", height: "100%" }}
+        resizeMode="cover"
+        source={require("../../assets/images/sub_background_all.png")}
+      >
+      <BackPressHeader navigation={navigation} subText={type} />
       <Container>
         {resPostTop.loading ? (
           <ActivityIndicator color={"white"} />
@@ -48,6 +53,7 @@ export default ({ route, navigation }) => {
           </Container>
         )}
       </Container>
+      </ImageBackground>
     </OutContainer>
   );
 };

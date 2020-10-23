@@ -8,8 +8,6 @@ import { useQuery } from "react-apollo-hooks";
 import { HOME_AD_MANY } from "./ScreenQueries";
 import constants from "../constants";
 
-
-
 const OutContainer = styled.View`
   align-items: center;
   flex: 1;
@@ -60,6 +58,7 @@ const LogoImg = styled.Image`
   width: ${constants.width / 2.5};
   height: ${793 * (constants.width / 2.5 / 1948)};
 `;
+
 const ProfileContainer = styled.TouchableOpacity`
   flex:1
 `;

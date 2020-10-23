@@ -12,10 +12,13 @@ const CategoryContainer = styled.View`
 `;
 
 const PostItem = styled.View`
-  margin-bottom: 8;
-  margin-top: 8;
+  margin-bottom: 8px;
+  margin-top: 8px;
 `;
-const ItemContainer = styled.View``;
+const ItemContainer = styled.View`
+  padding-left: 12px
+  padding-right: 15px
+`;
 
 const Divider = styled.View`
   background: #f0f0f0;
@@ -27,19 +30,8 @@ const Row = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items:baseline
-  width: ${constants.width / 1.2};
 `;
 
-const TextCategory = styled.Text`
-  font-size:20px
-  margin-bottom:10px
-  color: ${(props) => props.theme.blackColor};
-`;
-
-const TextMany = styled.Text`
-  font-size:13px
-  color: ${(props) => props.theme.darkGreyColor};
-`;
 
 const TextTitle = styled.Text`
   font-size:16px
@@ -48,8 +40,25 @@ const TextTitle = styled.Text`
 
 const TextViews = styled.Text`
   font-size:9px
-  color: ${(props) => props.theme.darkGreyColor};
+  color: #000000;
 `;
+
+const PressedContainer = styled.View`
+    background:white;
+    padding-top:10px;
+    padding-bottom:10px
+    align-items:center
+    border-radius:300px
+    border: 1px solid white;
+    width: ${constants.width / 1.2};
+`;
+const PressedText = styled.Text`
+    font-family:NotoSansCJKkr-Regular;
+    align-items:center;
+    color: #4A7768;
+    font-size: 20px;
+`;
+
 
 const PostTopView = ({ error, data, navigation }) => {
   const categories = [...new Set(data.map((item) => item.category))];
@@ -85,14 +94,9 @@ const PostTopView = ({ error, data, navigation }) => {
                   navigation.navigate("PostMany", { category: itemCategory })
                 }
               >
-                <TextCategory>{itemCategory}</TextCategory>
-              </Touchable>
-              <Touchable
-                onPress={() =>
-                  navigation.navigate("PostMany", { category: itemCategory })
-                }
-              >
-                <TextMany>전체보기</TextMany>
+                <PressedContainer>
+                    <PressedText>{itemCategory}</PressedText>
+                </PressedContainer>
               </Touchable>
             </Row>
             {topByCategories[itemCategory].map((item, key) => (

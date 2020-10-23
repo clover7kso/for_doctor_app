@@ -4,35 +4,68 @@ import PropTypes from "prop-types";
 import { Ionicons } from "@expo/vector-icons";
 import constants from "../constants";
 
-const Touchable = styled.TouchableOpacity``;
+const LogoImg = styled.Image`
+  width: ${constants.width / 3.7};
+  height: ${230 * (constants.width / 3.7 / 877)};
+`;
+
+const Touchable = styled.TouchableOpacity`  
+  justify-content: center;
+  align-items: center;
+  margin:10px;
+  width: ${constants.width / 14};
+  height: ${constants.width / 14};
+`;
+
+const SubTitleContainer= styled.View`
+  justify-content: center;
+  align-items: center;
+  width: ${constants.width / 2.5};
+  height: ${793 * (constants.width / 2.5 / 1948)}
+`;
+const SubTitleBack = styled.Image`
+  position: absolute;
+  width: ${constants.width / 2.5};
+  height: ${793 * (constants.width / 2.5 / 1948)}
+`;
+const SubTitleText = styled.Text`
+  font-size: ${constants.width / 23};
+  color: black;
+  text-align: center;
+  width: ${constants.width / 2.5};
+`;
+
+
+const BackImg = styled.Image`  
+  width: ${constants.width / 16};
+  height: ${constants.width / 16};
+`;
+
+const HomeImg = styled.Image`  
+  width: ${constants.width / 16};
+  height: ${constants.width / 16};
+`;
 
 const Container = styled.View`
+  align-items: center;
+`;
+
+const TopBarContainer = styled.View`
+  padding-top: ${Platform.OS === "ios" ? 0 : Expo.Constants.statusBarHeight};
+  background:white
   flex-direction: row;
-  background-color: white;
   width: ${constants.width};
   align-items: center;
   justify-content: space-between;
-
-	shadow-color: #000000;
-  shadow-opacity: 0.3;
-  shadow-offset: { width: 2, height: 2 };
-  elevation: 10;
-
-  padding-bottom: 5;
-  padding-top: ${Platform.OS === "ios" ? 0 : Expo.Constants.statusBarHeight};
 `;
 
-const Text = styled.Text`
-  font-size: 25px;
-  color: ${(props) => props.theme.darkBlueColor};
+const MainText = styled.Text`
+  font-size: 20px;
+  color: black;
   text-align: center;
 `;
-const Icon = styled.View`
-  padding-left: 15px;
-  padding-right: 15px;
-`;
 
-const BackPressHeader = ({ navigation, text }) => {
+const BackPressHeader = ({ navigation, mainText, subText }) => {
   const goBackToTopSafe = () => {
     // Traverse parent stack until we can go back
     let parent = navigation;
@@ -57,32 +90,44 @@ const BackPressHeader = ({ navigation, text }) => {
   };
   return (
     <Container>
-      <Touchable onPress={goBackSafe}>
-        <Icon>
-          <Ionicons
-            name={Platform.OS === "ios" ? "ios-arrow-back" : "md-arrow-back"}
-            size={30}
-            color={"grey"}
+      <TopBarContainer>
+        <Touchable onPress={goBackSafe}>
+          <BackImg
+            resizeMode={"contain"}
+            source={require("../assets/images/navi_back.png")}
           />
-        </Icon>
-      </Touchable>
-      <Text>{text}</Text>
-      <Touchable onPress={goBackToTopSafe}>
-        <Icon>
-          <Ionicons
-            name={Platform.OS === "ios" ? "ios-home" : "md-home"}
-            size={30}
-            color={"grey"}
+        </Touchable>
+        
+        {
+          mainText? 
+            <MainText>{mainText}</MainText>:
+            <LogoImg
+              resizeMode={"contain"}
+              source={require("../assets/images/logo_color.png")}
+            />
+        }
+        <Touchable onPress={goBackToTopSafe}>
+          <HomeImg
+            resizeMode={"contain"}
+            source={require("../assets/images/navi_home.png")}
           />
-        </Icon>
-      </Touchable>
+        </Touchable>
+      </TopBarContainer>
+      <SubTitleContainer>
+        <SubTitleBack
+          resizeMode={"contain"}
+          source={require("../assets/images/top_bar_text.png")}
+        />
+        <SubTitleText>{subText}</SubTitleText>
+      </SubTitleContainer>
     </Container>
   );
 };
 
 BackPressHeader.propTypes = {
   navigation: PropTypes.object.isRequired,
-  text: PropTypes.string.isRequired,
+  mainText: PropTypes.string.isRequired,
+  subText: PropTypes.string.isRequired,
 };
 
 export default BackPressHeader;

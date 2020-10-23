@@ -8,7 +8,6 @@ import ProductButton from "../../components/ProductButton";
 import constants from "../../constants";
 
 const OutContainer = styled.View`
-  background : white
   align-items: center;
   flex: 1;
 `;
@@ -21,6 +20,12 @@ const Container = styled.View`
 
 const Divider = styled.View`
 `;
+
+const SubTitleContainer = styled.Image`
+  width: ${constants.width / 2.5};
+  height: ${793 * (constants.width / 2.5 / 1948)}
+`;
+
 
 export default ({ navigation, route }) => {
   const { type } = route.params;
@@ -37,12 +42,13 @@ export default ({ navigation, route }) => {
 
   return (
     <OutContainer>
-      <BackPressHeader navigation={navigation} text={type} />
       <ImageBackground
-            style={{ width: "100%", height: "100%" }}
-            resizeMode="cover"
-            source={require("../../assets/images/sub_background_all.png")}
+        style={{ width: "100%", height: "100%" }}
+        resizeMode="cover"
+        source={require("../../assets/images/sub_background_all.png")}
       >
+      <BackPressHeader navigation={navigation} subText={type} />
+      <Divider style={{height:constants.height/categories.data.productCategory.length/4}}/>
       {categories.loading ? (
         <ActivityIndicator color={"white"} />
       ) : (

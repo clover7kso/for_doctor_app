@@ -2,7 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import constants from "../constants";
-import { ImageBackground  } from "react-native";
+
+const Container = styled.View`
+  padding-top: ${Platform.OS === "ios" ? 0 : Expo.Constants.statusBarHeight};
+  flex-direction:row
+  width: ${constants.width};
+  background:#4ca493
+`;
 
 const Touchable = styled.TouchableOpacity`  
   justify-content: center;
@@ -10,14 +16,6 @@ const Touchable = styled.TouchableOpacity`
   margin:10px;
   width: ${constants.width / 14};
   height: ${constants.width / 14};
-`;
-
-
-const Container = styled.View`
-  padding-top: ${Platform.OS === "ios" ? 0 : Expo.Constants.statusBarHeight};
-  flex-direction:row
-  width: ${constants.width};
-  background:#4ca493
 `;
 
 const MessageImg = styled.Image`  
@@ -50,11 +48,11 @@ const BackPressHeader = ({ navigation }) => (
       <Column_1><Divider/></Column_1>
       <Column_2>
         <Touchable onPress={() => navigation.navigate("Message")}>
-              <MessageImg
-                resizeMode={"contain"}
-                source={require("../assets/images/main_message.png")}
-              />
-          </Touchable>
+          <MessageImg
+            resizeMode={"contain"}
+            source={require("../assets/images/main_message.png")}
+          />
+        </Touchable>
       </Column_2>
     </Container>
 );
