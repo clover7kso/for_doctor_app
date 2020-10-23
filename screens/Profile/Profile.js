@@ -4,7 +4,7 @@ import { useQuery } from "react-apollo-hooks";
 import { USER_ONE } from "./ProfileQueries";
 import { ActivityIndicator, ScrollView } from "react-native";
 import { useLogOut } from "../../AuthContext";
-import BackPressHeader from "../../components/BackPressHeader";
+import BackPressHeader4 from "../../components/BackPressHeader4";
 
 const OutContainer = styled.View`
   background: white;
@@ -19,9 +19,9 @@ const Column = styled.View`
   flex: 1;
 `;
 const UserAvater = styled.Image`
-margin-left: 19px;
-margin-top: 19px;
-margin-bottom: 19px;
+  margin-left: 19px;
+  margin-top: 19px;
+  margin-bottom: 19px;
   width:70px;
   height:70px;
   border-radius:30px
@@ -76,7 +76,7 @@ export default ({ navigation }) => {
 
   return (
     <OutContainer>
-      <BackPressHeader navigation={navigation} text={"마이페이지"} />
+      <BackPressHeader4 navigation={navigation} text={"마이페이지"} />
 
       {resUserOne.loading ? (
         <ActivityIndicator color={"black"} />
