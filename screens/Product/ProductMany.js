@@ -98,7 +98,7 @@ export default ({ navigation, route }) => {
 
   return (
     <OutContainer>
-      <BackPressHeader2 navigation={navigation} mainText={title} subText={category} />
+      <BackPressHeader2 navigation={navigation} mainText={title} subText={category.replace("마케팅","").substring(0,4)} />
       <ProductSearchBox value={searchWord} onChange={setSearchWord} />
       {resSubCate.loading ? null : (
         <Container>
