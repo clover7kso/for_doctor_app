@@ -110,8 +110,8 @@ export default ({ navigation }) => {
             <Container>
               <TopContainer>
                 <LogoImg
-                resizeMode={"contain"}
-                source={require("../assets/images/top_bar_logo.png")}
+                  resizeMode={"contain"}
+                  source={require("../assets/images/top_bar_logo.png")}
                 />
                 <ProfileContainer
                 onPress={() =>
