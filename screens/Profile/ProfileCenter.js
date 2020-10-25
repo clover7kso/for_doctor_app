@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import BackPressHeader from "../../components/BackPressHeader";
+import BackPressHeader4 from "../../components/BackPressHeader4";
 
 const OutContainer = styled.View`
   background: white;
@@ -14,7 +14,7 @@ const Text = styled.Text`
 export default ({ navigation }) => {
   return (
     <OutContainer>
-      <BackPressHeader navigation={navigation} text={"고객센터"} />
+      <BackPressHeader4 navigation={navigation} text={"고객센터"} />
 
       <Text>앱버전 v1.0.0</Text>
       <Text>영업 관련 문의 xxxxxxxxxx@xxxxx.com</Text>

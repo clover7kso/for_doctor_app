@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useQuery } from "react-apollo-hooks";
 import { MY_COMMENT } from "./ProfileQueries";
-import BackPressHeader from "../../components/BackPressHeader";
+import BackPressHeader4 from "../../components/BackPressHeader4";
 import MyComment from "../../components/profileMy/MyComment";
 import { ActivityIndicator, FlatList,Alert } from "react-native";
 
@@ -43,7 +43,7 @@ export default ({ navigation }) => {
 
   return (
     <OutContainer>
-      <BackPressHeader navigation={navigation} text={"내가쓴댓글"} />
+      <BackPressHeader4 navigation={navigation} text={"내가쓴댓글"} />
       <Container>
         {resMyComment.loading ? (
           <ActivityIndicator color={"black"} />

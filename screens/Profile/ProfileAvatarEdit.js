@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Platform, Alert } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-import BackPressHeader from "../../components/BackPressHeader";
+import BackPressHeader4 from "../../components/BackPressHeader4";
 import { AVATAR_EDIT } from "./ProfileQueries";
 import { useMutation } from "react-apollo-hooks";
 import moment from "moment";
@@ -97,7 +97,7 @@ export default ({ navigation, route }) => {
   };
   return (
     <OutContainer>
-      <BackPressHeader navigation={navigation} text={"프로필사진변경"} />
+      <BackPressHeader4 navigation={navigation} text={"프로필사진변경"} />
 
       <ImageSelected
         source={

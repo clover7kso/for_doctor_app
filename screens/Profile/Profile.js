@@ -2,44 +2,78 @@ import React from "react";
 import styled from "styled-components";
 import { useQuery } from "react-apollo-hooks";
 import { USER_ONE } from "./ProfileQueries";
-import { ActivityIndicator, ScrollView } from "react-native";
+import { ActivityIndicator, ImageBackground } from "react-native";
 import { useLogOut } from "../../AuthContext";
 import BackPressHeader4 from "../../components/BackPressHeader4";
+import constants from "../../constants";
 
 const OutContainer = styled.View`
-  background: white;
   flex: 1;
 `;
 
-const Row = styled.View`
+const ProfileContiner = styled.View`
+  padding-top:50px
+  padding-bottom:10px
+  position: relative
+  z-index:1
+  flex-direction: row
+  background:white
+`
+
+
+const ProfileColumn= styled.View`
+  justify-content: center;
+`
+
+const LogoutContiner = styled.View`
+  flex-direction: row
+  align-items: center
+  justify-content:space-between
+`
+const LogoutText = styled.Text`
+  color: white;
+  margin-right:30px
+  border: 1px solid white;
+  border-radius: 40px
+  padding-left:24px
+  padding-right:20px
+  padding-top:5px
+  padding-bottom:5px
+`;
+const ProfileBackground = styled.Image`
+  resizeMode :stretch
+  width: ${constants.width / 2};
+  height: ${793 * (constants.width / 2 / 1948) -10};
+`
+
+const ButtonContiner = styled.View`
+  flex:1
+  justify-content: center;
+`
+
+const ButtonContainerRow = styled.View`
+  margin-bottom:50px
   flex-direction: row;
-`;
-
-const Column = styled.View`
-  flex: 1;
+  justify-content: space-around;
+  align-items:center;
+  margin-left:20px
+  margin-right:20px
 `;
 const UserAvater = styled.Image`
-  margin-left: 19px;
-  margin-top: 19px;
-  margin-bottom: 19px;
-  width:70px;
-  height:70px;
-  border-radius:30px
+  margin-left: ${constants.width / 9.4};
+  margin-bottom: ${constants.width /-1};
+  width:${constants.width / 3.5};
+  height:${constants.width / 3.5};
+  border-radius:5000px
   background:#f0f0f0
 `;
 const UserName = styled.Text`
-  font-size:24px
-  margin-left: 19px;
-  margin-top: 19px;
+  font-size:25px
+  margin-left: 30px;
 `;
 const UserId = styled.Text`
-  margin-left: 22px;
-  margin-top: 8px;
-  color: #cfcfcf;
-`;
-const UserProfile = styled.Text`
-  margin-top: 7px;
-  margin-left: 19px;
+  font-size:14px
+  margin-left: 30px;
   color: #cfcfcf;
 `;
 
@@ -47,17 +81,15 @@ const Touchable = styled.TouchableOpacity`
   flex-direction: row;
 `;
 const Divider = styled.TouchableOpacity`
-  margin-left: 19px;
-  margin-right: 19px;
-  height: 1;
-  background-color: #cccccc;
+  height:  ${constants.width / 3.9};
+  width: 0.4px
+  margin-top: 20px
+  margin-bottom: 20px
+  background-color: white;
 `;
-const BtnText = styled.Text`
-  margin-left: 30px;
-  margin-right: 30px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  font-size: 20px;
+const Icon = styled.Image`
+  width: ${constants.width / 3.9};
+  height: ${constants.width / 3.9};
 `;
 
 export default ({ navigation }) => {
@@ -74,16 +106,20 @@ export default ({ navigation }) => {
     logOut();
   };
 
-  return (
+  return (  
+  <ImageBackground
+    style={{ width: "100%", height: "100%" }}
+    resizeMode="cover"
+    source={require("../../assets/images/sub_background_all.png")}>
     <OutContainer>
       <BackPressHeader4 navigation={navigation} text={"마이페이지"} />
 
       {resUserOne.loading ? (
         <ActivityIndicator color={"black"} />
       ) : (
-        <ScrollView>
-          <Column>
-            <Row>
+            <>
+            <ProfileContiner>
+              
               <Touchable
                 onPress={() =>
                   navigation.navigate("ProfileAvatarEdit", {
@@ -100,43 +136,68 @@ export default ({ navigation }) => {
                   }
                 />
               </Touchable>
-              <Column>
+              <ProfileColumn>
                 <UserName>{resUserOne.data.userOne.name} 원장님</UserName>
                 <UserId>{resUserOne.data.userOne.id}</UserId>
-              </Column>
-            </Row>
-            <Touchable onPress={() => navigation.navigate("ProfileMyProduct")}>
-              <BtnText>관심제품</BtnText>
-            </Touchable>
-            <Divider />
-            <Touchable
-              onPress={() => navigation.navigate("ProfileMyMarketing")}
-            >
-              <BtnText>관심마케팅</BtnText>
-            </Touchable>
-            <Divider />
-            <Touchable onPress={() => navigation.navigate("ProfileMyLaw")}>
-              <BtnText>관심법률서비스</BtnText>
-            </Touchable>
-            <Divider />
-            <Touchable onPress={() => navigation.navigate("ProfileMyPost")}>
-              <BtnText>내가쓴글</BtnText>
-            </Touchable>
-            <Divider />
-            <Touchable onPress={() => navigation.navigate("ProfileMyComment")}>
-              <BtnText>내가쓴댓글</BtnText>
-            </Touchable>
-            <Divider />
-            <Touchable onPress={() => navigation.navigate("ProfileCenter")}>
-              <BtnText>고객센터</BtnText>
-            </Touchable>
-            <Divider />
-            <Touchable onPress={handleLogOut}>
-              <BtnText>로그아웃</BtnText>
-            </Touchable>
-          </Column>
-        </ScrollView>
+              </ProfileColumn>
+            </ProfileContiner>
+            <LogoutContiner>
+              <ProfileBackground
+                resizeMode={"contain"}
+                source={require("../../assets/images/top_bar_text.png")}/>
+              <Touchable onPress={handleLogOut}>
+                <LogoutText>로그아웃</LogoutText>
+              </Touchable>
+            </LogoutContiner>
+            <ButtonContiner>
+              <ButtonContainerRow>
+                <Touchable onPress={() => navigation.navigate("ProfileMyProduct")}>
+                  <Icon 
+                    resizeMode={"contain"}
+                    source={require("../../assets/images/btn_my_product.png")}/>
+                </Touchable>
+                <Divider/>
+                
+                <Touchable onPress={() => navigation.navigate("ProfileMyMarketing")} >
+                  <Icon 
+                    resizeMode={"contain"}
+                    source={require("../../assets/images/btn_my_marketing.png")}/>
+                </Touchable>
+                <Divider/>
+
+                <Touchable onPress={() => navigation.navigate("ProfileMyLaw")}>
+                  <Icon 
+                    resizeMode={"contain"}
+                    source={require("../../assets/images/btn_my_law.png")}/>
+                </Touchable>
+              </ButtonContainerRow>
+              
+              <ButtonContainerRow>
+                <Touchable onPress={() => navigation.navigate("ProfileMyPost")}>
+                  <Icon 
+                    resizeMode={"contain"}
+                    source={require("../../assets/images/btn_my_post.png")}/>
+                </Touchable>
+                <Divider/>
+
+                <Touchable onPress={() => navigation.navigate("ProfileMyComment")}>
+                  <Icon 
+                    resizeMode={"contain"}
+                    source={require("../../assets/images/btn_my_comment.png")}/>
+                </Touchable>
+                <Divider/>
+
+                <Touchable onPress={() => navigation.navigate("ProfileCenter")}>
+                  <Icon 
+                    resizeMode={"contain"}
+                    source={require("../../assets/images/btn_my_center.png")}/>
+                </Touchable>
+              </ButtonContainerRow>
+            </ButtonContiner>
+           
+          </>
       )}
     </OutContainer>
+  </ImageBackground>
   );
 };

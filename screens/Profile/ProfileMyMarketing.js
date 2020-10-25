@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useQuery } from "react-apollo-hooks";
 import { MY_MARKETING } from "./ProfileQueries";
 import { ActivityIndicator, FlatList,Alert } from "react-native";
-import BackPressHeader from "../../components/BackPressHeader";
+import BackPressHeader4 from "../../components/BackPressHeader4";
 import MyProduct from "../../components/profileMy/MyProduct";
 
 const OutContainer = styled.View`
@@ -44,7 +44,7 @@ export default ({ navigation, route }) => {
 
   return (
     <OutContainer>
-      <BackPressHeader navigation={navigation} text={"관심마케팅"} />
+      <BackPressHeader4 navigation={navigation} text={"관심마케팅"} />
       {resMyMarketing.loading ? null : (
         <Container>
           {resMyMarketing.loading ? (
