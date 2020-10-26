@@ -40,11 +40,7 @@ const Info = styled.Text`
   color: grey;
   font-size: 12px;
 `;
-const Divider = styled.View`
-  background: #f0f0f0;
-  border-radius: 30;
-  height: 1;
-`;
+
 
 const Product = ({ item, navigation, handleProductAddView }) => {
   return (
@@ -75,7 +71,6 @@ const Product = ({ item, navigation, handleProductAddView }) => {
           </InContainer2>
         </InContainer1>
       </Touchable>
-      <Divider />
     </Container>
   );
 };

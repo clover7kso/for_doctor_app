@@ -16,17 +16,14 @@ export const PRODUCT_MANY = gql`
   query productMany(
     $mainCategory: String!
     $subCategory: String
-    $after: String
     $searchWord: String
   ) {
     productMany(
       mainCategory: $mainCategory
       subCategory: $subCategory
-      after: $after
       searchWord: $searchWord
     ) {
-      cursor
-      products {
+        aboveAD
         id
         title
         content
@@ -35,7 +32,6 @@ export const PRODUCT_MANY = gql`
         sampleImages {
           url
         }
-      }
     }
   }
 `;

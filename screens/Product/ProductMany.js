@@ -6,7 +6,7 @@ import {
   PRODUCT_MANY,
   PRODUCT_ADD_VIEW,
 } from "./ProductQueries";
-import { ActivityIndicator, FlatList } from "react-native";
+import { ActivityIndicator, SectionList } from "react-native";
 import BackPressHeader2 from "../../components/BackPressHeader2";
 import ProductSearchBox from "../../components/ProductSearchBox";
 import ProductSubCategory from "../../components/ProductSubCategory";
@@ -22,6 +22,18 @@ const OutContainer = styled.View`
 const Container = styled.View`
   align-items: center;
   flex: 1;
+`;
+
+
+const SectionTitle = styled.Text`
+  margin-top:20px
+  font-size:19px
+`;
+
+const Divider = styled.View`
+  background: #f0f0f0;
+  border-radius: 30;
+  height: 1;
 `;
 
 export default ({ navigation, route }) => {
@@ -44,44 +56,17 @@ export default ({ navigation, route }) => {
     fetchPolicy: "network-only",
   });
 
-  const onLoadMore = () => {
-    if (!loadMore & (resProductMany.data.productMany.cursor !== "End")) {
-      setLoadMore(true);
-      resProductMany.fetchMore({
-        variables: {
-          mainCategory: category,
-          subCategory: selectText,
-          after: resProductMany.data.productMany.cursor,
-          searchWord: searchWord,
-        },
-        updateQuery: (prev, { fetchMoreResult }) => {
-          if (!fetchMoreResult) return prev;
-          setLoadMore(false);
-          return {
-            productMany: {
-              __typename: prev.productMany.__typename,
-              cursor: fetchMoreResult.productMany.cursor,
-              products: [
-                ...prev.productMany.products,
-                ...fetchMoreResult.productMany.products,
-              ],
-            },
-          };
-        },
-      });
-    }
-  };
+  const adItems = (element) =>{
+    if(element.aboveAD) return true
+  }
+  const normalItems = (element) =>{
+    if(!element.aboveAD) return true
+  }
+
 
   const [productAddView] = useMutation(PRODUCT_ADD_VIEW);
   const handleProductAddView = (id) => {
     productAddView({ variables: { productId: id } });
-  };
-
-  const [loadMore, setLoadMore] = useState(false);
-  const renderFooter = () => {
-    //it will show indicator at the bottom of the list when data is loading otherwise it returns null
-    if (!loadMore) return null;
-    return <ActivityIndicator style={{ color: "#000" }} />;
   };
 
   const [refreshing, setRefreshing] = useState(false);
@@ -96,6 +81,17 @@ export default ({ navigation, route }) => {
     }
   };
 
+  const shuffle=(array)=> {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+    while (0 !== currentIndex) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+        temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+    return array;
+  }
   return (
     <OutContainer>
       <BackPressHeader2 navigation={navigation} mainText={title} subText={category.replace("마케팅","").substring(0,4)} />
@@ -113,18 +109,30 @@ export default ({ navigation, route }) => {
           {resProductMany.loading ? (
             <ActivityIndicator color={"black"} />
           ) : (
-            <FlatList
-              showsVerticalScrollIndicator={false}
-              data={resProductMany.data.productMany.products}
+            <SectionList
+              sections={[{
+                title:"추천제품",
+                data : shuffle(resProductMany.data.productMany.filter(adItems))
+              },
+              {
+                title:"일반제품",
+                data : shuffle(resProductMany.data.productMany.filter(normalItems))
+              }]}
+              showsVerticalScrollIndicator ={false}
               renderItem={({ item }) =>
                 Product({ item, navigation, handleProductAddView })
               }
-              keyExtractor={(item, index) => item.id}
-              ListFooterComponent={renderFooter}
+              renderSectionHeader={({ section: { title } }) => (
+                title==="추천제품"?
+                  (resProductMany.data.productMany.filter(adItems).length>0?
+                    <SectionTitle>{title}</SectionTitle>:null)
+                      :resProductMany.data.productMany.filter(normalItems).length>0?
+                        <SectionTitle>{title}</SectionTitle>:null
+              )}
+              ItemSeparatorComponent={()=>(<Divider/>)}
+              keyExtractor={(item, index) => item + index}
               refreshing={refreshing}
               onRefresh={refresh}
-              onEndReached={onLoadMore}
-              onEndReachedThreshold={1}
             />
           )}
         </Container>
