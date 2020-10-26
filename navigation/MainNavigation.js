@@ -22,7 +22,8 @@ import ProfileMyProduct from "../screens/Profile/ProfileMyProduct";
 import ProfileCenter from "../screens/Profile/ProfileCenter";
 
 import Home from "../screens/Home";
-import Message from "../screens/Message";
+import Message from "../screens/Chat/Message";
+import Rooms from "../screens/Chat/Rooms";
 
 const Stack = createStackNavigator();
 
@@ -33,15 +34,13 @@ function MainNavigation() {
         <Stack.Screen name="Home" component={Home} />
 
         <Stack.Screen name="Message" component={Message} />
+        <Stack.Screen name="Rooms" component={Rooms} />
 
         <Stack.Screen name="Profile" component={Profile} />
         <Stack.Screen name="ProfileAvatarEdit" component={ProfileAvatarEdit} />
         <Stack.Screen name="ProfileMyComment" component={ProfileMyComment} />
         <Stack.Screen name="ProfileMyLaw" component={ProfileMyLaw} />
-        <Stack.Screen
-          name="ProfileMyMarketing"
-          component={ProfileMyMarketing}
-        />
+        <Stack.Screen name="ProfileMyMarketing" component={ProfileMyMarketing}/>
         <Stack.Screen name="ProfileMyPost" component={ProfileMyPost} />
         <Stack.Screen name="ProfileMyProduct" component={ProfileMyProduct} />
         <Stack.Screen name="ProfileCenter" component={ProfileCenter} />

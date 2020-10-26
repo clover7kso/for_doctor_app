@@ -47,7 +47,7 @@ const BackPressHeader = ({ navigation }) => (
     <Container>
       <Column_1><Divider/></Column_1>
       <Column_2>
-        <Touchable onPress={() => navigation.navigate("Message")}>
+        <Touchable onPress={() => navigation.navigate("Rooms")}>
           <MessageImg
             resizeMode={"contain"}
             source={require("../assets/images/main_message.png")}
