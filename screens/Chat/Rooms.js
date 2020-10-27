@@ -11,22 +11,16 @@ const OutContainer = styled.View`
   align-items: center;
   flex: 1;
 `;
-const Divider = styled.View`
-  background: #f0f0f0;
-  border-radius: 30;
-  height: 1;
-`;
 
-export default ({ navigation }) => {
-    
+export default ({ navigation, route }) => {
     const rooms = useQuery(SEE_ROOMS, {
         variables: {},
     });
     rooms.refetch()
 
     const compare=(a, b)=> {
-        const aDate = new Date(parseInt(a.message[0].createdAt)).toString()
-        const bDate = new Date(parseInt(b.message[0].createdAt)).toString()
+        const aDate = new Date(parseInt(a.recentMessage[0].createdAt)).toString()
+        const bDate = new Date(parseInt(b.recentMessage[0].createdAt)).toString()
         if (aDate>bDate) {
           return -1;
         }

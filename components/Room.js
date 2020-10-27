@@ -45,27 +45,27 @@ const Info = styled.Text`
 `;
 
 
-const Room = ({ item, navigation, }) => {
+const Room = ({ item, navigation }) => {
   return (
     <Container>
       <Touchable
         onPress={() => {
-          navigation.navigate("Message", {roomId:item.id});
+          navigation.navigate("Message", {roomId:item.id,toId:item.participants[0].id, toName:item.participants[0].name});
         }}
       >
         <InContainer1>
-          <UserAvater source={item.from[0].avatar?{ uri: item.participants[0].avatar }: require("../assets/images/avatar.png")} />
+          <UserAvater source={item.participants[0].avatar?{ uri: item.participants[0].avatar }: require("../assets/images/avatar.png")} />
           <InContainer2>
             <InContainer3>
                 <Title numberOfLines={1} ellipsizeMode="tail">
-                  {item.from[0].name}
+                  {item.participants[0].name}
                 </Title>
                 <Info numberOfLines={1} ellipsizeMode="tail">
-                  {item.message[0].timeFromToday}
+                  {item.recentMessage[0].timeFromToday}
                 </Info>
             </InContainer3>
             <Content numberOfLines={3} ellipsizeMode="tail">
-              {item.message[0].text}
+              {item.recentMessage[0].text}
             </Content>
           </InContainer2>
         </InContainer1>
