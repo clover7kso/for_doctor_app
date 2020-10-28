@@ -49,7 +49,7 @@ export const SEND_MESSAGE = gql`
 `;
 
 export const NEW_MESSAGE = gql`
-  subscription newMessage($roomId:String!) {
+  subscription($roomId:String!) {
     newMessage(roomId:$roomId) {
         createdAt
         from{

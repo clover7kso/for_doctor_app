@@ -5,7 +5,6 @@ import * as Font from "expo-font";
 import AsyncStorage from '@react-native-community/async-storage'
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { persistCache } from "apollo-cache-persist";
-import ApolloClient from "apollo-boost";
 import { ThemeProvider } from "styled-components";
 import { ApolloProvider } from "react-apollo-hooks";
 import apolloClientOptions from "./apollo";
@@ -13,16 +12,21 @@ import styles from "./styles";
 import NavController from "./components/NavController";
 import { AuthProvider } from "./AuthContext";
 
+import {ApolloClient,HttpLink, split, ApolloLink} from 'apollo-boost';
+import { WebSocketLink } from "apollo-link-ws";
+import { getMainDefinition } from "apollo-utilities";
+import { setContext } from 'apollo-link-context';
 
 export default function App() {
+  
   const [loaded, setLoaded] = useState(false);
   const [client, setClient] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(null);
   const preLoad = async () => {
     try {
       await Font.loadAsync({
-        'NotoSansCJKkr-Regular': require('./assets/fonts/NotoSansCJKkr-Regular.ttf'),
-        'NotoSansCJKkr-Thin': require('./assets/fonts/NotoSansCJKkr-Thin.ttf'),
+        'NotoSansCJKkr_Regular': require('./assets/fonts/NotoSansCJKkr-Regular.ttf'),
+        'NotoSansCJKkr_Thin': require('./assets/fonts/NotoSansCJKkr-Thin.ttf'),
       });
       await Asset.loadAsync([require("./assets/images/logo.png")]);
       const cache = new InMemoryCache();
@@ -30,15 +34,36 @@ export default function App() {
         cache,
         storage: AsyncStorage,
       });
-      const client = new ApolloClient({
-        cache,
-        request: async (operation) => {
-          const token = await AsyncStorage.getItem("jwt");
-          return operation.setContext({
-            headers: { Authorization: `Bearer ${token}` },
-          });
+      const httpLink = new HttpLink({
+        uri: "http://192.168.219.101:4000"
+      });
+      
+      const wsLink = new WebSocketLink({
+        uri: `ws://192.168.219.101:4000/`,
+        options: {
+          reconnect: true
+        }
+      });
+      const authLink = setContext(async (_, { headers }) => {
+        const token = await AsyncStorage.getItem("jwt");
+        return {
+          headers: {
+            ...headers,
+            authorization: token ? `Bearer ${token}` : "",
+          }
+        }
+      });
+      const link = split(
+        ({ query }) => {
+          const { kind, operation } = getMainDefinition(query);
+          return kind === "OperationDefinition" && operation === "subscription";
         },
-        ...apolloClientOptions,
+        wsLink,
+        httpLink
+      );
+      const client = new ApolloClient({
+        link:authLink.concat(link),
+        cache,
       });
       //client.resetStore();
       //client.cache.reset();

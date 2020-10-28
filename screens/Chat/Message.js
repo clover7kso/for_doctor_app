@@ -6,8 +6,6 @@ import {
   TextInput,
 } from "react-native";
 import { useQuery, useMutation, useSubscription } from "react-apollo-hooks";
-import withSuspense from "./withSuspense";
-import styled from "styled-components";
 import {SEE_ROOM, SEND_MESSAGE, NEW_MESSAGE } from "./ChatQueries"
 
 
@@ -41,9 +39,9 @@ function Message({ navigation, route}) {
   });
   const [messages, setMessages] = useState(oldMessages || []);
   const handleNewMessage = () => {
-    console.log(data)
     if (data !== undefined) {
       const { newMessage } = data;
+      console.log(newMessage)
       setMessages(previous => [...previous, newMessage]);
     }
   };
