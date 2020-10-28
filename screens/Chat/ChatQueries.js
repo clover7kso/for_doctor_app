@@ -24,12 +24,13 @@ export const SEE_ROOM = gql`
     seeRoom(roomId:$roomId){
         allMessages{
             from{
-                name
+              avatar
+              name
             }
             text
             timeFromToday
             createdAt
-            }
+          }
         }
     }
 `;
@@ -38,12 +39,13 @@ export const SEE_ROOM = gql`
 export const SEND_MESSAGE = gql`
   mutation sendMessage($roomId: String!, $sendText: String!, $toId: String!) {
     sendMessage(roomId: $roomId, sendText: $sendText, toId: $toId) {
-        createdAt
-        from{
-            name
-        }
-        text
-        timeFromToday
+      createdAt
+      from{
+        avatar
+        name
+      }
+      text
+      timeFromToday
     }
   }
 `;
@@ -51,12 +53,13 @@ export const SEND_MESSAGE = gql`
 export const NEW_MESSAGE = gql`
   subscription($roomId:String!) {
     newMessage(roomId:$roomId) {
-        createdAt
-        from{
-            name
-        }
-        text
-        timeFromToday
+      createdAt
+      from{
+        avatar
+        name
+      }
+      text
+      timeFromToday
     }
   }
 `;

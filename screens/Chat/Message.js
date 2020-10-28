@@ -1,13 +1,91 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
-  View,
-  Text,
-  ScrollView,
+  FlatList,
   TextInput,
+  ActivityIndicator,
 } from "react-native";
 import { useQuery, useMutation, useSubscription } from "react-apollo-hooks";
 import {SEE_ROOM, SEND_MESSAGE, NEW_MESSAGE } from "./ChatQueries"
+import BackPressHeader4 from "../../components/BackPressHeader4";
+import styled from "styled-components";
+import constants from "../../constants";
 
+const OutContainer = styled.View`
+  background : white
+  align-items: center;
+  flex: 1;
+`;
+
+const FlatListView = styled.View`
+  background : #B0DAD2
+  justify-content: flex-end;
+  flex: 1;
+`;
+
+
+const UserAvater = styled.Image`
+  width:50px;
+  height:50px;
+  border-radius:30px
+  background:#f0f0f0
+  margin-right:10px
+`;
+
+const FromContainer = styled.View`
+  flex-direction:row
+  width:${constants.width}
+  margin-bottom: 10px
+  padding-left:10px
+  justify-content: flex-start
+`;
+const MyContainer = styled.View`
+  flex-direction:row
+  width:${constants.width}
+  margin-bottom: 10px
+  padding-right:20px
+  justify-content: flex-end
+`;
+
+const FromRowDate = styled.Text`
+  color:white
+  font-size:10px
+  text-align:left
+  padding-left:9px
+`;
+const MyRowDate = styled.Text`
+  color:white
+  font-size:10px
+  text-align:right
+  padding-right:9px
+`;
+
+const RowContainer = styled.View`
+`;
+const RowName = styled.Text`
+  margin-left:4px
+`;
+const RowText = styled.Text`
+  background:#ffffff
+  margin:4px
+  padding:13px
+  border-radius:10px
+`;
+
+
+function date_to_str(format)
+{
+    var year = format.getFullYear();
+    var month = format.getMonth() + 1;
+    if(month<10) month = '0' + month;
+    var date = format.getDate();
+    if(date<10) date = '0' + date;
+    var hour = format.getHours();
+    var timeText = hour>=12?"오후":"오전";
+    if(hour<10) hour = '0' + hour;
+    var min = format.getMinutes();
+    if(min<10) min = '0' + min;
+    return year + "-" + month + "-" + date + " " + timeText + ":" + hour + ":" + min;
+}
 
 
 function Message({ navigation, route}) {
@@ -28,21 +106,26 @@ function Message({ navigation, route}) {
         allMessages:oldMessages
       }
     },
+    loading,
     error,
+    refetch
   } = useQuery(SEE_ROOM, {
     variables: {roomId:roomId},
-    suspend: true
+    fetchPolicy: 'cache-and-network',
   });
 
   const { data } = useSubscription(NEW_MESSAGE, {
     variables:{roomId:roomId}
   });
   const [messages, setMessages] = useState(oldMessages || []);
+  useEffect(() => {
+    setMessages(oldMessages)
+  }, [oldMessages]);
+  
   const handleNewMessage = () => {
     if (data !== undefined) {
       const { newMessage } = data;
-      console.log(newMessage)
-      setMessages(previous => [...previous, newMessage]);
+      setMessages(previous => [newMessage,...previous,]);
     }
   };
   useEffect(() => {
@@ -63,28 +146,55 @@ function Message({ navigation, route}) {
   };
 
   return (
-      <ScrollView
-        contentContainerStyle={{
-          paddingVertical: 50,
-          flex: 1,
-          justifyContent: "flex-end",
-          alignItems: "center",
-          backgroundColor: "#B0DAD2"
-        }}
-      >
-        {messages.map(m => {
-          return(
-          <View key={m.createdAt} style={{ marginBottom: 10 }}>
-            <Text>{m.text}</Text>
-          </View>)
-        })}
+    <>
+    <BackPressHeader4 navigation={navigation} text={toName}/>
+    {!loading?
+      <OutContainer>
+        <FlatListView>
+          <FlatList
+            inverted
+            contentContainerStyle={{ flexGrow: 1 }}
+            data={messages}
+            renderItem={({item})=>{
+              return(
+                toName===item.from.name?
+                (
+                <FromContainer>
+                  <UserAvater
+                    source={
+                      item.from.avatar
+                        ? { uri: item.from.avatar}
+                        : require("../../assets/images/avatar.png")
+                    }
+                  />
+                  <RowContainer key={item.createdAt}>
+                    <RowName>{item.from.name}</RowName>
+                    <RowText>{item.text}</RowText>
+                    <FromRowDate>{date_to_str(new Date(parseInt(item.createdAt)))}</FromRowDate>
+                  </RowContainer>
+                </FromContainer>):
+                (
+                <MyContainer>
+                  <RowContainer key={item.createdAt}>
+                    <RowText>{item.text}</RowText>
+                    <MyRowDate>{date_to_str(new Date(parseInt(item.createdAt)))}</MyRowDate>
+                  </RowContainer>
+                </MyContainer>)
+              )}
+            }
+            keyExtractor={item => item.createdAt}
+            showsVerticalScrollIndicator={false}
+          />
+        </FlatListView>
+        
         <TextInput
           placeholder="메세지를 입력해주세요"
           style={{
-            marginTop: 50,
+            marginTop: 10,
+            marginBottom: 10,
             width: "90%",
             borderRadius: 10,
-            paddingVertical: 15,
+            paddingVertical: 8,
             paddingHorizontal: 10,
             backgroundColor: "#f0f0f0"
           }}
@@ -93,7 +203,10 @@ function Message({ navigation, route}) {
           onChangeText={onChangeText}
           onSubmitEditing={onSubmit}
         />
-      </ScrollView>
+      </OutContainer>
+      :<ActivityIndicator color={"black"} />
+    }
+    </>
   );
 
 };
