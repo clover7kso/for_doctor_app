@@ -25,7 +25,7 @@ const SubTitleBack = styled.Image`
   height: ${793 * (constants.width / 2.5 / 1948)}
 `;
 const SubTitleText = styled.Text`
-  font-size: ${constants.width / 23};
+  font-family:"NotoSansCJKkr_Regular"font-size: ${constants.width / 23};
   color: #4CA493;
   text-align: center;
   width: ${constants.width / 2.5};
@@ -48,7 +48,8 @@ const Container = styled.View`
 `;
 
 const TopBarContainer = styled.View`
-  padding-top: ${Platform.OS === "ios" ? 0 : Expo.Constants.statusBarHeight};
+  padding-top: ${(Platform.OS === "ios" ? 0 : Expo.Constants.statusBarHeight)+5};
+  padding-bottom:5px
   background:white
   flex-direction: row;
   width: ${constants.width};
@@ -57,7 +58,7 @@ const TopBarContainer = styled.View`
 `;
 
 const MainText = styled.Text`
-  font-size: 25px;
+  font-family:"NotoSansCJKkr_Regular"font-size: 25px;
   color: black;
   text-align: center;
 `;

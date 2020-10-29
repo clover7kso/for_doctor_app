@@ -25,6 +25,7 @@ const Container = styled.View`
 
 
 const SectionTitle = styled.Text`
+  font-family:NotoSansCJKkr_Regular
   margin-top:20px
   font-size:19px
 `;

@@ -46,11 +46,13 @@ const Row = styled.View`
 
 
 const TextTitle = styled.Text`
+  font-family:NotoSansCJKkr_Thin
   font-size:17px
   color: ${(props) => props.theme.blackColor};
 `;
 
 const TextViews = styled.Text`
+  font-family:NotoSansCJKkr_Thin
   font-size:9px
   color: #595959;
 `;
@@ -64,7 +66,7 @@ const PressedContainer = styled.View`
   border-radius:300px
 `;
 const PressedText = styled.Text`
-  font-family:NotoSansCJKkr_Regular;
+  font-family:NotoSansCJKkr_Regular
   align-items:center;
   color: #4A7768;
   font-size: 22px;

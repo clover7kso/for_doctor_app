@@ -31,13 +31,13 @@ const LogoutContiner = styled.View`
   justify-content:space-between
 `
 const LogoutText = styled.Text`
-  color: white;
+  font-family:"NotoSansCJKkr_Regular"color: white;
   margin-right:30px
   border: 1px solid white;
   border-radius: 40px
   padding-left:24px
   padding-right:20px
-  padding-top:5px
+  padding-top:8px
   padding-bottom:5px
 `;
 const ProfileBackground = styled.Image`
@@ -65,14 +65,13 @@ const UserAvater = styled.Image`
   width:${constants.width / 3.5};
   height:${constants.width / 3.5};
   border-radius:5000px
-  background:#f0f0f0
 `;
 const UserName = styled.Text`
-  font-size:25px
+  font-family:"NotoSansCJKkr_Regular"font-size:25px
   margin-left: 30px;
 `;
 const UserId = styled.Text`
-  font-size:14px
+  font-family:"NotoSansCJKkr_Regular"font-size:14px
   margin-left: 30px;
   color: #cfcfcf;
 `;

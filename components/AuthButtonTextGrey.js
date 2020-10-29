@@ -12,7 +12,7 @@ const Container = styled.View`
 const Text = styled.Text`
   font-family:"NotoSansCJKkr_Regular"
 padding: 5px;
-  color: white;
+  color: grey;
 `;
 
 const AuthButton = ({ text, onPress }) => (

@@ -44,7 +44,7 @@ const IconCall = styled.View`
 `;
 
 const Text = styled.Text`
-  font-size:17px
+  font-family:"NotoSansCJKkr_Regular"font-size:17px
   color: white;
   text-align: center;
 `;

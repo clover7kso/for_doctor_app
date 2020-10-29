@@ -35,6 +35,16 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "white",
     textAlign: "center",
+    fontFamily:"NotoSansCJKkr_Thin"
+  },
+  selectedTabText: {
+    paddingLeft: 10,
+    paddingRight: 10,
+    marginBottom: 5,
+    fontSize: 20,
+    color: "white",
+    textAlign: "center",
+    fontFamily:"NotoSansCJKkr_Regular"
   },
 });
 
@@ -60,7 +70,9 @@ class ProductSubCategory extends React.Component {
           style={cssArr}
           onPress={() => this.props.onChange(item)}
         >
-          <Text style={styles.tabText}>{item}</Text>
+          {item === this.props.value?
+          <Text style={styles.selectedTabText}>{item}</Text>
+          :<Text style={styles.tabText}>{item}</Text>}
         </TouchableHighlight>
       );
     });

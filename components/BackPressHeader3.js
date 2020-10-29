@@ -32,7 +32,8 @@ const Container = styled.View`
 `;
 
 const TopBarContainer = styled.View`
-  padding-top: ${Platform.OS === "ios" ? 0 : Expo.Constants.statusBarHeight};
+  padding-top: ${(Platform.OS === "ios" ? 0 : Expo.Constants.statusBarHeight)+5};
+  padding-bottom:5px
   background:white
   flex-direction: row;
   width: ${constants.width};
@@ -41,7 +42,7 @@ const TopBarContainer = styled.View`
 `;
 
 const MainText = styled.Text`
-  font-size: 20px;
+  font-family:"NotoSansCJKkr_Regular"font-size: 20px;
   color: black;
   text-align: center;
 `;

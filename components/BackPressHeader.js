@@ -5,8 +5,8 @@ import { Ionicons } from "@expo/vector-icons";
 import constants from "../constants";
 
 const LogoImg = styled.Image`
-  width: ${constants.width / 3.7};
-  height: ${230 * (constants.width / 3.7 / 877)};
+  width: ${constants.width / 4};
+  height: ${230 * (constants.width / 4 / 877)};
 `;
 
 const Touchable = styled.TouchableOpacity`  
@@ -30,6 +30,7 @@ const SubTitleBack = styled.Image`
   height: ${793 * (constants.width / 2.5 / 1948)}
 `;
 const SubTitleText = styled.Text`
+  font-family:NotoSansCJKkr_Regular
   font-size: ${constants.width / 23};
   color: black;
   text-align: center;
@@ -52,7 +53,8 @@ const Container = styled.View`
 `;
 
 const TopBarContainer = styled.View`
-  padding-top: ${Platform.OS === "ios" ? 0 : Expo.Constants.statusBarHeight};
+  padding-top: ${(Platform.OS === "ios" ? 0 : Expo.Constants.statusBarHeight)+5};
+  padding-bottom:5px
   background:white
   flex-direction: row;
   width: ${constants.width};
@@ -61,6 +63,7 @@ const TopBarContainer = styled.View`
 `;
 
 const MainText = styled.Text`
+  font-family:NotoSansCJKkr_Regular
   font-size: 20px;
   color: black;
   text-align: center;

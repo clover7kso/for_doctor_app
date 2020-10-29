@@ -34,17 +34,17 @@ const Row = styled.View`
 `;
 
 const TextTitle = styled.Text`
-  font-size:16px
+  font-family:"NotoSansCJKkr_Regular"font-size:16px
   color: ${(props) => props.theme.blackColor};
 `;
 
 const TextContent = styled.Text`
-  font-size:14px
+  font-family:"NotoSansCJKkr_Regular"font-size:14px
   color: ${(props) => props.theme.darkGreyColor};
 `;
 
 const TextInfo = styled.Text`
-  margin-top:5px
+  font-family:"NotoSansCJKkr_Regular"margin-top:5px
   font-size:9px
   color: ${(props) => props.theme.darkGreyColor};
 `;

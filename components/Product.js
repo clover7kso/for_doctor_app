@@ -31,12 +31,15 @@ const InContainer3 = styled.View`
   align-items: flex-end;
 `;
 const Title = styled.Text`
+  font-family:NotoSansCJKkr_Regular
   font-size: 20px;
 `;
 const Content = styled.Text`
+  font-family:NotoSansCJKkr_Thin
   font-size: 15px;
 `;
 const Info = styled.Text`
+  font-family:NotoSansCJKkr_Thin
   color: grey;
   font-size: 12px;
 `;

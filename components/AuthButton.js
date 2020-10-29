@@ -13,6 +13,7 @@ const Container = styled.View`
 `;
 
 const Text = styled.Text`
+  font-family:"NotoSansCJKkr_Regular"
   color: #34766e;
   text-align: center;
   font-size:20px

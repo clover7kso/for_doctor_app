@@ -3,7 +3,7 @@ import styled from "styled-components";
 import useInput from "../../hooks/useInput";
 import AuthInput from "../../components/AuthInput";
 import AuthButton from "../../components/AuthButton";
-import AuthButtonText from "../../components/AuthButtonText"
+import AuthButtonTextGrey from "../../components/AuthButtonTextGrey"
 import { TouchableWithoutFeedback, Keyboard, Alert } from "react-native";
 import {  useMutation } from "react-apollo-hooks";
 import { CHECK_ID_PHONE } from "./AuthQueries";
@@ -183,9 +183,9 @@ export default ({ navigation }) => {
               text="의사 회원가입"
             />
             
-          <AuthButtonText
+          <AuthButtonTextGrey
             onPress={()=>handleRegister("SignupMarketer")}
-            text={"의사가 아니신가요?"}
+            text={"업체 회원가입"}
           />
           </InContainer1>
 

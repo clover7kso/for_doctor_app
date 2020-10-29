@@ -27,7 +27,6 @@ const UserAvater = styled.Image`
   width:50px;
   height:50px;
   border-radius:30px
-  background:#f0f0f0
   margin-right:10px
 `;
 
@@ -47,12 +46,14 @@ const MyContainer = styled.View`
 `;
 
 const FromRowDate = styled.Text`
+  font-family:NotoSansCJKkr_Regular
   color:white
   font-size:10px
   text-align:left
   padding-left:9px
 `;
 const MyRowDate = styled.Text`
+  font-family:NotoSansCJKkr_Regular
   color:white
   font-size:10px
   text-align:right
@@ -62,9 +63,11 @@ const MyRowDate = styled.Text`
 const RowContainer = styled.View`
 `;
 const RowName = styled.Text`
+  font-family:NotoSansCJKkr_Regular
   margin-left:4px
 `;
 const RowText = styled.Text`
+  font-family:NotoSansCJKkr_Regular
   background:#ffffff
   margin:4px
   padding:13px

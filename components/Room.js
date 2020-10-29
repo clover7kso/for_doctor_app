@@ -20,7 +20,6 @@ const UserAvater = styled.Image`
   height:${constants.width / 7};
   resize-mode:cover
   border-radius:50px
-  background:#f0f0f0
 `;
 const InContainer2 = styled.View`
   justify-content: space-around;
@@ -34,12 +33,15 @@ const InContainer3 = styled.View`
   justify-content: space-between;
 `;
 const Title = styled.Text`
+  font-family:NotoSansCJKkr_Regular
   font-size: 20px;
 `;
 const Content = styled.Text`
+  font-family:NotoSansCJKkr_Regular
   font-size: 15px;
 `;
 const Info = styled.Text`
+  font-family:NotoSansCJKkr_Regular
   color: grey;
   font-size: 12px;
 `;

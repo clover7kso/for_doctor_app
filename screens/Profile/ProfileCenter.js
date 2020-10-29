@@ -7,7 +7,7 @@ const OutContainer = styled.View`
   flex: 1;
 `;
 const Text = styled.Text`
-  padding-left: 15px;
+  font-family:"NotoSansCJKkr_Regular"padding-left: 15px;
   padding-top: 15px;
 `;
 
