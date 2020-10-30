@@ -7,11 +7,10 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import { persistCache } from "apollo-cache-persist";
 import { ThemeProvider } from "styled-components";
 import { ApolloProvider } from "react-apollo-hooks";
-import apolloClientOptions from "./apollo";
 import styles from "./styles";
 import NavController from "./components/NavController";
 import { AuthProvider } from "./AuthContext";
-
+import {SERVER_URL, WEB_SOCKET_URL} from "./config"
 import {ApolloClient,HttpLink, split, ApolloLink} from 'apollo-boost';
 import { WebSocketLink } from "apollo-link-ws";
 import { getMainDefinition } from "apollo-utilities";
@@ -35,11 +34,11 @@ export default function App() {
         storage: AsyncStorage,
       });
       const httpLink = new HttpLink({
-        uri: "http://192.168.219.101:4000"
+        uri: SERVER_URL
       });
       
       const wsLink = new WebSocketLink({
-        uri: `ws://192.168.219.101:4000/`,
+        uri: WEB_SOCKET_URL,
         options: {
           reconnect: true
         }
