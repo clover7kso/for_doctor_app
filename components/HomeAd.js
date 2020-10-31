@@ -37,18 +37,21 @@ export default class HomeAd extends React.Component {
   componentWillUnmount() {
     clearInterval(interval);
   }
-
+  
+  
   render() {
     return (
       <OutContainer>
         <Touchable
           onPress={() =>
-            Linking.openURL(this.state.urlArray[this.state.counter])
+            {
+              Linking.openURL(this.state.urlArray[this.state.counter])
+            }
           }
         >
           <Image
             style={{
-              resizeMode: "contain",
+              resizeMode: "cover",
               width: constants.width / 1,
               height: constants.width / 2,
             }}

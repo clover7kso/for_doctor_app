@@ -5,7 +5,7 @@ import HomeAd from "../components/HomeAd";
 import HomeHeader from "../components/HomeHeader";
 import HomeButton from "../components/HomeButton";
 import { useQuery } from "react-apollo-hooks";
-import { HOME_AD_MANY } from "./ScreenQueries";
+import { HOME_AD_MANY,USER_PROFILE } from "./ScreenQueries";
 import constants from "../constants";
 
 const OutContainer = styled.View`
@@ -93,7 +93,11 @@ const ProfileLine = styled.View`
 `;
 
 export default ({ navigation }) => {
-  const { loading, error, data = { homeAdMany: {} } } = useQuery(HOME_AD_MANY, {
+  const result_homeAd = useQuery(HOME_AD_MANY, {
+    variables: {},
+  });
+  result_homeAd.refetch()
+  const result_profile = useQuery(USER_PROFILE, {
     variables: {},
   });
 
@@ -106,9 +110,6 @@ export default ({ navigation }) => {
       <OutContainer>
         <HomeHeader navigation={navigation} />
         <Container>
-          {loading ? (
-            <ActivityIndicator color={"white"} />
-          ) : (
             <Container>
               <TopContainer>
                 <LogoImg
@@ -119,14 +120,22 @@ export default ({ navigation }) => {
                 onPress={() =>
                   navigation.navigate("Profile")
                 }>
-                  <ProfileRowContainer>
-                    <ProfileText_1>강성운원장님</ProfileText_1>
-                    <ProfileText_2>안녕하세요!</ProfileText_2>
-                  </ProfileRowContainer>
+                {result_homeAd.loading ?
+                  (<ActivityIndicator color={"white"} /> ) :
+                  (
+                      <ProfileRowContainer>
+                        <ProfileText_1>{result_profile.data.profile.name}</ProfileText_1>
+                        <ProfileText_1>{result_profile.data.profile.role===0?"원장님":"사장님"}</ProfileText_1>
+                        <ProfileText_2>안녕하세요!</ProfileText_2>
+                      </ProfileRowContainer>
+                  )}
                   <ProfileLineContainer>
                     <ProfileLine/>
                   </ProfileLineContainer>
+                  
                 </ProfileContainer>
+                
+
               </TopContainer>
               <Table>
                 <Column_1><Divider/></Column_1>
@@ -157,10 +166,13 @@ export default ({ navigation }) => {
                   />
                 </Column_2>
               </Table>
-              <HomeAd data={data.homeAdMany} />
+              {result_homeAd.loading ?
+               (<ActivityIndicator color={"white"} /> ) : 
+               (<HomeAd data={result_homeAd.data.homeAdMany} />)
+               }
             </Container>
             
-          )}
+          
         </Container>
       </OutContainer>
     </ImageBackground>

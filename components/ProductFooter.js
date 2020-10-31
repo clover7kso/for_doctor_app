@@ -1,21 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { Ionicons } from "@expo/vector-icons";
+import { AntDesign, Ionicons } from "@expo/vector-icons";
 import constants from "../constants";
 import { Linking } from "react-native";
 
-const TouchableIcon = styled.TouchableOpacity``;
 const TouchableCall = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  flex: 1;
   background-color: #4A7768;
   padding: 15px;
   border-radius: 10px;
-  margin-left: 20px;
-  margin-right: 20px;
+  width: ${constants.width/3.4};
+
 `;
 
 const Container = styled.View`
@@ -34,12 +32,7 @@ const Container = styled.View`
   padding-top: 10px;
 `;
 
-const IconLike = styled.View`
-  padding-left: 30px;
-  padding-right: 10px;
-`;
-
-const IconCall = styled.View`
+const IconContainer = styled.View`
   padding-left: 15px;
 `;
 
@@ -63,32 +56,30 @@ const ProductFooter = ({ isLiked, onLike, onCall, phoneNum }) => {
 
   return (
     <Container>
-      <TouchableIcon onPress={() => onLike()}>
-        <IconLike>
-          <Ionicons
+      <TouchableCall onPress={() => onLike()}>
+        <Text>관심제품</Text>
+        <IconContainer>
+          <AntDesign
             name={
               isLiked
-                ? Platform.OS === "ios"
-                  ? "ios-square"
-                  : "md-square"
-                : Platform.OS === "ios"
-                ? "ios-square-outline"
-                : "md-square-outline"
+                  ? "heart"
+                  : "hearto"
             }
-            size={50}
-            color={"grey"}
+            size={20}
+            color={"white"}
           />
-        </IconLike>
-      </TouchableIcon>
+        </IconContainer>
+      </TouchableCall>
+      
       <TouchableCall onPress={() => dialCall(phoneNum)}>
         <Text>전화하기</Text>
-        <IconCall>
+        <IconContainer>
           <Ionicons
             name={Platform.OS === "ios" ? "ios-call" : "md-call"}
             size={20}
             color={"white"}
           />
-        </IconCall>
+        </IconContainer>
       </TouchableCall>
     </Container>
   );

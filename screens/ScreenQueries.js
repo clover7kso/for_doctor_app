@@ -12,3 +12,14 @@ export const HOME_AD_MANY = gql`
     }
   }
 `;
+
+
+export const USER_PROFILE = gql`
+  query {
+    profile{
+      id
+      role
+      name
+    }
+  }
+`;
