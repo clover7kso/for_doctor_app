@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { ActivityIndicator,ImageBackground } from "react-native";
+import { ActivityIndicator,ImageBackground,Alert } from "react-native";
 import HomeAd from "../components/HomeAd";
 import HomeHeader from "../components/HomeHeader";
 import HomeButton from "../components/HomeButton";
@@ -154,15 +154,21 @@ export default ({ navigation }) => {
                   />
                   <HomeButton
                     onPress={() =>
-                      {}
+                      navigation.navigate("ProductCategory", { type: "마케팅" })
+                    }
+                    text = "마케팅"
+                  />
+                  <HomeButton
+                    onPress={() =>
+                      {Alert.alert("아직 준비중인 기능입니다");}
                     }
                     text = "법률제휴"
                   />
                   <HomeButton
                     onPress={() =>
-                      navigation.navigate("ProductCategory", { type: "마케팅" })
+                      {Alert.alert("아직 준비중인 기능입니다");}
                     }
-                    text = "마케팅"
+                    text = "구인구직"
                   />
                 </Column_2>
               </Table>

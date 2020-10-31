@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { AntDesign, Ionicons } from "@expo/vector-icons";
+import { AntDesign, Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import constants from "../constants";
 import { Linking } from "react-native";
 
@@ -27,8 +27,10 @@ const Container = styled.View`
   shadow-opacity: 0.3;
   shadow-offset: { width: 2, height: 2 };
   elevation: 10;
-
+  
   padding-bottom: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
   padding-top: 10px;
 `;
 
@@ -65,6 +67,17 @@ const ProductFooter = ({ isLiked, onLike, onCall, phoneNum }) => {
                   ? "heart"
                   : "hearto"
             }
+            size={20}
+            color={"white"}
+          />
+        </IconContainer>
+      </TouchableCall>
+      
+      <TouchableCall onPress={() => {}}>
+        <Text>채팅하기</Text>
+        <IconContainer>
+          <MaterialCommunityIcons
+            name={"message"}
             size={20}
             color={"white"}
           />
