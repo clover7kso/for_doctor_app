@@ -23,10 +23,15 @@ const InContainer2 = styled.View`
 `;
 
 const Text = styled.Text`
-  font-family:"NotoSansCJKkr_Regular"
-margin-top: 10%;
-  padding: 5px;
+  font-family:NotoSansCJKkr_Regular
   color: white;
+  margin-top: 10px;
+`;
+
+const TextContainer = styled.View`
+  margin-top: 10%;
+  font-family:NotoSansCJKkr_Regular
+  align-items: center;
 `;
 
 const LogoImg = styled.Image`
@@ -49,7 +54,10 @@ export default ({ navigation }) => {
               resizeMode={"contain"}
               source={require("../../assets/images/logo.png")}
             />
-            <Text>의사 선생님들을 위한 대한민국 No.1 플랫폼</Text>
+            <TextContainer>
+              <Text>슬기로운 의사생활을 위한</Text>
+              <Text>대한민국 No.1 Medical Platform</Text>
+            </TextContainer>
           </InContainer1>
           <InContainer2>
             <AuthButton
