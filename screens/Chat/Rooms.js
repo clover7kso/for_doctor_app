@@ -22,10 +22,10 @@ export default ({ navigation, route }) => {
         const aDate = new Date(parseInt(a.recentMessage[0].createdAt)).toString()
         const bDate = new Date(parseInt(b.recentMessage[0].createdAt)).toString()
         if (aDate>bDate) {
-          return -1;
+          return 1;
         }
         if (aDate<bDate) {
-          return 1;
+          return -1;
         }
         return 0;
     }
