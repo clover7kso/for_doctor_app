@@ -79,6 +79,10 @@ const UserId = styled.Text`
 const Touchable = styled.TouchableOpacity`
   flex-direction: row;
 `;
+
+const TouchableWithoutFeedback = styled.TouchableWithoutFeedback`
+  flex-direction: row;
+`;
 const Divider = styled.TouchableOpacity`
   height:  ${constants.width / 3.9};
   width: 0.4px
@@ -116,10 +120,9 @@ export default ({ navigation }) => {
       {resUserOne.loading ? (
         <ActivityIndicator color={"black"} />
       ) : (
-            <>
             <ProfileContiner>
               
-              <Touchable
+              <TouchableWithoutFeedback
                 onPress={() =>
                   navigation.navigate("ProfileAvatarEdit", {
                     avatar: resUserOne.data.userOne.avatar,
@@ -134,16 +137,24 @@ export default ({ navigation }) => {
                       : require("../../assets/images/avatar.png")
                   }
                 />
-              </Touchable>
+              </TouchableWithoutFeedback>
               <ProfileColumn>
                 <UserName>{resUserOne.data.userOne.name} 원장님</UserName>
                 <UserId>{resUserOne.data.userOne.id}</UserId>
               </ProfileColumn>
             </ProfileContiner>
+          )}
             <LogoutContiner>
+            <TouchableWithoutFeedback onPress={() =>
+                  navigation.navigate("ProfileAvatarEdit", {
+                    avatar: resUserOne.data.userOne.avatar,
+                    refresh: handleOnBack,
+                  })
+                }>
               <ProfileBackground
                 resizeMode={"contain"}
                 source={require("../../assets/images/top_bar_text.png")}/>
+              </TouchableWithoutFeedback>
               <Touchable onPress={handleLogOut}>
                 <LogoutText>로그아웃</LogoutText>
               </Touchable>
@@ -194,8 +205,7 @@ export default ({ navigation }) => {
               </ButtonContainerRow>
             </ButtonContiner>
            
-          </>
-      )}
+          
     </OutContainer>
   </ImageBackground>
   );

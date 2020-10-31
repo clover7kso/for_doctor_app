@@ -19,7 +19,6 @@ const ImageSelected = styled.Image`
   width: 200px;
   height: 200px;
   border-radius:30px
-  background:#f0f0f0
   margin:30px
 `;
 
