@@ -32,11 +32,12 @@ const InnerContainer = styled.View`
 `;
 
 const TextInput = styled.TextInput`
-  padding-left: 10px;
-  padding-top: 3px;
-  padding-bottom: 3px;
+  flex:1
+  padding-left: 8px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  font-size:15px
 `;
-
 const Touchable = styled.TouchableOpacity``;
 
 const PostSearchBox = ({ onChange, value }) => {
@@ -50,6 +51,11 @@ const PostSearchBox = ({ onChange, value }) => {
   return (
     <Container>
       <InnerContainer>
+        <TextInput
+          onChangeText={change}
+          placeholder="제목 및 내용을 입력하세요"
+          value={(text) => inputValue}
+        />
         <Touchable onPress={onPress}>
           <Ionicons
             name={Platform.OS === "ios" ? "ios-search" : "md-search"}
@@ -57,11 +63,6 @@ const PostSearchBox = ({ onChange, value }) => {
             color="#4CA493"
           />
         </Touchable>
-        <TextInput
-          onChangeText={change}
-          placeholder="제목 및 내용을 입력하세요"
-          value={(text) => inputValue}
-        />
       </InnerContainer>
     </Container>
   );

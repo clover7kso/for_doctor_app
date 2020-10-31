@@ -65,7 +65,7 @@ export default ({ navigation, route }) => {
   const handleOnBack = () => {
     resPostMany.refetch();
   };
-
+  resPostMany.refetch();
   const onLoadMore = () => {
     if (!loadMore & (resPostMany.data.postMany.cursor !== "End")) {
       setLoadMore(true);

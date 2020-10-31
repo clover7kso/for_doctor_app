@@ -51,13 +51,16 @@ const UserNickName = styled.Text`
   font-size: 22px;
 `;
 const TimeFromToday = styled.Text`
-  font-family:"NotoSansCJKkr_Regular"font-size: 17px;
+  font-family:NotoSansCJKkr_Regular
+  font-size: 17px;
 `;
 const NumViews = styled.Text`
-  font-family:"NotoSansCJKkr_Regular"font-size: 10px;
+  font-family:NotoSansCJKkr_Regular
+  font-size: 10px;
 `;
 const NumComments = styled.Text`
-  font-family:"NotoSansCJKkr_Regular"margin-left:10px
+  font-family:NotoSansCJKkr_Regular
+  margin-left:10px
   font-size: 10px;
 `;
 
@@ -111,7 +114,7 @@ export default ({ route, navigation }) => {
 
   resPostOne.refetch();
   const [commentUpload] = useMutation(COMMENT_UPLOAD);
-  const handleCommentUpload = (text, setInputValue) => {
+  const handleCommentUpload = async(text, setInputValue) => {
     const result = commentUpload({
       variables: {
         postId: postId,
@@ -119,7 +122,8 @@ export default ({ route, navigation }) => {
       },
     });
     if (result) {
-      resPostOne.refetch(), setInputValue("");
+      await resPostOne.refetch(), 
+      setInputValue("");
     }
   };
 
