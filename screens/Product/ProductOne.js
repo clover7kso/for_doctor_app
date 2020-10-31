@@ -52,6 +52,7 @@ export default ({ navigation, route }) => {
       id: id,
     },
   });
+  
   resProductOne.refetch();
   const [isLiked, setIsLiked] = !resProductOne.loading
     ? useState(resProductOne.data.productOne.isLiked)
@@ -75,6 +76,10 @@ export default ({ navigation, route }) => {
     } catch (e) {}
   };
 
+  const handleToChat = async () => {
+    navigation.navigate("Message", {roomId:resProductOne.data.productOne.chatRoomId,toId:resProductOne.data.productOne.marketerId, toName:resProductOne.data.productOne.marketerName})
+  };
+
   return (
     <OutContainer>
       <BackPressHeader3 navigation={navigation} />
@@ -84,11 +89,9 @@ export default ({ navigation, route }) => {
         <Container>
           <ScrollView
             contentContainerStyle={{ paddingBottom: 20 }}
-            showsVerticalScrollIndicator={false}
-          >
+            showsVerticalScrollIndicator={false}>
             <ProductSampleImages
-              imageArray={resProductOne.data.productOne.sampleImages}
-            />
+              imageArray={resProductOne.data.productOne.sampleImages}/>
             <InfoContainer>
               <Title>{resProductOne.data.productOne.title}</Title>
               <Company>{resProductOne.data.productOne.company}</Company>
@@ -102,8 +105,8 @@ export default ({ navigation, route }) => {
             isLiked={isLiked}
             onLike={handleToggleLike}
             onCall={productAddCall}
-            phoneNum={resProductOne.data.productOne.phone}
-          />
+            onChat={handleToChat}
+            phoneNum={resProductOne.data.productOne.phone}/>
         </Container>
       )}
     </OutContainer>

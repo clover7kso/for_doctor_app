@@ -103,16 +103,7 @@ function Message({ navigation, route}) {
     }
   });
 
-  const {
-    data: { 
-      seeRoom:{
-        allMessages:oldMessages
-      }
-    },
-    loading,
-    error,
-    refetch
-  } = useQuery(SEE_ROOM, {
+  const resultMessage = useQuery(SEE_ROOM, {
     variables: {roomId:roomId},
     fetchPolicy: 'cache-and-network',
   });
@@ -120,10 +111,12 @@ function Message({ navigation, route}) {
   const { data } = useSubscription(NEW_MESSAGE, {
     variables:{roomId:roomId}
   });
-  const [messages, setMessages] = useState(oldMessages || []);
+
+
+  const [messages, setMessages] = useState(resultMessage.data.seeRoom.allMessages || []);
   useEffect(() => {
-    setMessages(oldMessages)
-  }, [oldMessages]);
+    setMessages(resultMessage.data.seeRoom.allMessages)
+  }, [resultMessage.data.seeRoom.allMessages]);
   
   const handleNewMessage = () => {
     if (data !== undefined) {
@@ -151,7 +144,7 @@ function Message({ navigation, route}) {
   return (
     <>
     <BackPressHeader4 navigation={navigation} text={toName}/>
-    {!loading?
+    {!resultMessage.loading?
       <OutContainer>
         <FlatListView>
           <FlatList

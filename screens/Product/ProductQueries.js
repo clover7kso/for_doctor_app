@@ -51,6 +51,9 @@ export const PRODUCT_ONE = gql`
       views
       company
       phone
+      marketerName
+      marketerId
+      chatRoomId
     }
   }
 `;

@@ -44,7 +44,7 @@ const Text = styled.Text`
   text-align: center;
 `;
 
-const ProductFooter = ({ isLiked, onLike, onCall, phoneNum }) => {
+const ProductFooter = ({ isLiked, onLike, onCall,onChat, phoneNum }) => {
   const dialCall = (number) => {
     onCall();
     let phoneNumber = "";
@@ -73,7 +73,7 @@ const ProductFooter = ({ isLiked, onLike, onCall, phoneNum }) => {
         </IconContainer>
       </TouchableCall>
       
-      <TouchableCall onPress={() => {}}>
+      <TouchableCall onPress={() => onChat()}>
         <Text>채팅하기</Text>
         <IconContainer>
           <MaterialCommunityIcons

@@ -37,7 +37,7 @@ export const SEE_ROOM = gql`
 
 
 export const SEND_MESSAGE = gql`
-  mutation sendMessage($roomId: String!, $sendText: String!, $toId: String!) {
+  mutation sendMessage($roomId: String, $sendText: String!, $toId: String!) {
     sendMessage(roomId: $roomId, sendText: $sendText, toId: $toId) {
       createdAt
       from{
