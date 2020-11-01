@@ -120,7 +120,7 @@ export default ({ navigation }) => {
                 onPress={() =>
                   navigation.navigate("Profile")
                 }>
-                {result_homeAd.loading ?
+                {result_homeAd.loading && result_profile.data!==undefined ?
                   (<ActivityIndicator color={"white"} /> ) :
                   (
                       <ProfileRowContainer>

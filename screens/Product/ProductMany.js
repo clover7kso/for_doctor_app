@@ -47,7 +47,7 @@ export default ({ navigation, route }) => {
     variables: { category: category },
   });
   resSubCate.refetch();
-  const [selectText, setSelectText] = !resSubCate.loading
+  const [selectText, setSelectText] = !resSubCate.loading && resSubCate.data!==undefined
     ? useState(resSubCate.data.productSubCategory[0])
     : useState(null);
 
@@ -103,7 +103,7 @@ export default ({ navigation, route }) => {
       <ProductSearchBox value={searchWord} onChange={setSearchWord} />
       {resSubCate.loading ? null : (
         <Container>
-          {resSubCate.data.productSubCategory.length === 0 ? null : (
+          {resSubCate.data !== undefined && resSubCate.data.productSubCategory.length === 0 ? null : (
             <ProductSubCategory
               value={selectText}
               onChange={setSelectText}
@@ -111,11 +111,11 @@ export default ({ navigation, route }) => {
             />
           )}
 
-          {resProductMany.loading ? (
+          {resProductMany.loading? (
             <LoadingContainer>
               <ActivityIndicator color={"black"} />
             </LoadingContainer>
-          ) : resProductMany.data.productMany.length !== 0?(
+          ) :resProductMany.data !== undefined && resProductMany.data.productMany.length !== 0?(
             <SectionList
               sections={[{
                 title:"추천제품",

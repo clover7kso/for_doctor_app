@@ -39,6 +39,7 @@ export default ({ navigation, route }) => {
     Alert.alert(categories.error.message.replace("GraphQL error: ", ""));
     navigation.pop(1)
   }
+  console.log(categories.data)
 
   return (
     <OutContainer>
@@ -48,11 +49,12 @@ export default ({ navigation, route }) => {
         source={require("../../assets/images/sub_background_all.png")}
       >
       <BackPressHeader navigation={navigation} subText={type} />
-      <Divider style={{height:constants.height/categories.data.productCategory.length/4}}/>
-      {categories.loading ? (
+      
+      {categories.loading || categories.data === undefined ? (
         <ActivityIndicator color={"white"} />
       ) : (
         <Container>
+          <Divider style={{height:constants.height/categories.data.productCategory.length/4}}/>
           {categories.data.productCategory.map((item, key) => (
             <>
             <ProductButton
