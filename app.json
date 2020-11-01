@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "FOR_DOCTOR_APP",
-    "slug": "FOR_DOCTOR_APP",
+    "name": "FOR DOCTOR",
+    "slug": "FOR_DOCTOR",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -15,7 +15,10 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "com.woony.fordoctor"
+    },
+    "android": {
+      "package": "com.woony.fordoctor"
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
