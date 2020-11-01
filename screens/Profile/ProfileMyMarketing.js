@@ -18,6 +18,18 @@ const Container = styled.View`
   flex: 1;
 `;
 
+const LoadingContainer = styled.View`
+  align-items: center;
+  justify-content:center;
+  flex: 1;
+`;
+
+const NoData = styled.Text`
+  font-family:NotoSansCJKkr_Regular
+  margin-top:20px
+  font-size:19px
+`;
+
 export default ({ navigation, route }) => {
   const resMyMarketing = useQuery(MY_MARKETING, {
     variables: {},
@@ -48,8 +60,10 @@ export default ({ navigation, route }) => {
       {resMyMarketing.loading ? null : (
         <Container>
           {resMyMarketing.loading ? (
-            <ActivityIndicator color={"black"} />
-          ) : (
+            <LoadingContainer>
+              <ActivityIndicator color={"black"} />
+            </LoadingContainer>
+          ) : resMyMarketing.data.myMarketing.length !== 0 ? (
             <FlatList
               showsVerticalScrollIndicator={false}
               data={resMyMarketing.data.myMarketing}
@@ -58,7 +72,11 @@ export default ({ navigation, route }) => {
               refreshing={refreshing}
               onRefresh={refresh}
             />
-          )}
+          ):
+          <LoadingContainer>
+            <NoData>관심등록하신 마케팅이 없습니다.</NoData>
+          </LoadingContainer>
+          }
         </Container>
       )}
     </OutContainer>

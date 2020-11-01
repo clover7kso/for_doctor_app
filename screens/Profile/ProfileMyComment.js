@@ -17,6 +17,18 @@ const Container = styled.View`
   flex: 1;
 `;
 
+const LoadingContainer = styled.View`
+  align-items: center;
+  justify-content:center;
+  flex: 1;
+`;
+
+const NoData = styled.Text`
+  font-family:NotoSansCJKkr_Regular
+  margin-top:20px
+  font-size:19px
+`;
+
 export default ({ navigation }) => {
   const resMyComment = useQuery(MY_COMMENT, {
     variables: {},
@@ -46,8 +58,10 @@ export default ({ navigation }) => {
       <BackPressHeader4 navigation={navigation} text={"내가쓴댓글"} />
       <Container>
         {resMyComment.loading ? (
-          <ActivityIndicator color={"black"} />
-        ) : (
+          <LoadingContainer>
+            <ActivityIndicator color={"black"} />
+          </LoadingContainer>
+        ) : resMyComment.data.myComment.length !== 0 ? (
           <FlatList
             contentContainerStyle={{ paddingBottom: 60 }}
             showsVerticalScrollIndicator={false}
@@ -62,7 +76,11 @@ export default ({ navigation }) => {
             refreshing={refreshing}
             onRefresh={refresh}
           />
-        )}
+        ):
+          <LoadingContainer>
+            <NoData>아직 등록하신 댓글이 없습니다.</NoData>
+          </LoadingContainer>
+        }
       </Container>
     </OutContainer>
   );

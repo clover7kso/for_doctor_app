@@ -148,15 +148,15 @@ export default ({ navigation }) => {
                   />
                   <HomeButton
                     onPress={() =>
-                      navigation.navigate("PostTop", { type: "커뮤니티" })
-                    }
-                    text = "커뮤니티"
-                  />
-                  <HomeButton
-                    onPress={() =>
                       navigation.navigate("ProductCategory", { type: "마케팅" })
                     }
                     text = "마케팅"
+                  />
+                  <HomeButton
+                    onPress={() =>
+                      navigation.navigate("PostTop", { type: "커뮤니티" })
+                    }
+                    text = "커뮤니티"
                   />
                   <HomeButton
                     onPress={() =>

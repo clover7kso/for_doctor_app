@@ -74,6 +74,12 @@ const RowText = styled.Text`
   border-radius:10px
 `;
 
+const LoadingContainer = styled.View`
+  background : #B0DAD2
+  align-items: center;
+  justify-content:center;
+  flex: 1;
+`;
 
 function date_to_str(format)
 {
@@ -200,7 +206,10 @@ function Message({ navigation, route}) {
           onSubmitEditing={onSubmit}
         />
       </OutContainer>
-      :<ActivityIndicator color={"black"} />
+      :
+      <LoadingContainer>
+        <ActivityIndicator color={"black"} />
+      </LoadingContainer>
     }
     </>
   );

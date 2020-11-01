@@ -10,13 +10,25 @@ const OutContainer = styled.View`
   background : white
   align-items: center;
   flex: 1;
-  
 `;
 
 const Container = styled.View`
   align-items: center;
   flex: 1;
 `;
+
+const LoadingContainer = styled.View`
+  align-items: center;
+  justify-content:center;
+  flex: 1;
+`;
+
+const NoData = styled.Text`
+  font-family:NotoSansCJKkr_Regular
+  margin-top:20px
+  font-size:19px
+`;
+
 
 export default ({ navigation, route }) => {
   const resMyProduct = useQuery(MY_PRODUCT, {
@@ -47,8 +59,10 @@ export default ({ navigation, route }) => {
       {resMyProduct.loading ? null : (
         <Container>
           {resMyProduct.loading ? (
-            <ActivityIndicator color={"black"} />
-          ) : (
+            <LoadingContainer>
+              <ActivityIndicator color={"black"} />
+            </LoadingContainer>
+          ) : resMyProduct.data.myProduct.length !== 0 ? (
             <FlatList
               showsVerticalScrollIndicator={false}
               data={resMyProduct.data.myProduct}
@@ -57,7 +71,11 @@ export default ({ navigation, route }) => {
               refreshing={refreshing}
               onRefresh={refresh}
             />
-          )}
+          ):
+          <LoadingContainer>
+            <NoData>관심등록하신 의료기기가 없습니다.</NoData>
+          </LoadingContainer>
+          }
         </Container>
       )}
     </OutContainer>

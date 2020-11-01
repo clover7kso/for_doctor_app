@@ -23,6 +23,11 @@ const Container = styled.View`
   flex: 1;
 `;
 
+const LoadingContainer = styled.View`
+  align-items: center;
+  justify-content:center;
+  flex: 1;
+`;
 
 const SectionTitle = styled.Text`
   font-family:NotoSansCJKkr_Regular
@@ -107,8 +112,10 @@ export default ({ navigation, route }) => {
           )}
 
           {resProductMany.loading ? (
-            <ActivityIndicator color={"black"} />
-          ) : (
+            <LoadingContainer>
+              <ActivityIndicator color={"black"} />
+            </LoadingContainer>
+          ) : resProductMany.data.productMany.length !== 0?(
             <SectionList
               sections={[{
                 title:"추천제품",
@@ -134,6 +141,10 @@ export default ({ navigation, route }) => {
               refreshing={refreshing}
               onRefresh={refresh}
             />
+          ):(
+            <LoadingContainer>
+              <SectionTitle>아직 준비된 상품이 없습니다</SectionTitle>
+            </LoadingContainer>
           )}
         </Container>
       )}
