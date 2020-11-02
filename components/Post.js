@@ -65,7 +65,7 @@ const Product = ({ item, navigation, handlePostAddView }) => {
               {item.title}
             </TextTitle>
             <TextContent numberOfLines={2} ellipsizeMode="tail">
-              {item.content}
+              {item.content.replace('\\n'," ")}
             </TextContent>
             <Row>
               <TextInfo>

@@ -95,7 +95,9 @@ export default ({ navigation, route }) => {
             <InfoContainer>
               <Title>{resProductOne.data.productOne.title}</Title>
               <Company>{resProductOne.data.productOne.company}</Company>
-              <Content>{resProductOne.data.productOne.content}</Content>
+              {resProductOne.data.productOne.content.split('\\n').map((item, key) => {
+                 return <Content key={key}>{item}</Content>
+              })}
             </InfoContainer>
             <ProductDetailImages
               imageArray={resProductOne.data.productOne.detailImages}

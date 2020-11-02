@@ -111,8 +111,8 @@ export default ({ route, navigation }) => {
   const resPostOne = useQuery(POST_ONE, {
     variables: { id: postId },
   });
-
   resPostOne.refetch();
+  
   const [commentUpload] = useMutation(COMMENT_UPLOAD);
   const handleCommentUpload = async(text, setInputValue) => {
     const result = commentUpload({
@@ -174,7 +174,9 @@ export default ({ route, navigation }) => {
               </Column>
             </Row>
             <Title>{resPostOne.data.postOne.title}</Title>
-            <Content> {resPostOne.data.postOne.content}</Content>
+            {resPostOne.data.postOne.content.split('\\n').map((item, key) => {
+              return <Content key={key}>{item}</Content>
+            })}
             <Row>
               <NumViews> 조회수 : {resPostOne.data.postOne.views}</NumViews>
               <NumComments>
