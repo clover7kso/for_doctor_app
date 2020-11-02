@@ -36,7 +36,8 @@ const OutContainer = styled.View`
 `;
 
 const Text = styled.Text`
-  font-family:"NotoSansCJKkr_Regular"align-items: center;
+  font-family:NotoSansCJKkr_Regular
+  align-items: center;
   color: white;
   margin-right: 10px;
 `;

@@ -6,6 +6,18 @@ import Room from "../../components/Room";
 import { ActivityIndicator, FlatList } from "react-native";
 import BackPressHeader4 from "../../components/BackPressHeader4";
 
+const LoadingContainer = styled.View`
+  align-items: center;
+  justify-content:center;
+  flex: 1;
+`;
+
+const LoadingTitle = styled.Text`
+  font-family:NotoSansCJKkr_Regular
+  margin-top:20px
+  font-size:19px
+`;
+
 const OutContainer = styled.View`
   background : white
   align-items: center;
@@ -47,7 +59,7 @@ export default ({ navigation, route }) => {
             <BackPressHeader4 navigation={navigation} text={"메시지"}/>
             {rooms.loading ? (
             <ActivityIndicator color={"black"} />
-          ) : (
+          ):rooms.data !== undefined && rooms.data.seeRooms.length !== 0? (
             <FlatList
               data={rooms.data.seeRooms.sort(compare)}
               showsVerticalScrollIndicator ={false}
@@ -58,6 +70,10 @@ export default ({ navigation, route }) => {
               refreshing={refreshing}
               onRefresh={refresh}
             />
+          ):(
+            <LoadingContainer>
+              <LoadingTitle>아직 채팅방이 없습니다.</LoadingTitle>
+            </LoadingContainer>
           )}
         </OutContainer>
     )
