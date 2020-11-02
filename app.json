@@ -19,9 +19,6 @@
     },
     "android": {
       "package": "com.woony.fordoctor"
-    },
-    "web": {
-      "favicon": "./assets/images/favicon.png"
     }
   }
 }
