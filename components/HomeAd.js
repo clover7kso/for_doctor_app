@@ -22,6 +22,7 @@ export default class HomeAd extends React.Component {
       urlArray: props.data.map(function (item) {
         return item["url"];
       }),
+      navigation:props.navigation
     };
     interval = setInterval(
       function () {
@@ -45,7 +46,13 @@ export default class HomeAd extends React.Component {
         <Touchable
           onPress={() =>
             {
-              Linking.openURL(this.state.urlArray[this.state.counter])
+              const url = this.state.urlArray[this.state.counter]
+              url.startsWith('http')?
+              Linking.openURL(url):
+              this.state.navigation.navigate("ProductOne", {
+                id: url.splite(".")[0],
+                subCategory: url.splite(".")[1],
+              })
             }
           }
         >

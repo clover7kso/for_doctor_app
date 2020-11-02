@@ -174,7 +174,7 @@ export default ({ navigation }) => {
               </Table>
               {result_homeAd.loading || result_homeAd.data === undefined?
                (<ActivityIndicator color={"white"} /> ) : 
-               (<HomeAd data={result_homeAd.data.homeAdMany} />)
+               (<HomeAd data={result_homeAd.data.homeAdMany} navigation={navigation}/>)
                }
             </Container>
             
