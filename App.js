@@ -17,7 +17,6 @@ import { getMainDefinition } from "apollo-utilities";
 import { setContext } from 'apollo-link-context';
 
 export default function App() {
-  
   const [loaded, setLoaded] = useState(false);
   const [client, setClient] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(null);
