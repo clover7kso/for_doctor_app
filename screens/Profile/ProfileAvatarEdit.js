@@ -27,7 +27,8 @@ const TouchableOpacity = styled.TouchableOpacity`
 `;
 
 const ImageSelect = styled.Text`
-  font-family:"NotoSansCJKkr_Regular"font-size: 20px;
+  font-family:NotoSansCJKkr_Regular
+  font-size: 20px;
 `;
 
 export default ({ navigation, route }) => {
