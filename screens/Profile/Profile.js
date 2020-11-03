@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useQuery } from "react-apollo-hooks";
 import { USER_ONE } from "./ProfileQueries";
-import { ActivityIndicator, ImageBackground } from "react-native";
+import { ActivityIndicator, ImageBackground, Alert } from "react-native";
 import { useLogOut } from "../../AuthContext";
 import BackPressHeader4 from "../../components/BackPressHeader4";
 import constants from "../../constants";
@@ -155,7 +155,21 @@ export default ({ navigation }) => {
                 resizeMode={"contain"}
                 source={require("../../assets/images/top_bar_text.png")}/>
               </TouchableWithoutFeedback>
-              <Touchable onPress={handleLogOut}>
+              <Touchable onPress={()=>Alert.alert(
+                                    '로그아웃 하시겠습니까?',
+                                    '로그아웃시 추후에 재로그인이 필요합니다',
+                                    [
+                                      {
+                                        text: '로그아웃',
+                                        onPress: () => handleLogOut()
+                                      },
+                                      {
+                                        text: '취소',
+                                        onPress: () => {},
+                                        style: 'cancel'
+                                      },
+                                    ],
+                                  )}>
                 <LogoutText>로그아웃</LogoutText>
               </Touchable>
             </LogoutContiner>
