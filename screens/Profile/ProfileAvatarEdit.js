@@ -18,7 +18,7 @@ const OutContainer = styled.View`
 const ImageSelected = styled.Image`
   width: 200px;
   height: 200px;
-  border-radius:30px
+  border-radius:3000px
   margin:30px
 `;
 
