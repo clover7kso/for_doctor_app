@@ -154,7 +154,7 @@ export default ({ navigation }) => {
                   />
                   <HomeButton
                     onPress={() =>
-                      navigation.navigate("PostTop", { type: "커뮤니티" })
+                      navigation.navigate("PostMany", { type: "커뮤니티", category:"자유게시판"})
                     }
                     text = "커뮤니티"
                   />

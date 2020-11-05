@@ -3,7 +3,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { CardStyleInterpolators } from "@react-navigation/stack";
 
-import PostTop from "../screens/Post/PostTop";
 import PostMany from "../screens/Post/PostMany";
 import PostOne from "../screens/Post/PostOne";
 import PostUpload from "../screens/Post/PostUpload";
@@ -45,7 +44,6 @@ function MainNavigation() {
         <Stack.Screen name="ProfileMyProduct" component={ProfileMyProduct} />
         <Stack.Screen name="ProfileCenter" component={ProfileCenter} />
 
-        <Stack.Screen name="PostTop" component={PostTop} />
         <Stack.Screen name="PostMany" component={PostMany} />
         <Stack.Screen name="PostOne" component={PostOne} />
         <Stack.Screen name="PostUpload" component={PostUpload} />

@@ -48,7 +48,7 @@ const Container = styled.View`
 `;
 
 export default ({ navigation, route }) => {
-  const { title, category } = route.params;
+  const { type, category } = route.params;
 
   const [postAddView] = useMutation(POST_ADD_VIEW);
   const handlePostAddView = (id) => {
@@ -115,7 +115,7 @@ export default ({ navigation, route }) => {
 
   return (
     <OutContainer>
-      <BackPressHeader2 navigation={navigation} mainText={title} subText={category.replace("게시판","").substring(0,4)} />
+      <BackPressHeader2 navigation={navigation} mainText={type} subText={category.replace("게시판","").substring(0,4)} />
       <PostSearchBox value={searchWord} onChange={setSearchWord} />
       <Container>
         {resPostMany.loading ? (
