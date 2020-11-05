@@ -154,15 +154,21 @@ export default ({ navigation }) => {
                   />
                   <HomeButton
                     onPress={() =>
-                      navigation.navigate("PostMany", { type: "커뮤니티" })
-                    }
-                    text = "커뮤니티"
-                  />
-                  <HomeButton
-                    onPress={() =>
                       {Alert.alert("아직 준비중인 기능입니다");}
                     }
                     text = "법률제휴"
+                  />
+                  <HomeButton
+                     onPress={() =>
+                      {Alert.alert("아직 준비중인 기능입니다");}
+                    }
+                    text = "동호회"
+                  />
+                  <HomeButton
+                    onPress={() =>
+                      navigation.navigate("PostMany", { type: "커뮤니티" })
+                    }
+                    text = "커뮤니티"
                   />
                   <HomeButton
                     onPress={() =>
