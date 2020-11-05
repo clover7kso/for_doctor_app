@@ -35,11 +35,11 @@ const Title = styled.Text`
   font-size: 20px;
 `;
 const Content = styled.Text`
-  font-family:NotoSansCJKkr_Thin
+  font-family:WandocleanseaR
   font-size: 15px;
 `;
 const Info = styled.Text`
-  font-family:NotoSansCJKkr_Thin
+  font-family:WandocleanseaR
   color: grey;
   font-size: 12px;
 `;

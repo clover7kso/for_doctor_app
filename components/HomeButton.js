@@ -12,7 +12,7 @@ const Container = styled.View`
 `;
 
 const Text = styled.Text`
-    font-family:NotoSansCJKkr_Thin
+    font-family:WandocleanseaR
     margin-left:20px;
     margin-right:20px;
     padding-top: 12px;

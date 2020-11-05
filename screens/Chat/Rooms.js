@@ -13,7 +13,7 @@ const LoadingContainer = styled.View`
 `;
 
 const LoadingTitle = styled.Text`
-  font-family:NotoSansCJKkr_Regular
+  font-family:WandocleanseaB
   margin-top:20px
   font-size:19px
 `;

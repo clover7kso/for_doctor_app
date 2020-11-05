@@ -23,8 +23,8 @@ export default function App() {
   const preLoad = async () => {
     try {
       await Font.loadAsync({
-        'NotoSansCJKkr_Regular': require('./assets/fonts/NotoSansCJKkr-Regular.ttf'),
-        'NotoSansCJKkr_Thin': require('./assets/fonts/NotoSansCJKkr-Thin.ttf'),
+        'WandocleanseaB': require('./assets/fonts/WandocleanseaB.ttf'),
+        'WandocleanseaR': require('./assets/fonts/WandocleanseaR.ttf'),
       });
       await Asset.loadAsync([require("./assets/images/logo.png")]);
       const cache = new InMemoryCache();

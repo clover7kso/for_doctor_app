@@ -46,14 +46,14 @@ const MyContainer = styled.View`
 `;
 
 const FromRowDate = styled.Text`
-  font-family:NotoSansCJKkr_Regular
+  font-family:WandocleanseaB
   color:white
   font-size:10px
   text-align:left
   padding-left:9px
 `;
 const MyRowDate = styled.Text`
-  font-family:NotoSansCJKkr_Regular
+  font-family:WandocleanseaB
   color:white
   font-size:10px
   text-align:right
@@ -63,11 +63,11 @@ const MyRowDate = styled.Text`
 const RowContainer = styled.View`
 `;
 const RowName = styled.Text`
-  font-family:NotoSansCJKkr_Regular
+  font-family:WandocleanseaB
   margin-left:4px
 `;
 const RowText = styled.Text`
-  font-family:NotoSansCJKkr_Regular
+  font-family:WandocleanseaB
   background:#ffffff
   margin:4px
   padding:13px

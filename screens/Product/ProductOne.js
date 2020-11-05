@@ -29,18 +29,18 @@ const InfoContainer = styled.View`
 `;
 
 const Title = styled.Text`
-  font-family:NotoSansCJKkr_Regular
+  font-family:WandocleanseaB
   margin-top: 10;
   font-size: 25;
 `;
 const Company = styled.Text`
-  font-family:NotoSansCJKkr_Thin
+  font-family:WandocleanseaR
   font-size: 12;
   text-align: right;  
   color: grey;
 `;
 const Content = styled.Text`
-  font-family:NotoSansCJKkr_Thin
+  font-family:WandocleanseaR
   margin-top: 30;
   font-size: 18;
 `;

@@ -46,13 +46,13 @@ const Row = styled.View`
 
 
 const TextTitle = styled.Text`
-  font-family:NotoSansCJKkr_Thin
+  font-family:WandocleanseaR
   font-size:17px
   color: ${(props) => props.theme.blackColor};
 `;
 
 const TextViews = styled.Text`
-  font-family:NotoSansCJKkr_Thin
+  font-family:WandocleanseaR
   font-size:9px
   color: #595959;
 `;

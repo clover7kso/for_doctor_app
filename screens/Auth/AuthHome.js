@@ -23,7 +23,7 @@ const InContainer2 = styled.View`
 `;
 
 const Text = styled.Text`
-  font-family:NotoSansCJKkr_Regular
+  font-family:WandocleanseaB
   color: white;
   margin-top: 10px;
 `;

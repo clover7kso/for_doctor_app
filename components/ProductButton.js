@@ -13,7 +13,7 @@ const Container = styled.View`
 `;
 
 const Text = styled.Text`
-    font-family:NotoSansCJKkr_Thin
+    font-family:WandocleanseaR
     padding-top:10px;
     padding-bottom:10px
     align-items:center;
