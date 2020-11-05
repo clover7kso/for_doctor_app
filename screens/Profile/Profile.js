@@ -31,7 +31,8 @@ const LogoutContiner = styled.View`
   justify-content:space-between
 `
 const LogoutText = styled.Text`
-  font-family:"WandocleanseaB"color: white;
+  font-family:WandocleanseaB
+  color: white;
   margin-right:30px
   border: 1px solid white;
   border-radius: 40px
@@ -67,11 +68,13 @@ const UserAvater = styled.Image`
   border-radius:5000px
 `;
 const UserName = styled.Text`
-  font-family:"WandocleanseaB"font-size:25px
+  font-family:WandocleanseaB
+  font-size:25px
   margin-left: 30px;
 `;
 const UserId = styled.Text`
-  font-family:"WandocleanseaB"font-size:14px
+  font-family:WandocleanseaB
+  font-size:14px
   margin-left: 30px;
   color: #cfcfcf;
 `;

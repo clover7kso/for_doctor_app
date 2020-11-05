@@ -33,15 +33,15 @@ const InContainer3 = styled.View`
   justify-content: space-between;
 `;
 const Title = styled.Text`
-  font-family:NotoSansCJKkr_Regular
+  font-family:WandocleanseaB
   font-size: 20px;
 `;
 const Content = styled.Text`
-  font-family:NotoSansCJKkr_Regular
+  font-family:WandocleanseaB
   font-size: 15px;
 `;
 const Info = styled.Text`
-  font-family:NotoSansCJKkr_Regular
+  font-family:WandocleanseaB
   color: grey;
   font-size: 12px;
 `;

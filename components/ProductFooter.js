@@ -39,7 +39,8 @@ const IconContainer = styled.View`
 `;
 
 const Text = styled.Text`
-  font-family:"NotoSansCJKkr_Regular"font-size:17px
+  font-family:WandocleanseaB
+  font-size:17px
   color: white;
   text-align: center;
 `;

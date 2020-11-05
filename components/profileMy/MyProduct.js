@@ -31,13 +31,16 @@ const InContainer3 = styled.View`
   align-items: flex-end;
 `;
 const Title = styled.Text`
-  font-family:"NotoSansCJKkr_Regular"font-size: 20px;
+  font-family:WandocleanseaB
+  font-size: 20px;
 `;
 const Content = styled.Text`
-  font-family:"NotoSansCJKkr_Regular"font-size: 15px;
+  font-family:WandocleanseaB
+  font-size: 15px;
 `;
 const Info = styled.Text`
-  font-family:"NotoSansCJKkr_Regular"color: grey;
+  font-family:WandocleanseaB
+  color: grey;
   font-size: 12px;
 `;
 const Divider = styled.View`

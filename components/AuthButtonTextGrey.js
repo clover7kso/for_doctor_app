@@ -10,8 +10,8 @@ const Container = styled.View`
 `;
 
 const Text = styled.Text`
-  font-family:"NotoSansCJKkr_Regular"
-padding: 5px;
+  font-family:WandocleanseaB
+  padding: 5px;
   color: grey;
 `;
 

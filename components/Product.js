@@ -31,7 +31,7 @@ const InContainer3 = styled.View`
   align-items: flex-end;
 `;
 const Title = styled.Text`
-  font-family:NotoSansCJKkr_Regular
+  font-family:WandocleanseaB
   font-size: 20px;
 `;
 const Content = styled.Text`

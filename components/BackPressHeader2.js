@@ -25,7 +25,8 @@ const SubTitleBack = styled.Image`
   height: ${793 * (constants.width / 2.5 / 1948)}
 `;
 const SubTitleText = styled.Text`
-  font-family:"NotoSansCJKkr_Regular"font-size: ${constants.width / 23};
+  font-family:WandocleanseaB
+  font-size: ${constants.width / 23};
   color: #4CA493;
   text-align: center;
   width: ${constants.width / 2.5};
@@ -58,7 +59,8 @@ const TopBarContainer = styled.View`
 `;
 
 const MainText = styled.Text`
-  font-family:"NotoSansCJKkr_Regular"font-size: 25px;
+  font-family:WandocleanseaB
+  font-size: 25px;
   color: black;
   text-align: center;
 `;

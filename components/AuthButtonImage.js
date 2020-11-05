@@ -28,7 +28,8 @@ const Container2 = styled.View`
 `;
 
 const Text = styled.Text`
-  font-family:"NotoSansCJKkr_Regular"color: ${(props) => props.theme.darkGreyColor};
+  font-family:WandocleanseaB
+  color: ${(props) => props.theme.darkGreyColor};
   text-align: center;
 `;
 

@@ -66,7 +66,7 @@ const PressedContainer = styled.View`
   border-radius:300px
 `;
 const PressedText = styled.Text`
-  font-family:NotoSansCJKkr_Regular
+  font-family:WandocleanseaB
   align-items:center;
   color: #4A7768;
   font-size: 22px;

@@ -7,7 +7,8 @@ const OutContainer = styled.View`
   flex: 1;
 `;
 const Text = styled.Text`
-  font-family:"WandocleanseaB"padding-left: 15px;
+  font-family:WandocleanseaB
+  padding-left: 15px;
   padding-top: 15px;
 `;
 

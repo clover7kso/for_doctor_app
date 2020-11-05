@@ -74,12 +74,12 @@ const ProfileRowContainer = styled.View`
   flex-direction:row
 `;
 const ProfileText_1 = styled.Text`
-  font-family:"WandocleanseaB"
+  font-family:WandocleanseaB
   color: #34766e;
   font-size: 20px;
 `;
 const ProfileText_2 = styled.Text`
-  font-family:"WandocleanseaB"
+  font-family:WandocleanseaB
   padding-left: 10px;
   color: black;
   font-size: 15px;

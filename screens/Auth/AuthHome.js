@@ -30,7 +30,7 @@ const Text = styled.Text`
 
 const TextContainer = styled.View`
   margin-top: 10%;
-  font-family:NotoSansCJKkr_Regular
+  font-family:WandocleanseaB
   align-items: center;
 `;
 

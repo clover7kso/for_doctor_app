@@ -39,7 +39,8 @@ const Container = styled.View`
   margin-bottom: 10px;
 `;
 const Text = styled.Text`
-  font-family:"WandocleanseaB"padding: 5px;
+  font-family:WandocleanseaB
+  padding: 5px;
   color: ${(props) => props.theme.blueColor};
 `;
 
