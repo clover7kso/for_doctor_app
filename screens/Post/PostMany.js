@@ -1,12 +1,25 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useQuery, useMutation } from "react-apollo-hooks";
-import { POST_MANY, POST_ADD_VIEW } from "./PostQueries";
+import { POST_MANY, POST_ADD_VIEW, POST_SUB_CATEGORY } from "./PostQueries";
 import BackPressHeader2 from "../../components/BackPressHeader2";
 import PostSearchBox from "../../components/PostSearchBox";
+import PostSubCategory from "../../components/PostSubCategory";
 import Post from "../../components/Post";
 import { ActivityIndicator, FlatList } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+
+const LoadingContainer = styled.View`
+  align-items: center;
+  justify-content:center;
+  flex: 1;
+`;
+
+const SectionTitle = styled.Text`
+  font-family:WandocleanseaB
+  margin-top:20px
+  font-size:19px
+`;
 
 const Touchable = styled.TouchableOpacity`
   padding-left:35;
@@ -48,7 +61,16 @@ const Container = styled.View`
 `;
 
 export default ({ navigation, route }) => {
-  const { type, category } = route.params;
+  const { type } = route.params;
+
+  const resSubCate = useQuery(POST_SUB_CATEGORY, {
+    variables: {},
+  });
+  resSubCate.refetch();
+  const [category, setCategory] = !resSubCate.loading && resSubCate.data!==undefined
+    ? useState(resSubCate.data.postSubCategory[0])
+    : useState("자유게시판");
+
 
   const [postAddView] = useMutation(POST_ADD_VIEW);
   const handlePostAddView = (id) => {
@@ -117,45 +139,63 @@ export default ({ navigation, route }) => {
     <OutContainer>
       <BackPressHeader2 navigation={navigation} mainText={type} subText={category.replace("게시판","").substring(0,4)} />
       <PostSearchBox value={searchWord} onChange={setSearchWord} />
-      <Container>
-        {resPostMany.loading ? (
-          <ActivityIndicator color={"black"} />
-        ) : (
-          <FlatList
-            contentContainerStyle={{ paddingBottom: 60 }}
-            showsVerticalScrollIndicator={false}
-            data={resPostMany.data.postMany.posts}
-            renderItem={({ item }) =>
-              Post({
-                item,
-                navigation,
-                handlePostAddView,
+      
+      {resSubCate.loading ? null : (
+        <Container>
+          {resSubCate.data !== undefined && resSubCate.data.postSubCategory.length === 0 ? null : (
+            <PostSubCategory
+              value={category}
+              onChange={setCategory}
+              tabArray={resSubCate.data.postSubCategory}
+            />
+          )}
+      
+          {resPostMany.loading? (
+            <LoadingContainer>
+              <ActivityIndicator color={"black"} />
+            </LoadingContainer>
+          ) : resPostMany.data !== undefined && resPostMany.data.postMany.length !== 0?(
+            
+            <FlatList
+              contentContainerStyle={{ paddingBottom: 60 }}
+              showsVerticalScrollIndicator={false}
+              data={resPostMany.data.postMany.posts}
+              renderItem={({ item }) =>
+                Post({
+                  item,
+                  navigation,
+                  handlePostAddView,
+                })
+              }
+              keyExtractor={(item, index) => item.id}
+              ListFooterComponent={renderFooter}
+              refreshing={refreshing}
+              onRefresh={refresh}
+              onEndReached={onLoadMore}
+              onEndReachedThreshold={1}
+            />
+            ):(
+              <LoadingContainer>
+                <SectionTitle>아직 쓰여진 글이 없습니다.</SectionTitle>
+              </LoadingContainer>
+          )}
+          <Touchable
+            onPress={() =>
+              navigation.navigate("PostUpload", {
+                category: category,
+                refresh: handleOnBack,
               })
             }
-            keyExtractor={(item, index) => item.id}
-            ListFooterComponent={renderFooter}
-            refreshing={refreshing}
-            onRefresh={refresh}
-            onEndReached={onLoadMore}
-            onEndReachedThreshold={1}
-          />
-        )}
-        <Touchable
-          onPress={() =>
-            navigation.navigate("PostUpload", {
-              category: category,
-              refresh: handleOnBack,
-            })
-          }
-        >
-          <Text>글쓰기</Text>
-          <Ionicons
-            name={Platform.OS === "ios" ? "ios-add" : "md-add"}
-            size={20}
-            color={"white"}
-          />
-        </Touchable>
-      </Container>
+          >
+            <Text>글쓰기</Text>
+            <Ionicons
+              name={Platform.OS === "ios" ? "ios-add" : "md-add"}
+              size={20}
+              color={"white"}
+            />
+          </Touchable>
+        </Container>
+      )}
     </OutContainer>
   );
 };

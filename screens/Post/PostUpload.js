@@ -46,7 +46,7 @@ const Text = styled.Text`
 
 export default ({ navigation, route }) => {
   const { category } = route.params;
-
+  console.log(category)
   const titleInput = useInput("");
   const contentInput = useInput("");
   const [postUpload] = useMutation(POST_UPLOAD);

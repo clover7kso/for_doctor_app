@@ -1,5 +1,11 @@
 import { gql } from "apollo-boost";
 
+export const POST_SUB_CATEGORY = gql`
+  query postSubCategory{
+    postSubCategory
+  }
+`;
+
 export const POST_ONE = gql`
   query($id: String!) {
     postOne(id: $id) {
