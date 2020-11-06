@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Platform, Alert } from "react-native";
-import * as ImagePicker from "expo-image-picker";
 import BackPressHeader4 from "../../components/BackPressHeader4";
 import { AVATAR_EDIT } from "./ProfileQueries";
 import { useMutation } from "react-apollo-hooks";
 import moment from "moment";
 import axios from "axios";
+import * as ImagePicker from "expo-image-picker";
 import * as config from '../../config';
 
 const OutContainer = styled.View`
@@ -52,7 +52,7 @@ export default ({ navigation, route }) => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      aspect: [4, 3],
+      aspect: [1, 1],
       quality: 1,
     });
 

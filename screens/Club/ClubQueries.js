@@ -40,8 +40,8 @@ export const CLUB_ADD_VIEW = gql`
 `;
 
 export const CLUB_UPLOAD = gql`
-  mutation clubUpload($category: String!, $title: String!, $content: String!) {
-    clubUpload(category: $category, title: $title, content: $content)
+  mutation clubUpload($clubImage: String!, $title: String!, $content: String!) {
+    clubUpload(clubImage: $clubImage, title: $title, content: $content)
   }
 `;
 

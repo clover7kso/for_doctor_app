@@ -162,7 +162,6 @@ export default ({ navigation, route }) => {
           <Touchable
             onPress={() =>
               navigation.navigate("ClubUpload", {
-                category: category,
                 refresh: handleOnBack,
               })
             }
