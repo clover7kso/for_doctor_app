@@ -46,14 +46,14 @@ const MyContainer = styled.View`
 `;
 
 const FromRowDate = styled.Text`
-  font-family:WandocleanseaB
+  font-family:NanumB
   color:white
   font-size:10px
   text-align:left
   padding-left:9px
 `;
 const MyRowDate = styled.Text`
-  font-family:WandocleanseaB
+  font-family:NanumB
   color:white
   font-size:10px
   text-align:right
@@ -61,13 +61,15 @@ const MyRowDate = styled.Text`
 `;
 
 const RowContainer = styled.View`
+  width:${constants.width - 150}
 `;
+
 const RowName = styled.Text`
-  font-family:WandocleanseaB
+  font-family:NanumB
   margin-left:4px
 `;
 const RowText = styled.Text`
-  font-family:WandocleanseaB
+  font-family:NanumB
   background:#ffffff
   margin:4px
   padding:13px
@@ -93,13 +95,13 @@ function date_to_str(format)
     if(hour<10) hour = '0' + hour;
     var min = format.getMinutes();
     if(min<10) min = '0' + min;
-    return year + "-" + month + "-" + date + " " + timeText + ":" + hour + ":" + min;
+    return year + "-" + month + "-" + date + "    " + timeText + " " + hour + ":" + min;
 }
 
 
 function Message({ navigation, route}) {
   const {roomId,toId,toName} = route.params
-
+  
   const [message, setMessage] = useState("");
   const [sendMessageMutation] = useMutation(SEND_MESSAGE, {
     variables: {
@@ -119,10 +121,12 @@ function Message({ navigation, route}) {
   });
 
 
-  const [messages, setMessages] = useState(resultMessage.data.seeRoom.allMessages || []);
+  const [messages, setMessages] = useState(resultMessage.data!==undefined?resultMessage.data.seeRoom.allMessages:[]);
   useEffect(() => {
-    setMessages(resultMessage.data.seeRoom.allMessages)
-  }, [resultMessage.data.seeRoom.allMessages]);
+    if(resultMessage.data!==undefined){
+      setMessages(resultMessage.data.seeRoom.allMessages)
+    }
+  }, [resultMessage.data!==undefined?resultMessage.data.seeRoom.allMessages:null]);
   
   const handleNewMessage = () => {
     if (data !== undefined) {
@@ -159,7 +163,7 @@ function Message({ navigation, route}) {
             data={messages}
             renderItem={({item})=>{
               return(
-                toName===item.from.name?
+                toId===item.from.id?
                 (
                 <FromContainer>
                   <UserAvater

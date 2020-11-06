@@ -22,16 +22,17 @@ export const SEE_ROOMS = gql`
 export const SEE_ROOM = gql`
   query seeRoom($roomId:String!){
     seeRoom(roomId:$roomId){
-        allMessages{
-            from{
-              avatar
-              name
-            }
-            text
-            timeFromToday
-            createdAt
+      allMessages{
+          from{
+            id
+            avatar
+            name
           }
+          text
+          timeFromToday
+          createdAt
         }
+      }
     }
 `;
 
@@ -41,6 +42,7 @@ export const SEND_MESSAGE = gql`
     sendMessage(roomId: $roomId, sendText: $sendText, toId: $toId) {
       createdAt
       from{
+        id
         avatar
         name
       }
@@ -55,6 +57,7 @@ export const NEW_MESSAGE = gql`
     newMessage(roomId:$roomId) {
       createdAt
       from{
+        id
         avatar
         name
       }

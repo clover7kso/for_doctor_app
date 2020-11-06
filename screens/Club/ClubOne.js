@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { useQuery, useMutation } from "react-apollo-hooks";
-import { CLUB_ONE } from "./ClubQueries";
+import { CLUB_ONE, SEND_MESSAGE } from "./ClubQueries";
 import constants from "../../constants";
-import { ActivityIndicator, ScrollView, FlatList } from "react-native";
+import { ActivityIndicator, ScrollView } from "react-native";
 import BackPressHeader3 from "../../components/BackPressHeader3";
 import ClubFooter from "../../components/ClubFooter";
 const OutContainer = styled.View`
@@ -92,8 +92,10 @@ export default ({ route, navigation }) => {
   });
   resClubOne.refetch();
 
+  const [sendMessage] = useMutation(SEND_MESSAGE);
   const handleToChat = async () => {
-    navigation.navigate("Message", {roomId:resClubOne.data.clubOne.chatRoomId, toId:resClubOne.data.clubOne.userId, toName:resClubOne.data.clubOne.userName})
+    const message = await sendMessage({ variables: { sendText:"안녕하세요 \""+resClubOne.data.clubOne.title+"\" 동호회 글을 보고 채팅드립니다.", toId:resClubOne.data.clubOne.userId } });
+    navigation.navigate("Message", {roomId:message.data.sendMessage.room.id, toId:resClubOne.data.clubOne.userId, toName:resClubOne.data.clubOne.userName})
   };
 
   return (

@@ -74,3 +74,14 @@ export const PRODUCT_ADD_CALL = gql`
     productAddCall(productId: $productId)
   }
 `;
+
+export const SEND_MESSAGE = gql`
+  mutation sendMessage($roomId:String, $sendText:String!, $toId:String!){
+      sendMessage(roomId:$roomId, sendText:$sendText, toId:$toId)
+      {
+        room{
+          id
+        }
+      }
+  }
+`

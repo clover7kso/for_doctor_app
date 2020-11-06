@@ -39,6 +39,7 @@ const Title = styled.Text`
 const Content = styled.Text`
   font-family:NanumB
   font-size: 15px;
+  padding-right:${constants.width / 7 + 20};
 `;
 const Info = styled.Text`
   font-family:NanumB
@@ -66,7 +67,7 @@ const Room = ({ item, navigation }) => {
                   {item.recentMessage[0].timeFromToday}
                 </Info>
             </InContainer3>
-            <Content numberOfLines={3} ellipsizeMode="tail">
+            <Content numberOfLines={2} ellipsizeMode="tail">
               {item.recentMessage[0].text}
             </Content>
           </InContainer2>

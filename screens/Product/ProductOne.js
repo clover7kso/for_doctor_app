@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ScrollView } from "react-native";
 import styled from "styled-components";
 import { useQuery, useMutation } from "react-apollo-hooks";
-import { PRODUCT_ONE, TOGGLE_LIKE, PRODUCT_ADD_CALL } from "./ProductQueries";
+import { PRODUCT_ONE, TOGGLE_LIKE, PRODUCT_ADD_CALL,SEND_MESSAGE } from "./ProductQueries";
 import { ActivityIndicator } from "react-native";
 import BackPressHeader3 from "../../components/BackPressHeader3";
 import ProductSampleImages from "../../components/ProductSampleImages";
@@ -76,8 +76,10 @@ export default ({ navigation, route }) => {
     } catch (e) {}
   };
 
+  const [sendMessage] = useMutation(SEND_MESSAGE);
   const handleToChat = async () => {
-    navigation.navigate("Message", {roomId:resProductOne.data.productOne.chatRoomId,toId:resProductOne.data.productOne.marketerId, toName:resProductOne.data.productOne.marketerName})
+    const message = await sendMessage({ variables: { sendText:"안녕하세요. \""+resProductOne.data.productOne.title+"\" 제품/업체 글을 보고 채팅드립니다.", toId:resProductOne.data.productOne.marketerId } });
+    navigation.navigate("Message", {roomId:message.data.sendMessage.room.id, toId:resProductOne.data.productOne.marketerId, toName:resProductOne.data.productOne.marketerName})
   };
 
   return (
