@@ -28,7 +28,7 @@ const Container2 = styled.View`
 `;
 
 const Text = styled.Text`
-  font-family:WandocleanseaB
+  font-family:NanumB
   color: ${(props) => props.theme.darkGreyColor};
   text-align: center;
 `;

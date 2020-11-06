@@ -39,7 +39,6 @@ export default ({ navigation, route }) => {
     Alert.alert(categories.error.message.replace("GraphQL error: ", ""));
     navigation.pop(1)
   }
-  console.log(categories.data)
 
   return (
     <OutContainer>

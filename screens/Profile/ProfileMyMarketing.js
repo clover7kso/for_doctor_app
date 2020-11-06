@@ -25,7 +25,7 @@ const LoadingContainer = styled.View`
 `;
 
 const NoData = styled.Text`
-  font-family:WandocleanseaB
+  font-family:NanumB
   margin-top:20px
   font-size:19px
 `;

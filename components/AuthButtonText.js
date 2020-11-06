@@ -10,7 +10,7 @@ const Container = styled.View`
 `;
 
 const Text = styled.Text`
-  font-family:WandocleanseaB
+  font-family:NanumB
   padding: 5px;
   color: white;
 `;

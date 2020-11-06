@@ -30,7 +30,7 @@ const LoadingContainer = styled.View`
 `;
 
 const SectionTitle = styled.Text`
-  font-family:WandocleanseaB
+  font-family:NanumB
   margin-top:20px
   font-size:19px
 `;
@@ -42,7 +42,7 @@ const Divider = styled.View`
 `;
 
 export default ({ navigation, route }) => {
-  const { title,category } = route.params;
+  const { title, category } = route.params;
   const resSubCate = useQuery(PRODUCT_SUB_CATEGORY, {
     variables: { category: category },
   });
@@ -118,11 +118,11 @@ export default ({ navigation, route }) => {
           ) :resProductMany.data !== undefined && resProductMany.data.productMany.length !== 0?(
             <SectionList
               sections={[{
-                title:"추천제품",
+                title:title==="의료기기"?"추천제품":"추천업체",
                 data : shuffle(resProductMany.data.productMany.filter(adItems))
               },
               {
-                title:"일반제품",
+                title:title==="의료기기"?"일반제품":"일반업체",
                 data : shuffle(resProductMany.data.productMany.filter(normalItems))
               }]}
               showsVerticalScrollIndicator ={false}
@@ -130,7 +130,7 @@ export default ({ navigation, route }) => {
                 Product({ item, navigation, handleProductAddView })
               }
               renderSectionHeader={({ section: { title } }) => (
-                title==="추천제품"?
+                title==="추천제품"||title==="추천업체"?
                   (resProductMany.data.productMany.filter(adItems).length>0?
                     <SectionTitle>{title}</SectionTitle>:null)
                       :resProductMany.data.productMany.filter(normalItems).length>0?

@@ -39,7 +39,7 @@ const Container = styled.View`
   margin-bottom: 10px;
 `;
 const Text = styled.Text`
-  font-family:WandocleanseaB
+  font-family:NanumB
   padding: 5px;
   color: ${(props) => props.theme.blueColor};
 `;

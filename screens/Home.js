@@ -74,12 +74,12 @@ const ProfileRowContainer = styled.View`
   flex-direction:row
 `;
 const ProfileText_1 = styled.Text`
-  font-family:WandocleanseaB
+  font-family:NanumB
   color: #34766e;
   font-size: 20px;
 `;
 const ProfileText_2 = styled.Text`
-  font-family:WandocleanseaB
+  font-family:NanumB
   padding-left: 10px;
   color: black;
   font-size: 15px;
@@ -160,7 +160,7 @@ export default ({ navigation }) => {
                   />
                   <HomeButton
                      onPress={() =>
-                      {Alert.alert("아직 준비중인 기능입니다");}
+                      navigation.navigate("ClubMany", { type: "동호회" })
                     }
                     text = "동호회"
                   />

@@ -7,6 +7,10 @@ import PostMany from "../screens/Post/PostMany";
 import PostOne from "../screens/Post/PostOne";
 import PostUpload from "../screens/Post/PostUpload";
 
+import ClubMany from "../screens/Club/ClubMany";
+import ClubOne from "../screens/Club/ClubOne";
+import ClubUpload from "../screens/Club/ClubUpload";
+
 import ProductCategory from "../screens/Product/ProductCategory";
 import ProductMany from "../screens/Product/ProductMany";
 import ProductOne from "../screens/Product/ProductOne";
@@ -47,6 +51,10 @@ function MainNavigation() {
         <Stack.Screen name="PostMany" component={PostMany} />
         <Stack.Screen name="PostOne" component={PostOne} />
         <Stack.Screen name="PostUpload" component={PostUpload} />
+        
+        <Stack.Screen name="ClubMany" component={ClubMany} />
+        <Stack.Screen name="ClubOne" component={ClubOne} />
+        <Stack.Screen name="ClubUpload" component={ClubUpload} />
 
         <Stack.Screen name="ProductCategory" component={ProductCategory} />
         <Stack.Screen name="ProductMany" component={ProductMany} />

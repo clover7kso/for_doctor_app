@@ -150,7 +150,7 @@ function Message({ navigation, route}) {
   return (
     <>
     <BackPressHeader4 navigation={navigation} text={toName}/>
-    {!resultMessage.loading?
+    {!resultMessage.loading || resultMessage.data!==undefined?
       <OutContainer>
         <FlatListView>
           <FlatList

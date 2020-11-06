@@ -23,8 +23,8 @@ export default function App() {
   const preLoad = async () => {
     try {
       await Font.loadAsync({
-        'WandocleanseaB': require('./assets/fonts/WandocleanseaB.ttf'),
-        'WandocleanseaR': require('./assets/fonts/WandocleanseaR.ttf'),
+        'NanumB': require('./assets/fonts/NanumBarunGothic.ttf'),
+        'NanumR': require('./assets/fonts/NanumSquareR.ttf'),
       });
       await Asset.loadAsync([require("./assets/images/logo.png")]);
       const cache = new InMemoryCache();

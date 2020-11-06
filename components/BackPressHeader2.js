@@ -25,7 +25,7 @@ const SubTitleBack = styled.Image`
   height: ${793 * (constants.width / 2.5 / 1948)}
 `;
 const SubTitleText = styled.Text`
-  font-family:WandocleanseaB
+  font-family:NanumB
   font-size: ${constants.width / 23};
   color: #4CA493;
   text-align: center;
@@ -59,7 +59,7 @@ const TopBarContainer = styled.View`
 `;
 
 const MainText = styled.Text`
-  font-family:WandocleanseaB
+  font-family:NanumB
   font-size: 25px;
   color: black;
   text-align: center;

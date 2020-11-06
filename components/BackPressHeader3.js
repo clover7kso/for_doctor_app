@@ -42,7 +42,7 @@ const TopBarContainer = styled.View`
 `;
 
 const MainText = styled.Text`
-  font-family:WandocleanseaB
+  font-family:NanumB
   font-size: 20px;
   color: black;
   text-align: center;

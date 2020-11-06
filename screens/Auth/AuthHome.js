@@ -23,14 +23,15 @@ const InContainer2 = styled.View`
 `;
 
 const Text = styled.Text`
-  font-family:WandocleanseaB
+  font-family:NanumB
+  font-size:15px
   color: white;
   margin-top: 10px;
 `;
 
 const TextContainer = styled.View`
   margin-top: 10%;
-  font-family:WandocleanseaB
+  font-family:NanumB
   align-items: center;
 `;
 

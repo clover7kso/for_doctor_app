@@ -39,7 +39,7 @@ const IconContainer = styled.View`
 `;
 
 const Text = styled.Text`
-  font-family:WandocleanseaB
+  font-family:NanumB
   font-size:17px
   color: white;
   text-align: center;

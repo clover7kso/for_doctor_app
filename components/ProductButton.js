@@ -13,7 +13,7 @@ const Container = styled.View`
 `;
 
 const Text = styled.Text`
-    font-family:WandocleanseaR
+    font-family:NanumR
     padding-top:10px;
     padding-bottom:10px
     align-items:center;
@@ -30,7 +30,7 @@ const PressedContainer = styled.View`
     width: ${constants.width / 1.2};
 `;
 const PressedText = styled.Text`
-    font-family:WandocleanseaB 
+    font-family:NanumB 
     align-items:center;
     color: #4CA493;
     font-size: 20px;

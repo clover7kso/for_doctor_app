@@ -27,7 +27,7 @@ const TouchableOpacity = styled.TouchableOpacity`
 `;
 
 const ImageSelect = styled.Text`
-  font-family:WandocleanseaB
+  font-family:NanumB
   font-size: 20px;
 `;
 

@@ -31,15 +31,15 @@ const InContainer3 = styled.View`
   align-items: flex-end;
 `;
 const Title = styled.Text`
-  font-family:WandocleanseaB
+  font-family:NanumB
   font-size: 20px;
 `;
 const Content = styled.Text`
-  font-family:WandocleanseaB
+  font-family:NanumB
   font-size: 15px;
 `;
 const Info = styled.Text`
-  font-family:WandocleanseaB
+  font-family:NanumB
   color: grey;
   font-size: 12px;
 `;

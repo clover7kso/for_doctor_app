@@ -13,7 +13,7 @@ const Container = styled.View`
 `;
 
 const Text = styled.Text`
-  font-family:WandocleanseaB
+  font-family:NanumB
   color: #34766e;
   text-align: center;
   font-size:20px

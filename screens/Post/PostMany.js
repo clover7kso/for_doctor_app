@@ -16,7 +16,7 @@ const LoadingContainer = styled.View`
 `;
 
 const SectionTitle = styled.Text`
-  font-family:WandocleanseaB
+  font-family:NanumB
   margin-top:20px
   font-size:19px
 `;
@@ -49,7 +49,7 @@ const OutContainer = styled.View`
 `;
 
 const Text = styled.Text`
-  font-family:WandocleanseaB
+  font-family:NanumB
   align-items: center;
   color: white;
   margin-right: 10px;

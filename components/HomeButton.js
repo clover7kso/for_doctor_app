@@ -12,7 +12,7 @@ const Container = styled.View`
 `;
 
 const Text = styled.Text`
-    font-family:WandocleanseaR
+    font-family:NanumR
     margin-left:20px;
     margin-right:20px;
     padding-top: 12px;
@@ -36,7 +36,7 @@ const PressedContainer = styled.View`
     margin-left: 10px;
 `;
 const PressedText = styled.Text`
-    font-family:WandocleanseaB
+    font-family:NanumB
     margin-left:20px;
     margin-right:20px;
     padding-top: 12px;

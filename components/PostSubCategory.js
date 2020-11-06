@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "white",
     textAlign: "center",
-    fontFamily:"WandocleanseaR"
+    fontFamily:"NanumR"
   },
   selectedTabText: {
     paddingLeft: 10,
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "white",
     textAlign: "center",
-    fontFamily:"WandocleanseaB"
+    fontFamily:"NanumB"
   },
 });
 

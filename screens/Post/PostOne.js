@@ -31,7 +31,7 @@ const ViewInScroll = styled.View`
 `;
 
 const Title = styled.Text`
-  font-family:WandocleanseaB
+  font-family:NanumB
   padding-left:20px
   font-size: 23px;
 `;
@@ -47,19 +47,19 @@ const UserAvater = styled.Image`
   border-radius:30px
 `;
 const UserNickName = styled.Text`
-  font-family:WandocleanseaB
+  font-family:NanumB
   font-size: 22px;
 `;
 const TimeFromToday = styled.Text`
-  font-family:WandocleanseaB
+  font-family:NanumB
   font-size: 17px;
 `;
 const NumViews = styled.Text`
-  font-family:WandocleanseaB
+  font-family:NanumB
   font-size: 10px;
 `;
 const NumComments = styled.Text`
-  font-family:WandocleanseaB
+  font-family:NanumB
   margin-left:10px
   font-size: 10px;
 `;
@@ -96,11 +96,11 @@ const CommentColumn = styled.View`
   justify-content: space-around;
 `;
 const CommentName = styled.Text`
-  font-family:WandocleanseaB
+  font-family:NanumB
   font-size: 15px;
 `;
 const CommentTime = styled.Text`
-  font-family:WandocleanseaB
+  font-family:NanumB
   color: #c0c0c0;
   font-size: 12px;
 `;
