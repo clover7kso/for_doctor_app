@@ -97,7 +97,7 @@ export default ({ route, navigation }) => {
     const message = await sendMessage({ variables: { sendText:"안녕하세요 \""+resClubOne.data.clubOne.title+"\" 동호회 글을 보고 채팅드립니다.", toId:resClubOne.data.clubOne.userId } });
     navigation.navigate("Message", {roomId:message.data.sendMessage.room.id, toId:resClubOne.data.clubOne.userId, toName:resClubOne.data.clubOne.userName})
   };
-
+  console.log()
   return (
     <OutContainer>
       <BackPressHeader3 navigation={navigation} />
@@ -124,7 +124,7 @@ export default ({ route, navigation }) => {
               </Row>
               <ClubImage
               source={
-                resClubOne.data.clubOne.userAvatar
+                resClubOne.data.clubOne.clubImage
                   ? { uri: resClubOne.data.clubOne.clubImage }
                   :null
               }/>
