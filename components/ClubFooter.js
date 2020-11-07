@@ -28,10 +28,10 @@ const Container = styled.View`
   shadow-offset: { width: 2, height: 2 };
   elevation: 10;
   
-  padding-bottom: 10px;
+  padding-bottom: 20px;
   padding-left: 5px;
   padding-right: 5px;
-  padding-top: 10px;
+  padding-top: 15px;
 `;
 
 const IconContainer = styled.View`

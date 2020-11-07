@@ -11,9 +11,7 @@ import constants from "../constants";
 const OutContainer = styled.View`
   align-items: center;
   flex: 1;
-  padding-bottom: ${
-    Platform.OS === "ios" ? 0 : Expo.Constants.statusBarHeight * 2.2
-  };
+  padding-bottom: ${Expo.Constants.statusBarHeight * 2.2};
 `;
 
 const Container = styled.View`

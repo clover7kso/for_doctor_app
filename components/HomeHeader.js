@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import constants from "../constants";
 
 const Container = styled.View`
-  padding-top: ${Platform.OS === "ios" ? 0 : Expo.Constants.statusBarHeight};
+  padding-top: ${Expo.Constants.statusBarHeight};
   flex-direction:row
   width: ${constants.width};
   background:#4ca493

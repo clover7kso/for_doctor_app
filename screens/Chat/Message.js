@@ -197,7 +197,7 @@ function Message({ navigation, route}) {
           placeholder="메세지를 입력해주세요"
           style={{
             marginTop: 10,
-            marginBottom: 10,
+            marginBottom: 25,
             width: "90%",
             borderRadius: 10,
             paddingVertical: 8,

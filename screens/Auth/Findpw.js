@@ -12,7 +12,7 @@ import { ScrollView, BackHandler } from "react-native";
 const OutContainer = styled.View`
   background : white
   flex: 1;
-  paddingTop: ${Platform.OS === "ios" ? 0 : Expo.Constants.statusBarHeight};
+  paddingTop: ${ Expo.Constants.statusBarHeight};
 `;
 
 const InContainer1 = styled.View`

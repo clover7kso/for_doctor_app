@@ -3,6 +3,7 @@ import { gql } from "apollo-boost";
 export const CLUB_ONE = gql`
   query($id: String!) {
     clubOne(id: $id) {
+      userId
       timeFromToday
       userName
       userAvatar

@@ -31,7 +31,7 @@ const Touchable = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   position: absolute;
-  bottom: 10;
+  bottom: 20;
   border-color: transparent
   background: #4A7768;
   border-radius: 100;

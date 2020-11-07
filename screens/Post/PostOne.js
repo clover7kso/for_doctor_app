@@ -38,7 +38,7 @@ const Title = styled.Text`
 const Content = styled.Text`
   margin-top:10px;
   padding-left:20px
-  font-size: 15px;
+  font-size: 18px;
 `;
 
 const UserAvater = styled.Image`
@@ -56,12 +56,12 @@ const TimeFromToday = styled.Text`
 `;
 const NumViews = styled.Text`
   font-family:NanumB
-  font-size: 10px;
+  font-size: 15px;
 `;
 const NumComments = styled.Text`
   font-family:NanumB
   margin-left:10px
-  font-size: 10px;
+  font-size: 15px;
 `;
 
 const CommentContainer = styled.View`

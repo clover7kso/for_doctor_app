@@ -35,10 +35,10 @@ const LogoutText = styled.Text`
   color: white;
   margin-right:30px
   border: 1px solid white;
-  border-radius: 40px
-  padding-left:24px
+  border-radius: 15px
+  padding-left:20px
   padding-right:20px
-  padding-top:8px
+  padding-top:7px
   padding-bottom:5px
 `;
 const ProfileBackground = styled.Image`

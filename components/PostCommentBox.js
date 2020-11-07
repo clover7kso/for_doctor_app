@@ -11,9 +11,9 @@ const Container = styled.View`
   align-items: center;
   justify-content: space-between;
 
-  padding-bottom: 15px;
+  padding-bottom: 30px;
   padding-top: 15px;
-  padding-left: 20px;
+  padding-left: 15px;
   padding-right: 20px;
 
   shadow-color: #000000;

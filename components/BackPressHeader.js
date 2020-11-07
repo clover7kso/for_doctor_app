@@ -53,7 +53,7 @@ const Container = styled.View`
 `;
 
 const TopBarContainer = styled.View`
-  padding-top: ${(Platform.OS === "ios" ? 0 : Expo.Constants.statusBarHeight)+5};
+  padding-top: ${(Expo.Constants.statusBarHeight)+5};
   padding-bottom:5px
   background:white
   flex-direction: row;

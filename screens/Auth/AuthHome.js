@@ -7,7 +7,7 @@ import { TouchableWithoutFeedback, Keyboard,ImageBackground  } from "react-nativ
 
 const OutContainer = styled.View`
   flex: 1;
-  paddingTop: ${Platform.OS === "ios" ? 0 : Expo.Constants.statusBarHeight};
+  paddingTop: ${ Expo.Constants.statusBarHeight};
 `;
 
 const InContainer1 = styled.View`
