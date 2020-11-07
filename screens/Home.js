@@ -142,7 +142,7 @@ export default ({ navigation }) => {
                     onPress={() =>
                       navigation.navigate("ProductCategory", { type: "의료기기" })
                     }
-                    text = "의료기기"
+                    text = "의료기기 및 제품"
                   />
                   <HomeButton
                     onPress={() =>
