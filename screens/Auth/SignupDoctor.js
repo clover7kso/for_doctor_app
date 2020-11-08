@@ -46,6 +46,7 @@ export default ({ navigation, route }) => {
 
   const medicalIdInput = useInput("");
   const medicalCategoryInput = useInput("안과의사");
+  const medicalHospitalInput = useInput("");
   const [role, setRole]=useState(0);
 
   const medicalUri = useInput("");
@@ -66,9 +67,20 @@ export default ({ navigation, route }) => {
       medical_id: medicalIdInput.value,
       medical_cate: medicalCategoryInput.value,
       medical_certi: medicalUrl,
+      medical_hospital: medicalHospitalInput.value
     },
   });
-
+  const goBackToTopSafe = () => {
+    // Traverse parent stack until we can go back
+    let parent = navigation;
+    while (
+      parent.dangerouslyGetState()?.index === 0 &&
+      parent.dangerouslyGetParent()
+    ) {
+      parent = parent.dangerouslyGetParent();
+    }
+    parent?.popToTop();
+  };
   const handleSubmit = async () => {
     const formData = new FormData();
     const name = "DoctorCerti-"+ id + moment().format("_YYYY:MM:DD_HH:mm:ss") + ".jpg";
@@ -93,7 +105,7 @@ export default ({ navigation, route }) => {
       } = await uploadMutaion();
 
       if (signUpDoctor) {
-        navigation.navigate("SignupConfirm", { emailId: id });
+        goBackToTopSafe()
       }
     } catch (e) {
       Alert.alert(e.message.replace("GraphQL error: ", ""));
@@ -107,6 +119,7 @@ export default ({ navigation, route }) => {
       const medicalIdValue = medicalIdInput.value;
       const medicalCateogryValue = medicalCategoryInput.value;
       const medicalUriValue = medicalUri.value;
+      const medicalHospitalValue = medicalHospitalInput.value;
 
       const medicalIdRegex = /^[0-9]{5}$/;
 
@@ -120,6 +133,9 @@ export default ({ navigation, route }) => {
       }
       if (medicalUriValue === "") {
         return Alert.alert("면허번호 사진이 없습니다");
+      }
+      if (medicalHospitalValue === "") {
+        return Alert.alert("병원명이 비었습니다");
       }
 
       handleSubmit();
@@ -180,6 +196,11 @@ export default ({ navigation, route }) => {
               placeholder="면허번호"
               keyboardType="default"
               secureTextEntry={true}
+            />
+            <AuthInput
+              {...medicalHospitalInput}
+              placeholder="병원명"
+              keyboardType="default"
             />
           </InContainer1>
 

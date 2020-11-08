@@ -7,7 +7,7 @@ const Container = styled.View`
 `;
 
 const TextInput = styled.TextInput`
-  padding-left: 10px;
+  padding-left: 12px;
   padding-top: 3px;
   padding-bottom: 3px;
   background-color: ${(props) => props.theme.weakGreyColor};

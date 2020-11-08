@@ -86,6 +86,17 @@ export default ({ navigation,route }) => {
     },
   });
 
+  const goBackToTopSafe = () => {
+    // Traverse parent stack until we can go back
+    let parent = navigation;
+    while (
+      parent.dangerouslyGetState()?.index === 0 &&
+      parent.dangerouslyGetParent()
+    ) {
+      parent = parent.dangerouslyGetParent();
+    }
+    parent?.popToTop();
+  };
   const handleSubmit = async () => {
     const formData = new FormData();
     const name = "MarketerCerti-"+ id + moment().format("_YYYY:MM:DD_HH:mm:ss") + ".jpg";
@@ -109,13 +120,14 @@ export default ({ navigation,route }) => {
       } = await uploadMutaion();
 
       if (signUpMarketer) {
-        navigation.navigate("SignupConfirm", { emailId: id });
+        goBackToTopSafe()
       }
     } catch (e) {
       Alert.alert(e.message.replace("GraphQL error: ", ""));
     }
   };
 
+  
   const handleRegister = async () => {
     try {
       setRegisterLoading(true);

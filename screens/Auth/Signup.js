@@ -6,7 +6,7 @@ import AuthButton from "../../components/AuthButton";
 import AuthButtonTextGrey from "../../components/AuthButtonTextGrey"
 import { TouchableWithoutFeedback, Keyboard, Alert } from "react-native";
 import {  useMutation } from "react-apollo-hooks";
-import { CHECK_ID_PHONE } from "./AuthQueries";
+import { CHECK_ID_PHONE, PHONE_CHECK, PHONE_REQUEST } from "./AuthQueries";
 import {
   ScrollView,
   BackHandler,
@@ -25,9 +25,59 @@ const InContainer1 = styled.View`
   justify-content: center;
 `;
 
+const InContainer2 = styled.View`
+  margin-right:15px
+  flex: 2.5;
+  justify-content: center;
+`;
+
+const Touchable = styled.TouchableOpacity``;
+
+const Container = styled.View`
+  padding-left:17px
+  padding-top:8px
+  padding-bottom:8px
+  padding-right:17px
+  background-color: #34766e;
+  border-radius: 5px;
+  margin-bottom: 10px;
+`;
+
+const Text = styled.Text`
+  font-family:NanumB
+  color: white;
+  text-align: center;
+  font-size:15px
+`;
+
+const ContainerFinal = styled.View`
+  margin-bottom: 10px;
+`;
+
+const TextFinal = styled.Text`
+  color:black
+  padding-left: 12px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-radius: 4px;
+  
+  background-color: ${(props) => props.theme.darkGreyColor};
+  border: 1px solid ${(props) => props.theme.darkGreyColor};
+`;
+
+
+const Row = styled.View`
+  flex-direction:row
+  align-items: center;
+  justify-content: space-between;
+`;
+
 export default ({ navigation }) => {
   const emailInput = useInput("");
   const phoneInput = useInput("");
+  const validInput = useInput("");
+  const [sendValid, setSendValid] = useState(false);
+  const [validCheck, setValidCheck] = useState(false);
   const pwInput = useInput("");
   const pwConfirmInput = useInput("");
   const nameInput = useInput("");
@@ -41,6 +91,9 @@ export default ({ navigation }) => {
       phone: phoneInput.value,
     },
   });
+
+  const [phoneRequest] = useMutation(PHONE_REQUEST);
+  const [checkValid] = useMutation(PHONE_CHECK);
 
   const handleSubmit = async (navigateTo) => {
     try {
@@ -63,6 +116,8 @@ export default ({ navigation }) => {
 
   const handleRegister = async (navigateTo) => {
     try {
+      if(!validCheck)
+        return Alert.alert("전화번호 인증이 필요합니다.");
       setRegisterLoading(true);
       const emailValue = emailInput.value;
       const phoneValue = phoneInput.value;
@@ -72,7 +127,7 @@ export default ({ navigation }) => {
       
 
       const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      const phoneRegex = /^\d{2,3}-\d{3,4}-\d{4}$/;
+      const phoneRegex =  /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
       const pwRegex = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
       const nameRegex = /^[가-힣]{2,4}$/;
       
@@ -166,15 +221,86 @@ export default ({ navigation }) => {
               secureTextEntry={true}
             />
             <AuthInput
-              {...phoneInput}
-              placeholder="전화번호 ( - 를 포함하여 입력 )"
-              keyboardType="number-pad"
-            />
-            <AuthInput
               {...nameInput}
               placeholder="실명"
               keyboardType="default"
             />
+
+          {!sendValid?
+            <Row>
+              <InContainer2>
+                <AuthInput
+                  {...phoneInput}
+                  placeholder="전화번호"
+                  keyboardType="number-pad"
+                />
+              </InContainer2>
+              <Touchable onPress={()=>{
+                if(phoneInput.value==="")
+                  return Alert.alert("전화번호를 입력해주세요")
+                phoneRequest(
+                  {
+                    variables:{
+                    phoneNumber:phoneInput.value
+                  }
+                })
+                Alert.alert("인증번호가 발송되었습니다")
+                setSendValid(true)
+              }}>
+                <Container>
+                  <Text>인증코드요청</Text>
+                </Container>
+              </Touchable>
+            </Row>:
+            <ContainerFinal>
+              <TextFinal>{phoneInput.value}</TextFinal>
+            </ContainerFinal>
+          }
+          {!validCheck?
+            <Row>
+              <InContainer2>
+                <AuthInput
+                    {...validInput}
+                    placeholder="인증번호"
+                    keyboardType="number-pad"
+                  />
+              </InContainer2>
+              <Touchable onPress={async()=>
+                {
+                  if(validInput.value==="")
+                    return Alert.alert("인증번호를 입력해주세요")
+                    const {
+                      data: { phoneCheck },
+                    } = await checkValid(
+                    {
+                      variables:{
+                        phoneNumber:phoneInput.value,
+                        checkNumber:validInput.value
+                      }
+                  })
+                  console.log(phoneCheck)
+                  if(!phoneCheck){
+                    setSendValid(false)
+                    setValidCheck(false)
+                    validInput.onChange("")
+                    return Alert.alert("인증번호가 재요청이 필요합니다")
+                  }else{
+                    setValidCheck(phoneCheck)
+                    return Alert.alert("인증번호가 확인되었습니다")
+                  }
+                }
+              }>
+                <Container>
+                  <Text>번호확인</Text>
+                </Container>
+              </Touchable>
+            </Row>:
+            <ContainerFinal>
+              <TextFinal>{validInput.value}</TextFinal>
+            </ContainerFinal>
+          }
+
+            
 
             <AuthButton
               disabled={registerLoading}
