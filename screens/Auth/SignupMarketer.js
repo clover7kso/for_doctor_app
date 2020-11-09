@@ -19,11 +19,11 @@ import {
 import moment from "moment";
 import axios from "axios";
 import * as config from '../../config';
+import BackPressHeaderAuth from "../../components/BackPressHeaderAuth";
 
 const OutContainer = styled.View`
   background : white
   flex: 1;
-  paddingTop: ${ Expo.Constants.statusBarHeight};
 `;
 
 const InContainer1 = styled.View`
@@ -194,6 +194,7 @@ export default ({ navigation,route }) => {
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <OutContainer>
+          <BackPressHeaderAuth navigation = {navigation}/>
           <InContainer1>
             <AuthPicker
               {...companyCategoryInput}

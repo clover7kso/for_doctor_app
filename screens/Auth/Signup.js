@@ -11,11 +11,11 @@ import {
   ScrollView,
   BackHandler,
 } from "react-native";
+import BackPressHeaderAuth from "../../components/BackPressHeaderAuth";
 
 const OutContainer = styled.View`
   background : white
   flex: 1;
-  paddingTop: ${ Expo.Constants.statusBarHeight};
 `;
 
 const InContainer1 = styled.View`
@@ -202,6 +202,8 @@ export default ({ navigation }) => {
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <OutContainer>
+          <BackPressHeaderAuth navigation = {navigation}/>
+
           <InContainer1>
             <AuthInput
               {...emailInput}

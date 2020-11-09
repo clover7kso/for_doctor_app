@@ -9,11 +9,11 @@ import { TouchableWithoutFeedback, Keyboard, Alert } from "react-native";
 import { useMutation } from "react-apollo-hooks";
 import { LOG_IN } from "./AuthQueries";
 import { useLogIn } from "../../AuthContext";
+import BackPressHeaderAuth from "../../components/BackPressHeaderAuth";
 
 const OutContainer = styled.View`
   background : white
   flex: 1;
-  paddingTop: ${ Expo.Constants.statusBarHeight};
 `;
 
 const InContainer1 = styled.View`
@@ -69,6 +69,7 @@ export default ({ navigation }) => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <OutContainer>
+        <BackPressHeaderAuth navigation = {navigation}/>
         <InContainer1>
           <AuthInput
             {...emailInput}
