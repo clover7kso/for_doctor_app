@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "FOR DOCTOR",
-    "slug": "FOR_DOCTOR",
+    "name": "Daily Doctor",
+    "slug": "Daily-Doctor",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -15,10 +15,10 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "bundleIdentifier": "com.woony.fordoctor"
+      "bundleIdentifier": "com.woony.dailydoctor"
     },
     "android": {
-      "package": "com.woony.fordoctor"
+      "package": "com.woony.dailydoctor"
     }
   }
 }

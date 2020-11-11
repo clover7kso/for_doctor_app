@@ -23,3 +23,9 @@ export const USER_PROFILE = gql`
     }
   }
 `;
+
+export const UPDATE_PUSH_TOKEN = gql`
+  mutation updatePushToken($token:String!){
+    updatePushToken(token:$token)
+  }
+`;

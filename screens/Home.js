@@ -1,12 +1,14 @@
-import React from "react";
+import React,{useEffect} from "react";
 import styled from "styled-components";
 import { ActivityIndicator,ImageBackground,Alert } from "react-native";
 import HomeAd from "../components/HomeAd";
 import HomeHeader from "../components/HomeHeader";
 import HomeButton from "../components/HomeButton";
-import { useQuery } from "react-apollo-hooks";
-import { HOME_AD_MANY,USER_PROFILE } from "./ScreenQueries";
+import { useQuery,useMutation } from "react-apollo-hooks";
+import { HOME_AD_MANY,USER_PROFILE,UPDATE_PUSH_TOKEN } from "./ScreenQueries";
 import constants from "../constants";
+import { Notifications } from 'expo';
+import * as Permissions from 'expo-permissions';
 
 const OutContainer = styled.View`
   align-items: center;
@@ -90,7 +92,28 @@ const ProfileLine = styled.View`
   margin-right:30px
 `;
 
+
 export default ({ navigation }) => {
+  const [updateTokenMutation] = useMutation(UPDATE_PUSH_TOKEN)
+  const getToken =async()=>{
+    const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
+    let finalStatus = existingStatus;
+    if (existingStatus !== 'granted') {
+      const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+      finalStatus = status;
+    }
+    if (finalStatus !== 'granted') {
+      return;
+    }
+    var token = await Notifications.getExpoPushTokenAsync()
+    console.log(token)
+    updateTokenMutation({variables:{token:token}})
+    return true
+  }
+  useEffect(() => {
+    (async () => getToken())();
+  }, []);
+
   const result_homeAd = useQuery(HOME_AD_MANY, {
     variables: {},
   });
