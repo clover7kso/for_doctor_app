@@ -80,7 +80,7 @@ const ProfileText_1 = styled.Text`
 `;
 const ProfileText_2 = styled.Text`
   font-family:NanumB
-  padding-left: 10px;
+  padding-left: 4px;
   color: black;
   font-size: 15px;
 `;
@@ -145,9 +145,9 @@ export default ({ navigation }) => {
                   (<ActivityIndicator color={"white"} /> ) :
                   (
                       <ProfileRowContainer>
-                        <ProfileText_1>{result_profile.data.profile.name}</ProfileText_1>
-                        <ProfileText_1>{result_profile.data.profile.role===0?"원장님":"사장님"}</ProfileText_1>
-                        <ProfileText_2>안녕하세요!</ProfileText_2>
+                        <ProfileText_2>Welcome!</ProfileText_2>
+                        <ProfileText_1> {result_profile.data.profile.role===0?"Dr.":""}</ProfileText_1>
+                        <ProfileText_1>{result_profile.data.profile.name}님</ProfileText_1>
                       </ProfileRowContainer>
                   )}
                   <ProfileLineContainer>
@@ -169,15 +169,9 @@ export default ({ navigation }) => {
                   />
                   <HomeButton
                     onPress={() =>
-                      navigation.navigate("ProductCategory", { type: "마케팅" })
+                      navigation.navigate("ProductCategory", { type: "병원운영" })
                     }
-                    text = "마케팅"
-                  />
-                  <HomeButton
-                    onPress={() =>
-                      {Alert.alert("아직 준비중인 기능입니다");}
-                    }
-                    text = "법률제휴"
+                    text = "병원운영"
                   />
                   <HomeButton
                      onPress={() =>
@@ -190,12 +184,6 @@ export default ({ navigation }) => {
                       navigation.navigate("PostMany", { type: "커뮤니티" })
                     }
                     text = "커뮤니티"
-                  />
-                  <HomeButton
-                    onPress={() =>
-                      {Alert.alert("아직 준비중인 기능입니다");}
-                    }
-                    text = "구인구직"
                   />
                 </Column_2>
               </Table>

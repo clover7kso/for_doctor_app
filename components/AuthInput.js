@@ -8,8 +8,9 @@ const Container = styled.View`
 
 const TextInput = styled.TextInput`
   padding-left: 12px;
-  padding-top: 3px;
-  padding-bottom: 3px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  font-size:18px
   background-color: ${(props) => props.theme.weakGreyColor};
   border: 1px solid ${(props) => props.theme.darkGreyColor};
   border-radius: 4px;

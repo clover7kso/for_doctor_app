@@ -11,6 +11,7 @@ const Container = styled.View`
 
 const Text = styled.Text`
   font-family:NanumB
+  font-size:15px
   padding: 5px;
   color: white;
 `;

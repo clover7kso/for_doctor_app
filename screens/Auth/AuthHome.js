@@ -11,8 +11,8 @@ const OutContainer = styled.View`
 `;
 
 const InContainer1 = styled.View`
-  margin-top: 45%;
-  flex: 3;
+  margin-top: 35%;
+  flex: 1.7;
   align-items: center;
 `;
 const InContainer2 = styled.View`
@@ -24,20 +24,20 @@ const InContainer2 = styled.View`
 
 const Text = styled.Text`
   font-family:NanumB
-  font-size:15px
+  font-size:20px
   color: white;
   margin-top: 10px;
 `;
 
 const TextContainer = styled.View`
-  margin-top: 10%;
+  margin-top: -10%;
   font-family:NanumB
   align-items: center;
 `;
 
 const LogoImg = styled.Image`
-  width: ${constants.width / 1.7};
-  height: ${230 * (constants.width / 1.7 / 877)};
+  width: ${constants.width / 1.3};
+  height: ${894 * (constants.width / 1.3 / 1530)};
 `;
 
 

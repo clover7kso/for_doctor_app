@@ -37,7 +37,7 @@ export default ({ navigation, route }) => {
   if(categories.error)
   {
     Alert.alert(categories.error.message.replace("GraphQL error: ", ""));
-    navigation.pop(1)
+    navigation.goBack()
   }
 
   return (
