@@ -121,7 +121,8 @@ export default ({ navigation }) => {
   const result_profile = useQuery(USER_PROFILE, {
     variables: {},
   });
-
+  result_profile.refetch()
+  console.log(result_profile.data)
   return (
     <ImageBackground
       style={{ width: "100%", height: "100%" }}
@@ -146,7 +147,7 @@ export default ({ navigation }) => {
                   (
                       <ProfileRowContainer>
                         <ProfileText_2>Welcome!</ProfileText_2>
-                        <ProfileText_1> {result_profile.data.profile.role===0?"Dr.":""}</ProfileText_1>
+                        <ProfileText_1> {result_profile.data.profile.role==="DOCTOR"?"Dr.":""}</ProfileText_1>
                         <ProfileText_1>{result_profile.data.profile.name}님</ProfileText_1>
                       </ProfileRowContainer>
                   )}
@@ -174,12 +175,12 @@ export default ({ navigation }) => {
                   <HomeButton
                      onPress={() =>
                       navigation.navigate("ClubMany", { type: "동호회" })}
-                    text = {result_profile.data.profile.role===0?"의사 동호회":"동호회"}
+                    text = {result_profile.data.profile.role==="DOCTOR"?"의사 동호회":"동호회"}
                   />
                   <HomeButton
                     onPress={() =>
                       navigation.navigate("PostMany", { type: "커뮤니티" })}
-                    text = {result_profile.data.profile.role===0?"의사 커뮤니티":"커뮤니티"}
+                    text = {result_profile.data.profile.role==="DOCTOR"?"의사 커뮤니티":"커뮤니티"}
                   />
                 </Column_2>
               </Table>
