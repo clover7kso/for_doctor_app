@@ -138,8 +138,7 @@ export default ({ route, navigation }) => {
             </ViewInScroll>
           </ScrollView>
           <ClubFooter
-            onChat={handleToChat}
-            phoneNum={resClubOne.data.clubOne.phone}/>
+            onChat={handleToChat}/>
         </Container>
       )}
     </OutContainer>
