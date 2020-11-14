@@ -88,6 +88,7 @@ export default ({ navigation, route }) => {
   const handleOnBack = () => {
     resPostMany.refetch();
   };
+  
   resPostMany.refetch();
   const onLoadMore = () => {
     if (!loadMore & (resPostMany.data.postMany.cursor !== "End")) {
@@ -134,7 +135,7 @@ export default ({ navigation, route }) => {
       setRefreshing(false);
     }
   };
-  
+
   return (
     <OutContainer>
       <BackPressHeader2 navigation={navigation} mainText={type} subText={category.replace("게시판","").substring(0,4)} />

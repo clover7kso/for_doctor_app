@@ -133,14 +133,14 @@ export default ({ route, navigation }) => {
         <CommentTouch onPress={() => {}}>
           <CommentAvatar
             source={
-              item.userAvatar
+              item.userAvatar && item.anonymous===false
                 ? { uri: item.userAvatar }
                 : require("../../assets/images/avatar.png")
             }
           />
           <CommentColumn>
             <CommentRow>
-              <CommentName>{item.userName}</CommentName>
+              <CommentName>{item.anonymous===false?item.userName:"익명"}</CommentName>
               <CommentTime>{item.timeFromToday}</CommentTime>
             </CommentRow>
             <CommentContent>{item.text}</CommentContent>
@@ -161,13 +161,13 @@ export default ({ route, navigation }) => {
             <Row>
               <UserAvater
                 source={
-                  resPostOne.data.postOne.userAvatar
+                  resPostOne.data.postOne.userAvatar && resPostOne.data.postOne.anonymous===false
                     ? { uri: resPostOne.data.postOne.userAvatar }
                     : require("../../assets/images/avatar.png")
                 }
               />
               <Column>
-                <UserNickName>{resPostOne.data.postOne.userName}</UserNickName>
+                <UserNickName>{resPostOne.data.postOne.anonymous===false?resPostOne.data.postOne.userName:"익명"}</UserNickName>
                 <TimeFromToday>
                   {resPostOne.data.postOne.timeFromToday}
                 </TimeFromToday>

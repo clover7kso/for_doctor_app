@@ -173,13 +173,19 @@ export default ({ navigation }) => {
                     text = "병원운영"
                   />
                   <HomeButton
-                     onPress={() =>
-                      navigation.navigate("ClubMany", { type: "동호회" })}
+                     onPress={() => {
+                      result_profile.data.profile.role==="MARKETER"?
+                        Alert.alert("의사 및 병원관계자만 이용가능합니다"):
+                        navigation.navigate("ClubMany", { type: "동호회" })
+                    }}
                     text = {result_profile.data.profile.role==="DOCTOR"?"의사 동호회":"동호회"}
                   />
                   <HomeButton
-                    onPress={() =>
-                      navigation.navigate("PostMany", { type: "커뮤니티" })}
+                    onPress={() =>{
+                      result_profile.data.profile.role==="MARKETER"?
+                        Alert.alert("의사 및 병원관계자만 이용가능합니다"):
+                        navigation.navigate("PostMany", { type: "커뮤니티" })
+                    }}
                     text = {result_profile.data.profile.role==="DOCTOR"?"의사 커뮤니티":"커뮤니티"}
                   />
                 </Column_2>

@@ -9,6 +9,7 @@ export const POST_SUB_CATEGORY = gql`
 export const POST_ONE = gql`
   query($id: String!) {
     postOne(id: $id) {
+      anonymous
       timeFromToday
       userName
       userAvatar
@@ -30,6 +31,7 @@ export const POST_MANY = gql`
     postMany(category: $category, after: $after, searchWord: $searchWord) {
       cursor
       posts {
+        anonymous
         id
         title
         content
@@ -49,8 +51,8 @@ export const POST_ADD_VIEW = gql`
 `;
 
 export const POST_UPLOAD = gql`
-  mutation postUpload($category: String!, $title: String!, $content: String!) {
-    postUpload(category: $category, title: $title, content: $content)
+  mutation postUpload($category: String!, $title: String!, $content: String!, $anonymous:Boolean) {
+    postUpload(category: $category, title: $title, content: $content, anonymous:$anonymous)
   }
 `;
 

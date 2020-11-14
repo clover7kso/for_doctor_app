@@ -1,11 +1,11 @@
-import React from "react";
+import React,{useState} from "react";
 import styled from "styled-components";
 import BackPressHeader3 from "../../components/BackPressHeader3";
-import AuthButtonText from "../../components/AuthButtonText";
 import useInput from "../../hooks/useInput";
 import { useMutation } from "react-apollo-hooks";
 import { POST_UPLOAD } from "./PostQueries";
 import InputScrollView from "react-native-input-scroll-view";
+import CheckBox from '@react-native-community/checkbox';
 
 const OutContainer = styled.View`
   background: white;
@@ -35,20 +35,28 @@ const Divider = styled.View`
 
 const Touchable = styled.TouchableOpacity``;
 const Container = styled.View`
-  align-items: flex-end;
-  margin-bottom: 10px;
+  flex-direction:row
+  align-items: baseline;
+  justify-content:space-between
 `;
-const Text = styled.Text`
+const Text1 = styled.Text`
   font-family:NanumB
   padding: 5px;
   color: ${(props) => props.theme.blueColor};
 `;
 
+const Text2 = styled.Text`
+  font-family:NanumB
+  padding: 5px;
+  color: grey;
+`;
+
 export default ({ navigation, route }) => {
   const { category } = route.params;
-  console.log(category)
+
   const titleInput = useInput("");
   const contentInput = useInput("");
+  const [anonymous,setAnonymous] = useState(false);
   const [postUpload] = useMutation(POST_UPLOAD);
   const handlePostUpload = () => {
     const result = postUpload({
@@ -56,6 +64,7 @@ export default ({ navigation, route }) => {
         category: category,
         title: titleInput.value,
         content: contentInput.value,
+        anonymous: anonymous
       },
     });
     if (result) {
@@ -85,11 +94,22 @@ export default ({ navigation, route }) => {
             }
             value={contentInput.value}
           />
-          <Touchable onPress={handlePostUpload}>
+          <Container>
             <Container>
-              <Text>확인</Text>
+              <CheckBox
+                disabled={false}
+                value={anonymous}
+                onValueChange={(newValue) => setAnonymous(newValue)}/>
+              <Text2>익명</Text2>
             </Container>
-          </Touchable>
+
+            <Touchable onPress={handlePostUpload}>
+                <Text1>확인</Text1>
+            </Touchable>
+            
+          </Container>
+
+         
         </InContainer>
       </InputScrollView>
     </OutContainer>

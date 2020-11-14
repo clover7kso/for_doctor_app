@@ -72,7 +72,7 @@ const Product = ({ item, navigation, handlePostAddView }) => {
             </TextContent>
             <Row>
               <TextInfo>
-                {item.userName} | 조회수 : {item.views} | 댓글수 :{" "}
+                {item.anonymous===false?item.userName:"익명"} | 조회수 : {item.views} | 댓글수 :{" "}
                 {item.commentCount}
               </TextInfo>
               <TextInfo>{item.timeFromToday}</TextInfo>
