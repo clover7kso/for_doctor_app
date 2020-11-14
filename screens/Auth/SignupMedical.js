@@ -9,7 +9,7 @@ import constants from "../../constants";
 import { ActivityIndicator } from "react-native";
 import { TouchableWithoutFeedback, Keyboard, Alert } from "react-native";
 import { useQuery, useMutation } from "react-apollo-hooks";
-import { MEDICAL_CATEGORY, SIGN_UP_DOCTOR } from "./AuthQueries";
+import { MEDICAL_CATEGORY, SIGN_UP_MEDICAL } from "./AuthQueries";
 import {
   Image,
   ScrollView,
@@ -35,21 +35,19 @@ const InContainer1 = styled.View`
 `;
 
 export default ({ navigation, route }) => {
-  const { id,password,phone,name,} = route.params;
+  const { id,password,phone,name,role, text} = route.params;
 
-
-  const { loading, error, data = { medicalCategory: {} } } = useQuery(
+  const { loading, error, data = { medicalCategory: {} },refetch } = useQuery(
     MEDICAL_CATEGORY,
     {
-      variables: {},
+      variables: {role:role},
     }
   );
+  refetch()
 
   const medicalIdInput = useInput("");
-  const medicalCategoryInput = useInput("안과의사");
+  const medicalCategoryInput = useInput(role==="DOCTOR"?"안과의사":"검안사");
   const medicalHospitalInput = useInput("");
-  const [role, setRole]=useState(0);
-
   const medicalUri = useInput("");
   const setMedicalUri = (uri) => {
     medicalUri.onChange(uri);
@@ -58,7 +56,7 @@ export default ({ navigation, route }) => {
 
   const [registerLoading, setRegisterLoading] = useState(false);
 
-  const [uploadMutaion] = useMutation(SIGN_UP_DOCTOR, {
+  const [uploadMutaion] = useMutation(SIGN_UP_MEDICAL, {
     variables: {
       id: id,
       password: password,
@@ -102,10 +100,10 @@ export default ({ navigation, route }) => {
       console.log(location)
 
       const {
-        data: { signUpDoctor },
+        data: { signUpMedical },
       } = await uploadMutaion();
 
-      if (signUpDoctor) {
+      if (signUpMedical) {
         goBackToTopSafe()
       }
     } catch (e) {
@@ -184,7 +182,7 @@ export default ({ navigation, route }) => {
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <OutContainer>
-          <BackPressHeaderAuth navigation = {navigation}/>
+          <BackPressHeaderAuth navigation = {navigation} text={text+" 회원가입"}/>
           <InContainer1>
             <AuthPicker
               {...medicalCategoryInput}

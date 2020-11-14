@@ -52,7 +52,7 @@ function checkBizId(value) {
     return false;
 }
 export default ({ navigation,route }) => {
-  const { id,password,phone,name,} = route.params;
+  const { id,password,phone,name, text} = route.params;
 
   const { loading, error, data = { marketerCategory: {} } } = useQuery(
     MARKETER_CATEGORY,
@@ -194,7 +194,7 @@ export default ({ navigation,route }) => {
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <OutContainer>
-          <BackPressHeaderAuth navigation = {navigation}/>
+          <BackPressHeaderAuth navigation = {navigation} text={text+" 회원가입"}/>
           <InContainer1>
             <AuthPicker
               {...companyCategoryInput}
@@ -211,7 +211,7 @@ export default ({ navigation,route }) => {
 
             <AuthInput
               {...companyIdInput}
-              placeholder="면허번호"
+              placeholder="사업자번호"
               keyboardType="number-pad"
             />
           </InContainer1>

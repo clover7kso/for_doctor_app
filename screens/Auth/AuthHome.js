@@ -67,7 +67,7 @@ export default ({ navigation }) => {
               text="로그인"
             />
             <AuthButtonText
-              onPress={() => navigation.navigate("Signup")}
+              onPress={() => navigation.navigate("SignupSelection")}
               text="처음이신가요? 계정을 생성하세요"
             />
           </InContainer2>

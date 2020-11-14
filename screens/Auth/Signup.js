@@ -35,8 +35,8 @@ const Touchable = styled.TouchableOpacity``;
 
 const Container = styled.View`
   padding-left:17px
-  padding-top:8px
-  padding-bottom:8px
+  padding-top:22px
+  padding-bottom:22px
   padding-right:17px
   background-color: #34766e;
   border-radius: 5px;
@@ -57,9 +57,10 @@ const ContainerFinal = styled.View`
 const TextFinal = styled.Text`
   color:black
   padding-left: 12px;
-  padding-top: 3px;
-  padding-bottom: 3px;
   border-radius: 4px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  font-size:18px
   
   background-color: ${(props) => props.theme.darkGreyColor};
   border: 1px solid ${(props) => props.theme.darkGreyColor};
@@ -72,7 +73,9 @@ const Row = styled.View`
   justify-content: space-between;
 `;
 
-export default ({ navigation }) => {
+export default ({ navigation, route }) => {
+  const { role, text } = route.params;
+
   const emailInput = useInput("");
   const phoneInput = useInput("");
   const validInput = useInput("");
@@ -106,7 +109,9 @@ export default ({ navigation }) => {
           id: emailInput.value,
           password: pwInput.value,
           phone: phoneInput.value,
-          name: nameInput.value
+          name: nameInput.value,
+          role: role,
+          text:text
         });
       }
     } catch (e) {
@@ -202,7 +207,7 @@ export default ({ navigation }) => {
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <OutContainer>
-          <BackPressHeaderAuth navigation = {navigation}/>
+          <BackPressHeaderAuth navigation = {navigation} text={text+" 회원가입"}/>
 
           <InContainer1>
             <AuthInput
@@ -301,20 +306,12 @@ export default ({ navigation }) => {
               <TextFinal>{validInput.value}</TextFinal>
             </ContainerFinal>
           }
-
-            
-
             <AuthButton
               disabled={registerLoading}
               loading={registerLoading}
-              onPress={()=>handleRegister("SignupDoctor")}
-              text="의사 회원가입"
+              onPress={()=>handleRegister(role==="MARKETER"?"SignupMarketer":"SignupMedical")}
+              text="다음"
             />
-            
-          <AuthButtonTextGrey
-            onPress={()=>handleRegister("SignupMarketer")}
-            text={"업체 회원가입"}
-          />
           </InContainer1>
 
         </OutContainer>

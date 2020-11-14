@@ -69,7 +69,7 @@ export default ({ navigation }) => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <OutContainer>
-        <BackPressHeaderAuth navigation = {navigation}/>
+        <BackPressHeaderAuth navigation = {navigation} text = {"로그인"}/>
         <InContainer1>
           <AuthInput
             {...emailInput}

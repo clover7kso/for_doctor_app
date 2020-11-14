@@ -28,10 +28,19 @@ const TopBarContainer = styled.View`
   flex-direction: row;
   width: ${constants.width};
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
 `;
 
-const BackPressHeader = ({ navigation }) => {
+const MainText = styled.Text`
+  font-family:NanumB
+  font-size: 20px;
+  color: black;
+  flex:1
+  text-align: center;
+  padding-right:${constants.width / 14 + 20}
+`;
+
+const BackPressHeader = ({ navigation, text }) => {
   const goBackSafe = () => {
     // Traverse parent stack until we can go back
     let parent = navigation;
@@ -52,8 +61,8 @@ const BackPressHeader = ({ navigation }) => {
             source={require("../assets/images/navi_back.png")}
           />
         </Touchable>
+        <MainText>{text}</MainText>
       </TopBarContainer>
-      
     </Container>
   );
 };

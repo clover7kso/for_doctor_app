@@ -12,9 +12,9 @@ export const CHECK_ID_PHONE = gql`
   }
 `;
 
-export const SIGN_UP_DOCTOR = gql`
-  mutation signUpDoctor($id: String!,$password:String!, $phone:String!, $name:String!, $medical_id:String!, $medical_cate:String!,$medical_certi:String!, $medical_hospital:String!){
-    signUpDoctor(id: $id, password: $password, phone: $phone, name: $name,  medical_id:$medical_id, medical_cate:$medical_cate, medical_certi:$medical_certi, medical_hospital:$medical_hospital)
+export const SIGN_UP_MEDICAL = gql`
+  mutation signUpMedical($id: String!,$password:String!, $phone:String!, $name:String!, $role:String! ,$medical_id:String!, $medical_cate:String!,$medical_certi:String!, $medical_hospital:String!){
+    signUpMedical(id: $id, password: $password, phone: $phone, name: $name, role:$role, medical_id:$medical_id, medical_cate:$medical_cate, medical_certi:$medical_certi, medical_hospital:$medical_hospital)
   }
 `;
 
@@ -25,8 +25,8 @@ export const SIGN_UP_MARKETER = gql`
 `;
 
 export const MEDICAL_CATEGORY = gql`
-  query medicalCategory {
-    medicalCategory
+  query medicalCategory($role:String!) {
+    medicalCategory(role:$role)
   }
 `;
 
