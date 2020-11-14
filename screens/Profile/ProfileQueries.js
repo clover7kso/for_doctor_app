@@ -6,6 +6,7 @@ export const USER_ONE = gql`
       id
       avatar
       name
+      role
     }
   }
 `;

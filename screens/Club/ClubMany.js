@@ -123,19 +123,18 @@ export default ({ navigation, route }) => {
     }
   };
 
+  console.log(resClubMany.data)
   return (
     <OutContainer>
       <BackPressHeader4 navigation={navigation} text={type}/>
       <ClubSearchBox value={searchWord} onChange={setSearchWord} />
         <Container>
-         
-      
+          
           {resClubMany.loading? (
             <LoadingContainer>
               <ActivityIndicator color={"black"} />
             </LoadingContainer>
-          ) : resClubMany.data !== undefined && resClubMany.data.clubMany.length !== 0?(
-            
+          ) : resClubMany.data !== undefined && resClubMany.data.clubMany.clubs.length !== 0?(
             <FlatList
               contentContainerStyle={{ paddingBottom: 60 }}
               showsVerticalScrollIndicator={false}

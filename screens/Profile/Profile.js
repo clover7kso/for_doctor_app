@@ -142,7 +142,7 @@ export default ({ navigation }) => {
                 />
               </TouchableWithoutFeedback>
               <ProfileColumn>
-                <UserName>{resUserOne.data.userOne.name} 원장님</UserName>
+                <UserName>{resUserOne.data.userOne.role===0?"Dr.":""} {resUserOne.data.userOne.name}</UserName>
                 <UserId>{resUserOne.data.userOne.id}</UserId>
               </ProfileColumn>
             </ProfileContiner>

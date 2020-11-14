@@ -134,7 +134,7 @@ export default ({ navigation, route }) => {
       setRefreshing(false);
     }
   };
-
+  
   return (
     <OutContainer>
       <BackPressHeader2 navigation={navigation} mainText={type} subText={category.replace("게시판","").substring(0,4)} />
@@ -154,7 +154,7 @@ export default ({ navigation, route }) => {
             <LoadingContainer>
               <ActivityIndicator color={"black"} />
             </LoadingContainer>
-          ) : resPostMany.data !== undefined && resPostMany.data.postMany.length !== 0?(
+          ) : resPostMany.data !== undefined && resPostMany.data.postMany.posts.length !== 0?(
             
             <FlatList
               contentContainerStyle={{ paddingBottom: 60 }}

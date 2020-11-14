@@ -163,27 +163,23 @@ export default ({ navigation }) => {
                 <Column_2>
                   <HomeButton
                     onPress={() =>
-                      navigation.navigate("ProductCategory", { type: "의료기기" })
-                    }
+                      navigation.navigate("ProductCategory", { type: "의료기기" })}
                     text = "의료기기 및 제품"
                   />
                   <HomeButton
                     onPress={() =>
-                      navigation.navigate("ProductCategory", { type: "병원운영" })
-                    }
+                      navigation.navigate("ProductCategory", { type: "병원운영" })}
                     text = "병원운영"
                   />
                   <HomeButton
                      onPress={() =>
-                      navigation.navigate("ClubMany", { type: "동호회" })
-                    }
-                    text = "동호회"
+                      navigation.navigate("ClubMany", { type: "동호회" })}
+                    text = {result_profile.data.profile.role===0?"의사 동호회":"동호회"}
                   />
                   <HomeButton
                     onPress={() =>
-                      navigation.navigate("PostMany", { type: "커뮤니티" })
-                    }
-                    text = "커뮤니티"
+                      navigation.navigate("PostMany", { type: "커뮤니티" })}
+                    text = {result_profile.data.profile.role===0?"의사 커뮤니티":"커뮤니티"}
                   />
                 </Column_2>
               </Table>
