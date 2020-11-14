@@ -122,7 +122,7 @@ export default ({ navigation }) => {
     variables: {},
   });
   result_profile.refetch()
-  console.log(result_profile.data)
+
   return (
     <ImageBackground
       style={{ width: "100%", height: "100%" }}
