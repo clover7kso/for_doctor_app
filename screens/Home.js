@@ -125,7 +125,7 @@ export default ({ navigation }) => {
   return (
     <ImageBackground
       style={{ width: "100%", height: "100%" }}
-      resizeMode="cover"
+      resizeMode="contain"
       source={require("../assets/images/main_background.png")}
     >
       <OutContainer>
