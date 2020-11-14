@@ -11,7 +11,6 @@ export const CLUB_ONE = gql`
       content
       views
       clubImage
-      phone
       chatRoomId
     }
   }

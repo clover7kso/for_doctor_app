@@ -12,7 +12,7 @@ const TouchableCall = styled.TouchableOpacity`
   background-color: #4A7768;
   padding: 15px;
   border-radius: 10px;
-  width: ${constants.width/2.2};
+  width: ${constants.width/1.1};
 
 `;
 
@@ -63,17 +63,6 @@ const ClubFooter = ({ onChat, phoneNum }) => {
         <IconContainer>
           <MaterialCommunityIcons
             name={"message"}
-            size={20}
-            color={"white"}
-          />
-        </IconContainer>
-      </TouchableCall>
-      
-      <TouchableCall onPress={() => dialCall(phoneNum)}>
-        <Text>전화하기</Text>
-        <IconContainer>
-          <Ionicons
-            name={Platform.OS === "ios" ? "ios-call" : "md-call"}
             size={20}
             color={"white"}
           />

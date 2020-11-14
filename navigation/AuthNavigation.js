@@ -7,7 +7,7 @@ import SignupMarketer from "../screens/Auth/SignupMarketer";
 import Findpw from "../screens/Auth/Findpw";
 import FindpwConfirm from "../screens/Auth/FindpwConfirm";
 import AuthHome from "../screens/Auth/AuthHome";
-import Login from "../screens/Auth/Login";
+import Signin from "../screens/Auth/Signin";
 import TakePhoto from "../screens/Auth/TakePhoto";
 
 const Stack = createStackNavigator();
@@ -17,7 +17,7 @@ function AuthNavigation() {
     <NavigationContainer>
       <Stack.Navigator headerMode="none">
         <Stack.Screen name="AuthHome" component={AuthHome} />
-        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Signin" component={Signin} />
         <Stack.Screen name="Findpw" component={Findpw} />
         <Stack.Screen name="FindpwConfirm" component={FindpwConfirm} />
         <Stack.Screen name="Signup" component={Signup} />

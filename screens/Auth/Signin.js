@@ -7,7 +7,7 @@ import AuthInput from "../../components/AuthInput";
 import useInput from "../../hooks/useInput";
 import { TouchableWithoutFeedback, Keyboard, Alert } from "react-native";
 import { useMutation } from "react-apollo-hooks";
-import { LOG_IN } from "./AuthQueries";
+import { SIGN_IN } from "./AuthQueries";
 import { useLogIn } from "../../AuthContext";
 import BackPressHeaderAuth from "../../components/BackPressHeaderAuth";
 
@@ -29,7 +29,7 @@ export default ({ navigation }) => {
   const logIn = useLogIn();
 
   const [loading, setLoading] = useState(false);
-  const [signInMutation] = useMutation(LOG_IN, {
+  const [signInMutation] = useMutation(SIGN_IN, {
     variables: {
       id: emailInput.value,
       password: pwInput.value,

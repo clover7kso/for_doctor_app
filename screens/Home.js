@@ -5,7 +5,7 @@ import HomeAd from "../components/HomeAd";
 import HomeHeader from "../components/HomeHeader";
 import HomeButton from "../components/HomeButton";
 import { useQuery,useMutation } from "react-apollo-hooks";
-import { HOME_AD_MANY,USER_PROFILE,UPDATE_PUSH_TOKEN } from "./ScreenQueries";
+import { HOME_AD_MANY,USER_PROFILE,UPDATE_PUSH_TOKEN } from "./HomeQueries";
 import constants from "../constants";
 import { Notifications } from 'expo';
 import * as Permissions from 'expo-permissions';

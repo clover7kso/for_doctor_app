@@ -24,7 +24,7 @@ const InContainer2 = styled.View`
 
 const Text = styled.Text`
   font-family:NanumB
-  font-size:20px
+  font-size:16px
   color: white;
   margin-top: 10px;
 `;
@@ -36,8 +36,9 @@ const TextContainer = styled.View`
 `;
 
 const LogoImg = styled.Image`
-  width: ${constants.width / 1.3};
-  height: ${894 * (constants.width / 1.3 / 1530)};
+  width: ${constants.width / 1.4};
+  height: ${894 * (constants.width / 1.4 / 1530)};
+  margin-bottom: 10px
 `;
 
 
@@ -62,7 +63,7 @@ export default ({ navigation }) => {
           </InContainer1>
           <InContainer2>
             <AuthButton
-              onPress={() => navigation.navigate("Login")}
+              onPress={() => navigation.navigate("Signin")}
               text="로그인"
             />
             <AuthButtonText

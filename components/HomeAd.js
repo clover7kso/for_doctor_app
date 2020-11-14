@@ -62,7 +62,7 @@ export default class HomeAd extends React.Component {
               width: constants.width / 1,
               height: constants.width / 2,
             }}
-            source={{ uri: this.state.imageArray[this.state.counter] }}
+            source={{ uri: this.state.imageArray[this.state.counter]+'?random_number='+new Date().getTime() }}
           />
         </Touchable>
       </OutContainer>
