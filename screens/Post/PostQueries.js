@@ -39,6 +39,7 @@ export const POST_MANY = gql`
         timeFromToday
         commentCount
         userName
+        userAvatar
       }
     }
   }

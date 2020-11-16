@@ -43,7 +43,7 @@ const Touchable = styled.TouchableOpacity`
 `;
 
 const OutContainer = styled.View`
-  background : white
+  background : ${(props) => props.theme.greyColor};
   align-items: center;
   flex: 1;
 `;

@@ -7,7 +7,7 @@ import HomeButton from "../components/HomeButton";
 import { useQuery,useMutation } from "react-apollo-hooks";
 import { HOME_AD_MANY,USER_PROFILE,UPDATE_PUSH_TOKEN } from "./HomeQueries";
 import constants from "../constants";
-import { Notifications } from 'expo';
+import * as Notifications from 'expo-notifications'
 import * as Permissions from 'expo-permissions';
 
 const OutContainer = styled.View`
@@ -106,8 +106,8 @@ export default ({ navigation }) => {
       return;
     }
     var token = await Notifications.getExpoPushTokenAsync()
-    console.log(token)
-    updateTokenMutation({variables:{token:token}})
+    console.log(token.data)
+    updateTokenMutation({variables:{token:token.data}})
     return true
   }
   useEffect(() => {
