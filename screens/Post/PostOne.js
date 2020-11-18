@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useQuery, useMutation } from "react-apollo-hooks";
 import { POST_ONE } from "./PostQueries";
-import { ActivityIndicator, ScrollView, FlatList } from "react-native";
+import { ActivityIndicator, ScrollView, FlatList, KeyboardAvoidingView } from "react-native";
 import BackPressHeader3 from "../../components/BackPressHeader3";
 import PostCommentBox from "../../components/PostCommentBox";
 import { COMMENT_UPLOAD } from "./PostQueries";
@@ -151,6 +151,9 @@ export default ({ route, navigation }) => {
   };
 
   return (
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : null}
+      style={{ flex: 1 }}>
     <OutContainer>
       <BackPressHeader3 navigation={navigation} />
       {resPostOne.loading ? (
@@ -207,5 +210,6 @@ export default ({ route, navigation }) => {
         <PostCommentBox onPress={handleCommentUpload} />
       )}
     </OutContainer>
+    </KeyboardAvoidingView>
   );
 };

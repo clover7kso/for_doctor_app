@@ -5,7 +5,7 @@ import { CLUB_MANY, CLUB_ADD_VIEW } from "./ClubQueries";
 import BackPressHeader4 from "../../components/BackPressHeader4";
 import ClubSearchBox from "../../components/ClubSearchBox";
 import Club from "../../components/Club";
-import { ActivityIndicator, FlatList } from "react-native";
+import { ActivityIndicator, FlatList, KeyboardAvoidingView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 const LoadingContainer = styled.View`
@@ -125,6 +125,9 @@ export default ({ navigation, route }) => {
 
   console.log(resClubMany.data)
   return (
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : null}
+      style={{ flex: 1 }}>
     <OutContainer>
       <BackPressHeader4 navigation={navigation} text={type}/>
       <ClubSearchBox value={searchWord} onChange={setSearchWord} />
@@ -175,5 +178,6 @@ export default ({ navigation, route }) => {
         </Container>
       
     </OutContainer>
+    </KeyboardAvoidingView>
   );
 };

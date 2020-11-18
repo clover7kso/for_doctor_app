@@ -11,6 +11,7 @@ import BackPressHeader2 from "../../components/BackPressHeader2";
 import ProductSearchBox from "../../components/ProductSearchBox";
 import ProductSubCategory from "../../components/ProductSubCategory";
 import Product from "../../components/Product";
+import { KeyboardAvoidingView } from "react-native";
 
 const OutContainer = styled.View`
   background : white
@@ -98,6 +99,9 @@ export default ({ navigation, route }) => {
     return array;
   }
   return (
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : null}
+      style={{ flex: 1 }}>
     <OutContainer>
       <BackPressHeader2 navigation={navigation} mainText={title} subText={category.replace("마케팅","").substring(0,4)} />
       <ProductSearchBox value={searchWord} onChange={setSearchWord} />
@@ -149,5 +153,6 @@ export default ({ navigation, route }) => {
         </Container>
       )}
     </OutContainer>
+    </KeyboardAvoidingView>
   );
 };

@@ -161,6 +161,7 @@ export default ({ navigation }) => {
               </TopContainer>
               <Table>
                 <Column_1><Divider/></Column_1>
+                { result_profile.data===undefined ?(<ActivityIndicator color={"white"} /> ) :
                 <Column_2>
                   <HomeButton
                     onPress={() =>
@@ -172,6 +173,7 @@ export default ({ navigation }) => {
                       navigation.navigate("ProductCategory", { type: "병원운영" })}
                     text = "병원운영"
                   />
+                  
                   <HomeButton
                      onPress={() => {
                       result_profile.data.profile.role==="MARKETER"?
@@ -189,6 +191,7 @@ export default ({ navigation }) => {
                     text = {result_profile.data.profile.role==="DOCTOR"?"의사 커뮤니티":"커뮤니티"}
                   />
                 </Column_2>
+                }
               </Table>
               {result_homeAd.loading || result_homeAd.data === undefined?
                (<ActivityIndicator color={"white"} /> ) : 

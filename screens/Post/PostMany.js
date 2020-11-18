@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useQuery, useMutation } from "react-apollo-hooks";
 import { POST_MANY, POST_ADD_VIEW, POST_SUB_CATEGORY } from "./PostQueries";
@@ -6,7 +6,7 @@ import BackPressHeader2 from "../../components/BackPressHeader2";
 import PostSearchBox from "../../components/PostSearchBox";
 import PostSubCategory from "../../components/PostSubCategory";
 import Post from "../../components/Post";
-import { ActivityIndicator, FlatList } from "react-native";
+import { ActivityIndicator, FlatList, KeyboardAvoidingView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 const LoadingContainer = styled.View`
@@ -137,6 +137,9 @@ export default ({ navigation, route }) => {
   };
 
   return (
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : null}
+      style={{ flex: 1 }}>
     <OutContainer>
       <BackPressHeader2 navigation={navigation} mainText={type} subText={category.replace("게시판","").substring(0,4)} />
       <PostSearchBox value={searchWord} onChange={setSearchWord} />
@@ -198,5 +201,6 @@ export default ({ navigation, route }) => {
         </Container>
       )}
     </OutContainer>
+    </KeyboardAvoidingView>
   );
 };

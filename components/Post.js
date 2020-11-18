@@ -5,10 +5,10 @@ import constants from "../constants";
 
 
 const Touchable = styled.TouchableOpacity`
-  shadow-color: 'rgba(0,0,0, .6)'
-  shadow-offset: { height: 1, width: 1 }
-  shadow-opacity: 1
-  shadow-radius: 1
+  shadow-color: '#4d4d4d'
+  shadow-offset: { height: 8, width: 16 }
+  shadow-opacity: 0.3
+  shadow-radius: 3
   background: #fff
   elevation: 3
 

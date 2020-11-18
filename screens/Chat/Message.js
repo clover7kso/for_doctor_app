@@ -3,6 +3,7 @@ import {
   FlatList,
   TextInput,
   ActivityIndicator,
+  KeyboardAvoidingView
 } from "react-native";
 import { useQuery, useMutation, useSubscription } from "react-apollo-hooks";
 import {SEE_ROOM, SEND_MESSAGE, NEW_MESSAGE } from "./ChatQueries"
@@ -155,6 +156,9 @@ function Message({ navigation, route}) {
     <>
     <BackPressHeader4 navigation={navigation} text={toName}/>
     {!resultMessage.loading || resultMessage.data!==undefined?
+    <KeyboardAvoidingView
+    behavior={Platform.OS === "ios" ? "padding" : null}
+    style={{ flex: 1 }}>
       <OutContainer>
         <FlatListView>
           <FlatList
@@ -209,7 +213,9 @@ function Message({ navigation, route}) {
           onChangeText={onChangeText}
           onSubmitEditing={onSubmit}
         />
+        
       </OutContainer>
+      </KeyboardAvoidingView>
       :
       <LoadingContainer>
         <ActivityIndicator color={"black"} />
