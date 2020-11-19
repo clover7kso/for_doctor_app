@@ -14,7 +14,7 @@ const Touchable = styled.TouchableOpacity`
 
   margin-bottom: 20px;
   padding-top:15px
-  padding-bottom:15px
+  padding-bottom:10px
   width: ${constants.width};
   background:white
 `;
@@ -22,6 +22,7 @@ const Touchable = styled.TouchableOpacity`
 const Divider = styled.View`
   background: ${(props) => props.theme.greyColor};
   border-radius: 30;
+  margin-top:15px
   height: 1;
   margin-bottom:15px
 `
@@ -88,7 +89,6 @@ const TextTitle = styled.Text`
 const TextContent = styled.Text`
   font-family:NanumB
   font-size:20px
-  margin-bottom:15px
   color: ${(props) => props.theme.blackColor};
 `;
 
@@ -125,9 +125,14 @@ const Product = ({ item, navigation, handlePostAddView }) => {
             <TextTitle numberOfLines={1} ellipsizeMode="tail">
               {item.title}
             </TextTitle>
-            <TextContent numberOfLines={3} ellipsizeMode="tail">
-              {item.content.replace('\\n'," ")}
-            </TextContent>
+            {item.content.split('\\n').length>1?
+            item.content.split('\\n').map((item, key) => {
+              return <TextContent numberOfLines={1} ellipsizeMode="tail" key={key}>{item}</TextContent>
+            }):
+              <TextContent numberOfLines={3} ellipsizeMode="tail">
+                {item.content.replace('\\n'," ")}
+              </TextContent>
+            }
             <Divider/>
             <Row>
               <ViewsImage source={require("../assets/images/views.png")}/>
