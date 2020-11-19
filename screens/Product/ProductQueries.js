@@ -54,6 +54,7 @@ export const PRODUCT_ONE = gql`
       marketerName
       marketerId
       chatRoomId
+      youtubeId
     }
   }
 `;

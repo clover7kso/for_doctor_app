@@ -8,6 +8,8 @@ import BackPressHeader3 from "../../components/BackPressHeader3";
 import ProductSampleImages from "../../components/ProductSampleImages";
 import ProductDetailImages from "../../components/ProductDetailImages";
 import ProductFooter from "../../components/ProductFooter";
+import YoutubePlayer from 'react-native-youtube-iframe';
+import constants from "../../constants";
 
 const OutContainer = styled.View`
   background : white
@@ -85,13 +87,30 @@ export default ({ navigation, route }) => {
   return (
     <OutContainer>
       <BackPressHeader3 navigation={navigation} />
-      {resProductOne.loading ? (
+      {resProductOne.loading || resProductOne.data===undefined ? (
         <ActivityIndicator color={"black"} />
       ) : (
         <Container>
           <ScrollView
             contentContainerStyle={{ paddingBottom: 20 }}
             showsVerticalScrollIndicator={false}>
+            {resProductOne.data.productOne.youtubeId!==null?
+              <YoutubePlayer
+                height={constants.width * (9/16) + 20}
+                width={constants.width}
+                videoId={resProductOne.data.productOne.youtubeId}
+                onChangeState={event => console.log(event)}
+                onReady={() => console.log("ready")}
+                onError={e => console.log(e)}
+                onPlaybackQualityChange={q => console.log(q)}
+                volume={50}
+                playbackRate={1}
+                initialPlayerParams={{
+                  cc_lang_pref: "us",
+                  showClosedCaptions: true
+                }}
+              />:null
+            }
             <ProductSampleImages
               imageArray={resProductOne.data.productOne.sampleImages}/>
             <InfoContainer>
