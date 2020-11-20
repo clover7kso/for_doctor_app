@@ -82,8 +82,11 @@ const ProfileText_2 = styled.Text`
   font-family:NanumB
   padding-left: 4px;
   color: black;
-  font-size: 15px;
+  font-size: 17px;
 `;
+
+
+
 const ProfileLine = styled.View`
   background-color: #cad7d2;
   border-radius: 50px;
@@ -154,7 +157,6 @@ export default ({ navigation }) => {
                   <ProfileLineContainer>
                     <ProfileLine/>
                   </ProfileLineContainer>
-                  
                 </ProfileContainer>
                 
 

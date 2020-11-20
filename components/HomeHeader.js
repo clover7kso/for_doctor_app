@@ -18,9 +18,12 @@ const Touchable = styled.TouchableOpacity`
   height: ${constants.width / 14};
 `;
 
+const Touchable2 = styled.TouchableOpacity` 
+`;
+
 const MessageImg = styled.Image`  
-  width: ${constants.width / 16};
-  height: ${constants.width / 16};
+  width: ${constants.width / 13};
+  height: ${constants.width / 13};
 `;
 
 const Column_1 = styled.View`
@@ -36,9 +39,23 @@ const Divider = styled.View`
 `;
 
 const Column_2 = styled.View`
-  align-items: flex-end;
+  align-items: center;
   justify-content: flex-end;
+  flex-direction:row
   flex: 1;
+`;
+
+const MyPageContainer = styled.View`
+  justify-content:flex-end
+  flex-direction:row
+`;
+const MyPageText = styled.Text`
+  font-family:NanumB
+  color: black;
+  font-size: 22px;
+  color:white
+  padding-right:28px
+  padding-left:10px
 `;
 
 
@@ -53,6 +70,11 @@ const BackPressHeader = ({ navigation }) => (
             source={require("../assets/images/main_message.png")}
           />
         </Touchable>
+        <Touchable2 onPress={() => navigation.navigate("Profile")}>
+          <MyPageContainer>
+            <MyPageText>MY</MyPageText>
+          </MyPageContainer>
+        </Touchable2>
       </Column_2>
     </Container>
 );

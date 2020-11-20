@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { AppLoading } from "expo";
 import { Asset } from "expo-asset";
-import * as Font from "expo-font";
+import * as Font from 'expo-font';
 import AsyncStorage from '@react-native-community/async-storage'
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { persistCache } from "apollo-cache-persist";
